@@ -1,8 +1,8 @@
--- use master
--- go
+use master
+go
 
--- drop database QLDT
--- go
+drop database QLDT
+go
 
 create database QLDT
 go
