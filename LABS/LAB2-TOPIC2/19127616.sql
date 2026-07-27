@@ -285,3 +285,17 @@ insert into NGUOITHAN values ('003',N'Hà','2001-05-20',N'Nữ')
 insert into NGUOITHAN values ('005',N'Trang','2000-07-11',N'Nữ')
 insert into NGUOITHAN values ('007',N'Long','2003-08-09',N'Nam')
 go
+
+-- Bộ môn Hệ thống thông tin (HTTT), trực thuộc khoa CNTT
+insert into BOMON values ('HTTT', N'Hệ thống thông tin', 'B13', '0281000009', null, 'CNTT', null);
+
+-- Giảng viên cho bộ môn HTTT
+insert into GIAOVIEN values ('011', N'Đỗ Thành Nam',   2450, N'Nam', '1980-02-14', N'Quận 5, TP.HCM', null, 'HTTT');
+insert into GIAOVIEN values ('012', N'Trịnh Bảo Châu',  2350, N'Nữ',  '1983-06-25', N'Quận 4, TP.HCM', '011', 'HTTT');
+insert into GIAOVIEN values ('013', N'Vũ Gia Huy',      2700, N'Nam', '1977-10-03', N'Quận 8, TP.HCM', '011', 'HTTT');
+
+-- Cập nhật trưởng bộ môn HTTT sau khi đã có giảng viên (tránh lỗi khóa ngoại)
+update BOMON set TRUONGBM = '011' where MABM = 'HTTT';
+
+insert into GIAOVIEN values ('014', N'Nguyễn Hoài An', 2450, N'Nam', '1981-07-20', N'Quận 2, TP.HCM', '001', 'LTW1');
+insert into THAMGIADT values ('014', 'D02', 1, 1.0, N'Đạt');
