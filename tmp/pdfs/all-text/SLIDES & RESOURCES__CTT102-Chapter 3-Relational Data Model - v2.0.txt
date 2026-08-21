@@ -1,0 +1,700 @@
+
+--- PAGE 1 ---
+fit@hcmus
+4.0
+Chapter 3
+Relational Data Model
+--- PAGE 2 ---
+4.0
+fit@hcmus
+Content
+1. Introduction
+2. Relational Model Concepts
+3. Keys
+4. Characteristics of relation
+5. ER-to-Relational Mapping
+2
+--- PAGE 3 ---
+4.0
+fit@hcmus
+1. Introduction
+3
+Relational Data Model
+--- PAGE 4 ---
+4.0
+fit@hcmus
+1. Introduction
+⬜Was introduced by E. F. Codd 
+▪ “A Relation Model for Large Shared Data Banks”, 
+Communications of ACM, 6/1970
+⬜Allows a simple and unified representation of 
+data structure
+▪ Concept “Relation”
+⬜Has a strong theoretical background
+▪ Set theory of mathematical logic
+⬜Is used in many DBMS
+▪ Commercial: Oracle, SQL Server, DB2 …
+▪ Open source: MySQL, PostgreSQL, …
+4
+--- PAGE 5 ---
+4.0
+fit@hcmus
+1. Introduction
+⬜The relational Model of Data is based on the concept 
+of a Relation.
+⬜A Relation is a mathematical concept based on the 
+ideas of sets.
+⬜The strength of the relational approach to data 
+management comes from the formal foundation 
+provided by the theory of relations.
+5
+--- PAGE 6 ---
+4.0
+fit@hcmus
+2. Concepts - Relation
+⬜Informal Definition: A table of values
+▪ A relation may be thought of as a set of rows.
+▪ A relation may alternately be though of as a set of columns. 
+▪ Each row represents a fact that corresponds to a real-world entity or 
+relationship.
+⬜Example: a relation “FACULTY”
+6
+--- PAGE 7 ---
+4.0
+fit@hcmus
+2. Concepts - Relation
+⬜Other related concepts:
+▪ Relation = Table
+▪ Attribute = Column
+▪ Tuple = Row (A tuple is an ordered set of values)
+▪ Domain = set of attribute values
+⬜Example: Relation “FACULTY” has 4 tuples, 7 
+attributes
+7
+
+--- PAGE 8 ---
+4.0
+fit@hcmus
+2. Concepts - Schema of a Relation
+⬜A schema of a Relation R,  is represented by R(A1, A2, 
+…, An), 
+▪ R is the name of schema
+▪ A1, A2, …, An are the attributes
+⬜Ai receives the values that belongs to value domain, 
+note dom(Ai).  
+⬜Degree of schema represents the number of attributes
+⬜Example: KHOA (MÃKHOA, TÊNKHOA, NĂMTL, PHÒNG, ĐIỆNTHOAI, 
+TRƯỞNGKHOA, NGÀYNHẬNCHỨC). 
+▪ Degree of the schema KHOA is 7
+▪ Domain of the attribute MÃKHOA is “String”.
+▪ Domain of the attribute NĂMTL is “Integer”.
+8
+--- PAGE 9 ---
+4.0
+fit@hcmus
+2. Concepts - Relation
+Formal definition:
+⬜A relation r(R) of a schema R(A1, A2, …, An) is:
+▪ A set of tuples r = {t1, t2, …, tm}, each tuple t is an ordered list 
+of n values t = {v1, v2, …, vn} 
+▪ Each vi, 1 i n, ∈ dom(Ai) or null. Null indicates “unknown” or 
+“not exist”. 
+⬜Remark:
+r(R)  (dom(A1)  dom(A2)  … dom(An))
+The ith-value of t is represented by t.Ai or t[i]. 
+9
+MÃKHOA TÊNKHOA NĂMTL PHÒNG ĐIỆNTHOAI TRƯỞNGKHOA NGÀYNHẬNCHỨC
+CNTT Công nghệ thông tin 1995 B11 0838123456 002 20/02/2005
+VL Vật lý 1976 B21 0838223223 005 18/09/2003
+SH Sinh học 1980 B31 0838454545 004 11/10/2000
+HH Hóa học 1980 B41 NULL 007 15/10/2001
+t1
+t2
+t3
+t4
+--- PAGE 10 ---
+4.0
+fit@hcmus
+2. Concepts – Relational Database 
+schema
+⬜A Relational database schema consists of a set of 
+schemas.
+▪ S = {R1, R2, …, Rn}
+⬜Example:
+10
+GIÁOVIÊN (MÃGV, HỌTÊN, LƯƠNG, PHÁI, NGÀYSINH, SỐNHÀ, ĐƯỜNG, QUẬN, THÀNHPHỐ, GVQLCM, 
+MÃBM)
+GV_ĐT (MÃGV, ĐIỆNTHOẠI)
+BỘMÔN (MÃBM, TÊNBM, PHÒNG, ĐIỆNTHOẠI, TRƯỞNGBM, MÃKHOA, NGÀYNHẬNCHỨC)
+KHOA (MÃKHOA, TÊNKHOA, NĂMTL, PHÒNG, ĐIỆNTHOAI, TRƯỞNGKHOA, NGÀYNHẬNCHỨC)
+ĐỀTÀI (MÃĐT, TÊNĐT, KINHPHÍ, CẤPQL, NGÀYBĐ, NGÀYKT, MÃCĐ, GVCNĐT)
+CHỦĐỀ (MÃCĐ, TÊNCĐ)
+CÔNGVIỆC (MÃĐT, STT, TÊNCV, NGÀYBĐ, NGÀYKT)
+THAMGIAĐT(MÃGV, MÃĐT, STT, PHỤCẤP, KẾTQUẢ)
+--- PAGE 11 ---
+4.0
+fit@hcmus
+2. Concepts – more notations
+⬜The relation schema R of the degree n 
+▪ R(A1, A2, …, An)
+⬜Relations
+▪ r, q, s
+⬜Tuples
+▪ t, u, v
+⬜Domain of the attribute A
+▪ Dom(A)
+⬜The value at the attribute A of the tth tuple
+▪ t.A hay t[A]
+11
+--- PAGE 12 ---
+4.0
+fit@hcmus
+Content
+1. Introduction
+2. Concepts
+3. Keys
+4. Characteristics of relation
+5. ER-to-Relational Mapping
+12
+--- PAGE 13 ---
+4.0
+fit@hcmus
+Super key
+⬜Note:
+▪ Every tuple in a relation must be unique; identical tuples are 
+not allowed
+⬜Definition - Super key
+▪ Given SK is a subset of the attributes of R, and SK is not empty
+▪ SK is super key if
+r, t1, t2  r, t1  t2  t1[SK]  t2[SK]
+▪ Super Key is used to identify uniquely each tuple in a relation
+▪ Every relation has at least one super key 
+⬜Example:
+KHOA(MÃKHOA, TÊNKHOA, NĂMTL, PHÒNG, ĐIỆNTHOẠI, NGÀYNHẬN CHỨC)
+▪ {MÃKHOA, TÊNKHOA} is super key.
+▪ All attributes of a relation constitute a super key. Why?
+13
+--- PAGE 14 ---
+4.0
+fit@hcmus
+Super key
+⬜Consider a university's course enrollment system. Below is the relational 
+schema for tracking students' registrations:
+⬜Rules:
+▪ Each student is assigned a unique student ID (MSSV)
+▪ A student can register for multiple courses (MAMH), and a course can have many students.
+▪ A student cannot register for the exact same course more than once within the same semester 
+(HKY) of a given year (NAMHOC)
+▪ DIEMSO is the final grade the student receives, and NGAYDKY is the specific date they 
+registered.
+⬜Questions
+▪ Determine whether each of the following attribute sets is a valid Super Key. Explain why or why 
+not?
+▪ (MSSV, MAMH)
+▪ (MSSV, HKY)
+▪ {MSSV, MAMH, DIEMSO, NGAYDKY}
+▪ {MSSV, MAMH, HKY, NAMHOC, DIEMSO, NGAYDY}
+▪ Find Minimal Super Keys
+14
+DANG_KY(MSSV, MAMH, HKY, NAMHOC, DIEMSO, NGAYDKY)
+--- PAGE 15 ---
+4.0
+fit@hcmus
+Key
+⬜Definition - Key
+▪ Given K is a subset of the attributes of R, and K is not empty
+▪ K is a key if
+1. K is a super key of R
+2. AND  K’  K (K’  K), K’ is not the super key of R.
+⬜Remark
+▪ Key is super key with the least number of attributes
+▪ Key is used to identify uniquely each tuple in a relation
+▪ A key is a property of the relation schema
+◼ The key doesn’t depend on the instance of a relation
+▪ A key is determined from the meaning of attributes
+▪ A relation can have more than one key
+15
+--- PAGE 16 ---
+4.0
+fit@hcmus
+Quiz
+⬜Identify the keys of the below relational 
+schema:
+▪ LICH_DAY(MÔN, GVIÊN, HKỲ, LỚP, 
+PHÒNG, CA, THỨ) ?
+16
+--- PAGE 17 ---
+4.0
+fit@hcmus
+Primary Key
+⬜For the implementation:
+▪ Only one key is selected as the primary key to 
+identify uniquely the tuples in relation
+▪ Should choose the key with few attributes
+▪ The attributes of primary key are not null
+⬜A relation has only one primary key.
+⬜The primary key is underlined
+KHOA(MÃKHOA, TÊNKHOA, NĂMTL, PHÒNG, ĐIỆNTHOẠI, NGÀYNHẬN 
+CHỨC)
+17
+--- PAGE 18 ---
+4.0
+fit@hcmus
+The hierarchy of keys
+18
+
+--- PAGE 19 ---
+4.0
+fit@hcmus
+Reference (Tham chiếu)
+⬜An attribute A of a tuple in relation R receives a value 
+from an attribute B of relation S:
+▪ R is called referencing relation
+▪ S is called referenced relation
+19
+MÃBM TÊNBM PHÒNG ĐiỆNTHOẠI MÃKHOA
+HTTT Hệ thống thông tin I84 838125125 5
+CNPM Công nghệ phần mềm I82 838126126 4
+VLDT Vật lý điện tử F203 838127127 4
+VLƯD Vật lý ứng dụng F205 838128128 5
+TÊNKHOA MÃKHOA
+CNTT 5
+VL 4
+TOÁN 1
+R
+S
+--- PAGE 20 ---
+4.0
+fit@hcmus
+Foreign Key
+⬜2 relation schemas : 
+R1(A1, A2, …, An) và
+R2(B1, B2, … Bm)
+PK  {A1, …,An} is the primary key of R1, FK  {B1, …,Bn}
+⬜FK is a foreign key of R2 if:
+1. Attributes in FK have the same domains as the 
+primary key attributes PK.
+2. ∀t2 of R2, ∃ t1 ∈ R1 , t2[FK]  = t1[PK].
+20
+BỘMÔN (MÃBM, TÊNBM, PHÒNG, ĐIỆNTHOẠI, TRƯỞNGBM, MÃKHOA, NGÀYNHẬNCHỨC)
+KHOA (MÃKHOA, TÊNKHOA, NĂMTL, PHÒNG, ĐIỆN THOẠI, TRƯỞNGKHOA, NGÀYNHẬNCHỨC)
+Primary key
+Foreign key
+--- PAGE 21 ---
+4.0
+fit@hcmus
+Foreign Key
+⬜Remark:
+▪ An attribute can be part of a primary key and 
+foreign key at the same time
+▪ A foreign key can refer to the primary key of the 
+same relation
+▪ Many foreign keys can refer to the same primary 
+key
+▪ Referential integrity constraint = foreign key 
+constraint
+21
+--- PAGE 22 ---
+4.0
+fit@hcmus
+Foreign Key
+22
+MãGV HọTên Lương Phái NgàySinh SốNhà Đường Quận ThànhPhố GVQL MãBM
+MãGV ĐiệnThoại
+MãKhoa TrưởngBM NgàyNhậnChức ĐiệnThoại MãBM TênBM Phòng
+TrưởngKhoa NgàyNhậnChức TênKhoa NămTL Phòng ĐiệnThoại MãKhoa
+GVCNĐT MãĐT TênĐT KinhPhí CấpQL NgàyBĐ NgàyKT MãCĐ
+MãCĐ TênCĐMãĐT STT TênCV NgàyBĐ NgàyKT
+MãGV MãĐT STT PhụCấp KếtQuả
+GIÁOVIÊN
+GV_DT
+BỘMÔN
+KHOA
+ĐỀTÀI
+CHỦĐỀCÔNGVIỆC
+THAMGIAĐT
+--- PAGE 23 ---
+4.0
+fit@hcmus
+Content
+1. Introduction
+2. Concepts
+3. Keys
+4. Characteristics of relation
+5. ER-to-Relational Mapping
+23
+--- PAGE 24 ---
+4.0
+fit@hcmus
+4. Characteristics of relation
+⬜The order of tuples in a relation is not important
+⬜The order of values in a tuple is important
+24
+Hệ thống thông tinHTTT B13 0838125125 002 CNTT 20/09/2004
+TênBMMãBM Phòng Điện thoại Trưởng BM Mã khoa Ngày NC
+Công nghệ thông tinCNTT B15 0838126126 Null CNTT Null
+Mạng máy tínhMMT B16 0838676767 001 CNTT 15/05/2005
+Vật lý đại cươngVLĐC B23 0838234234 Null VL Null
+Bộ <HTTT, Hệ thống thông tin , B13, 0838125125, 002, CNTT, 20/09/2004>
+khác
+Bộ <HTTT, Hệ thống thông tin , B13, 0838125125, CNTT, 002, 20/09/2004>
+--- PAGE 25 ---
+4.0
+fit@hcmus
+4. Characteristics of relation
+⬜The values in a tuple
+▪ Either atomic
+▪ Or null
+⬜No tuples overlap
+25
+--- PAGE 26 ---
+4.0
+fit@hcmus
+Update Operations on Relations
+⬜Update Operations: INSERT a tuple, DELETE 
+a tuple, MODIFY a tuple.
+⬜Integrity constraints should not be violated by 
+the update operations.
+⬜Several update operations may have to be 
+grouped together.
+⬜Updates may propagate  to cause other 
+updates automatically. This may be necessary 
+to maintain integrity constraints.
+26
+--- PAGE 27 ---
+4.0
+fit@hcmus
+Update Operations on Relations
+⬜In case of integrity violation, several actions 
+can be taken:
+▪ Cancel the operation that causes the violation 
+(REJECT option)
+▪ Perform the operation but inform the user of the 
+violation
+▪ Trigger additional updates so the violation is 
+corrected (CASCADE option, SET NULL option)
+▪ Execute a user-specified error-correction routine 
+27
+--- PAGE 28 ---
+4.0
+fit@hcmus
+Quiz #1
+According to the definition of a Super Key (SK), which 
+condition must be satisfied for any two distinct tuples t1 and 
+t2 in a relation r?
+A. t1 [SK] = t2 [SK] for all tuples
+B. SK must be a subset of the primary key
+C. t1[SK]  t2 [SK] always
+D. SK must contain only one attribute
+28
+--- PAGE 29 ---
+4.0
+fit@hcmus
+Quiz #1
+When defining a Foreign Key (FK) in relation R2​ that 
+references Primary Key (PK) in relation R1​, what 
+must be true about their domains?
+A. The domain of FK must be larger than the domain of PK
+B. The FK can have a different domain if a mapping table is 
+used
+C. The FK domain must only contain numeric values
+D. Attributes in FK must have the same domains as attributes 
+in PK
+29
+--- PAGE 30 ---
+4.0
+fit@hcmus
+Exercise #1
+⬜Consider the following relations for a database that 
+keeps track of student enrollment in courses and the 
+books adopted for each course:
+▪ STUDENT(SSN, Name, Major, Bdate)
+▪ COURSE(Course#, Cname, Dept)
+▪ ENROLL(SSN, Course#, Quarter, Grade)
+▪ BOOK_ADOPTION(Course#, Quarter, Book_ISBN)
+▪ TEXT(Book_ISBN, Book_Title, Publisher, Author)
+⬜Draw a relational schema diagram specifying the 
+foreign keys for this schema.
+30
+--- PAGE 31 ---
+4.0
+fit@hcmus
+Content
+⬜Introduction
+⬜Concepts
+⬜Keys
+⬜Characteristics of relation
+⬜ER-to-Relational Mapping
+31
+--- PAGE 32 ---
+4.0
+fit@hcmus
+5.1. Regular Entity set
+⬜For each Entity set (except weak entity set), 
+create a corresponding relation:
+▪ Same name
+▪ Same set of attribute (except composite and multi 
+valued attribute)
+32
+GIÁOVIÊN (MÃGV, HỌTÊN, LƯƠNG, PHÁI, NGÀYSINH)
+BỘMÔN (MÃBM, TÊNBM, PHÒNG, ĐIỆNTHOẠI)
+GIÁO VIÊN BỘ MÔNLàm_việc(1,1) (1,n)
+PHÁI NGÀYSINH
+ĐỊA CHỈ
+MÃ GV
+SỐNHÀ
+ĐƯỜNG
+QUẬN
+THÀNHPHỐ
+ĐIỆNTHOẠI
+HỌTÊNLƯƠNG
+MÃBM
+TÊNBM
+ĐIỆNTHOẠI
+PHÒNG
+--- PAGE 33 ---
+4.0
+fit@hcmus
+5.2. Composite attribute
+We have 2 case:
+⬜Case 1: a composite attribute is transformed 
+into a single-valued attribute
+33
+GIÁOVIÊN (MÃGV, HỌTÊN, LƯƠNG, PHÁI, NGÀYSINH, ĐỊA CHỈ)
+PHÁI
+GIÁO VIÊN
+NGÀYSINH
+ĐỊA CHỈ
+MÃ GV
+SỐNHÀ
+ĐƯỜNG
+QUẬN
+THÀNHPHỐ
+ĐIỆNTHOẠIHỌTÊN
+LƯƠNG
+PHÁI
+GIÁO VIÊN
+NGÀYSINH
+ĐỊA CHỈ
+MÃ GV
+ĐIỆNTHOẠIHỌTÊN
+LƯƠNG
+--- PAGE 34 ---
+4.0
+fit@hcmus
+5.2. Composite attribute (cont.)
+⬜Case 2: a composite attribute is 
+transformed into a set of single valued 
+attributes
+34
+GIÁOVIÊN (MÃGV, HỌTÊN, LƯƠNG, PHÁI, NGÀYSINH, SỐNHÀ, ĐƯỜNG, QUẬN, THÀNHPHỐ)
+PHÁI
+GIÁO VIÊN
+NGÀYSINH
+ĐỊA CHỈ
+MÃ GV
+SỐNHÀ
+ĐƯỜNG
+QUẬN
+THÀNHPHỐ
+ĐIỆNTHOẠIHỌTÊN
+LƯƠNG
+PHÁI
+GIÁO VIÊN
+NGÀYSINH
+MÃ GV
+SỐNHÀ
+ĐƯỜNG
+QUẬN
+THÀNHPHỐ
+ĐIỆNTHOẠIHỌTÊN
+LƯƠNG
+--- PAGE 35 ---
+4.0
+fit@hcmus
+5.3. Multi-valued attribute
+⬜For each multi-valued attribute A of relation R, 
+create a relation S with the following attribute: 
+▪ primary key of R
+▪ attribute A (as a single-valued attribute)
+⬜Primary key of new relation S: 
+◼ either A
+◼ or  A + primary key of R
+35
+GIÁOVIÊN (MÃGV, HỌTÊN, LƯƠNG, PHÁI, NGÀYSINH, SỐNHÀ, ĐƯỜNG, QUẬN, THÀNHPHỐ)
+PHÁI
+GIÁO VIÊN
+NGÀYSINH
+MÃ GV
+ĐIỆNTHOẠIHỌTÊN
+LƯƠNG
+ĐIỆNTHOẠI (SốĐT, MÃGV)
+ĐIỆNTHOẠI (SốĐT, MÃGV)
+hoặc
+--- PAGE 36 ---
+4.0
+fit@hcmus
+5.4. Weak Entity Set
+⬜For each entity set, create a corresponding relation:
+▪ Same name
+▪ Same set of attribute (except composite and multi valued attribute)
+▪ Adding the key attributes of the entity sets which the weak entity 
+set depends on 
+▪ The key of relation consists of
+◼ weak key attributes 
+◼ key attributes of the entity sets which the weak entity set depends on 
+36
+ĐỀTÀI (MÃĐT, TÊNĐT, KINHPHÍ, CẤPQL, NGÀYBĐ, NGÀYKT)
+CÔNGVIỆC (MÃĐT, STT, TÊNCV, NGÀYBĐ, NGÀYKT)
+ĐỀ TÀI
+MÃĐT
+TÊNĐT
+CẤPQL
+NGÀYBĐ
+NGÀYKT
+KINHPHÍ
+(0,n)NGƯỜITHÂNCÔNG VIỆC gồmgồm
+ 
+(1,1)
+SốTT
+TÊNCV NGÀYKT
+NGÀYBĐ
+--- PAGE 37 ---
+4.0
+fit@hcmus
+5.5. Relationship set:1-n
+⬜Adding the key of the many-relation to 
+the one-relation
+37
+GIÁOVIÊN (MÃGV, HỌTÊN, LƯƠNG, PHÁI, NGÀYSINH, SỐNHÀ, ĐƯỜNG, QUẬN, THÀNHPHỐ, MÃBM)
+BỘMÔN (MÃBM, TÊNBM, PHÒNG, ĐIỆNTHOẠI)
+GIÁO VIÊN BỘ MÔNLàm_việc(1,1) (1,n)
+PHÁI NGÀYSINH
+ĐỊA CHỈ
+MÃ GV
+SỐNHÀ
+ĐƯỜNG
+QUẬN
+THÀNHPHỐ
+ĐIỆNTHOẠI
+HỌTÊNLƯƠNG
+MÃBM
+TÊNBM
+ĐIỆNTHOẠI
+PHÒNG
+--- PAGE 38 ---
+4.0
+fit@hcmus
+5.6. Relationship set: 1-1
+⬜Add the primary key of one relation to other relation, 
+together with the attributes of the relationship
+⬜Alternatively, add the primary keys of both relations to 
+a new relation, along with the attributes of the 
+relationship.
+38
+GIÁOVIÊN (MÃGV, HỌTÊN, LƯƠNG, PHÁI, NGÀYSINH, SỐNHÀ, ĐƯỜNG, QUẬN, THÀNHPHỐ, MÃBM)
+BỘMÔN (MÃBM, TÊNBM, PHÒNG, ĐIỆNTHOẠI, NGAYNHANCHUC, TRƯỞNGBM)
+GIÁO VIÊN BỘ MÔNLàm_việc(1,1) (1,n)
+PHÁI NGÀYSINH
+ĐỊA CHỈ
+MÃ GV
+SỐNHÀ
+ĐƯỜNG
+QUẬN
+THÀNHPHỐ
+ĐIỆNTHOẠI
+HỌTÊNLƯƠNG
+MÃBM
+TÊNBM
+ĐIỆNTHOẠI
+PHÒNG
+Là_Trưởng_ 
+BM (1,1)(0,1)
+NGÀY NHẬN 
+CHỨCS
+T
+--- PAGE 39 ---
+4.0
+fit@hcmus
+5.7. Relationship: n-n
+⬜Create a new relation
+▪ Relation name is the name of the relationship
+▪ Set of attribute consists of
+◼ the key attributes of connected entity sets
+◼ The attributes on the relationship
+▪ Primary key consists of
+◼ the key attributes of connected entity sets
+39
+CHỦĐỀ (MÃCĐ, TÊNCĐ)
+CÔNGVIỆC (MÃĐT, STT, TÊNCV, NGÀYBĐ, NGÀYKT)
+THAMGIA(MÃGV, MÃĐT, STT, PHỤCẤP, KẾTQUẢ)
+PHÁI
+GIÁO VIÊN
+NGÀYSINH
+ĐỊA CHỈ
+MÃ GV
+SỐNHÀ
+ĐƯỜNG
+QUẬN
+THÀNHPHỐ
+ĐIỆNTHOẠIHỌTÊN
+LƯƠNG
+NGƯỜITHÂNCÔNG VIỆC
+SốTT
+TÊNCV NGÀYKT
+NGÀYBĐ
+Tham_gia(0,n) (0,n)
+KẾTQUẢPHỤCẤP
+--- PAGE 40 ---
+4.0
+fit@hcmus
+Exercise #2
+40
+Tàu Loại tàu
+Quốc gia
+thuộc loại(1,1) (0,n)
+(1,1)
+Tên quốc gia
+Lục địa
+(0,n)
+Mã tàu
+Vỏ tàu
+Vùng biển
+Tên biển
+có
+(0,n)
+NGƯỜITHÂNLịch sử di chuyển
+(1,1)
+Thời gian
+Ngày
+Giờ
+Kinh tuyếnVĩ tuyến
+Mã loại Tải trọng
+thuộc
+NGƯỜITHÂNCảng
+(1,1)
+(1,n)
+Tên cảng
+cập bến
+(0,n)
+(0,n)
+trong
+(1,1)
+trên
+NGƯỜITHÂNCảng đi qua
+Ngày bắt đầu
+Ngày kết thúc
+Chủ tàu
+sở hữu
+(1,1)
+(1,n)
+Mã chủ tàu
+Họ tên
+Điện thoại
+(1,1)
+(0,n)
+--- PAGE 41 ---
+4.0
+fit@hcmus
+Exercise #3
+41

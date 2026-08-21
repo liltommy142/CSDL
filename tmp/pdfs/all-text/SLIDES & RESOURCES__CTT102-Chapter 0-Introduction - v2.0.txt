@@ -1,0 +1,175 @@
+
+--- PAGE 1 ---
+fit@hcmus
+4.0
+Chapter 00
+CTT102 – Introduction to Database
+--- PAGE 2 ---
+4.0
+4.0
+fit@hcmus
+2
+Chapter 0 - Introduction
+Instructor:
+Dr. Phạm Nguyễn Cương (pncuong@fit.hcmus.edu.vn )
+Teaching Assistant:
+- MsC. Lương Hán Cơ (lhco@fit.hcmus.edu.vn) 
+© Information System department - University of Science, HCMC
+--- PAGE 3 ---
+4.0
+4.0
+fit@hcmus Content 
+▪ Objectives 
+▪ Learning outcomes 
+▪ Course content
+▪ Evaluation forms and grading scale
+▪ Reference
+▪ Course rules
+© Information System department - University of Science, HCMC 3
+--- PAGE 4 ---
+4.0
+4.0
+fit@hcmus Objectives 
+▪ Knowledge: 
+- Explain the roles of the database in an organization, basic concepts of 
+database and database systems
+- Data modeling:  applying the ER model and relational data model to 
+model data at a basic level
+- Understanding principles of query language of database
+- Understanding how to detect, describe, and declare constraints on data
+- Interpret and evaluate the quality of a database schema 
+▪ Skills:
+- Design a simple database schema based on requirements
+- Implement a database, use SQL to create and exploit a relational 
+database  
+- Practice critical, creative thinking. Use presentation skills, English skills to 
+read technical documents, practice teamwork skills.
+© Information System department - University of Science, HCMC 4
+--- PAGE 5 ---
+4.0
+4.0
+fit@hcmus Learning Outcomes 
+1. DB concepts: understanding the fundamental concepts of DB and 
+DB system
+2. Data modelling: 
+a. Understand concepts of  Entity Relationship (ER) model - build 
+conceptual data schema from business cases
+b. Understand concepts of Relational data model – build a relational data 
+schema
+c. Transfer an ER schema to relational data schema
+3. Query languages: proficient in relational data query languages: 
+Relational Algebra, Relational Calculus, SQL
+4. DB implementation: 
+a. Using DBMS MS SQL server to deploy a relational database schema and 
+working with data using SQL language.
+b. Detect, declare and implement integrity constraints in a relational database 
+schema
+© Information System department - University of Science, HCMC 5
+--- PAGE 6 ---
+4.0
+4.0
+fit@hcmus Learning Outcomes 
+5. Quality control: assess the quality of a relational 
+database schema and normalize the schema
+6. Evolution or future directions of database systems
+© Information System department - University of Science, HCMC 6
+--- PAGE 7 ---
+4.0
+4.0
+fit@hcmus Content
+▪ Chapter 1- Overview of database systems 
+▪ Chapter 2- Entity Relationship Model
+▪ Chapter 3- Relational Data Model
+▪ Chapter 4- Relational Algebra
+▪ Chapter 5- SQL
+▪ Chapter 6- Relational Calculus
+▪ Chapter 7- Integrity Constraint
+▪ Chapter 8- Functional Dependencies and Normalization
+© Information System department - University of Science, HCMC 7
+--- PAGE 8 ---
+4.0
+4.0
+fit@hcmus Assessments & Scales
+▪ Works in class 25%
+- Design ER, relational schema 
+- Query languages
+- Integrity constraints 
+- Functional dependencies and normalization
+▪ Projects/practices/lab 30%
+- Project or online examination
+▪ Final exam 45%
+- Multi-choice testing: 50 - 90 questions
+- Writing : 3 – 5 questions
+- Time: ~ 90 minutes
+▪ Extra – bonus 10%
+© Information System department - University of Science, HCMC 8
+--- PAGE 9 ---
+4.0
+4.0
+fit@hcmus Reference
+▪ Vietnamese:
+- Giáo trình Cở sở dữ liệu, Đồng Thị Bích Thủy, Phạm
+Thị Bạch Huệ, Nguyễn Trần Minh Thư, Nhà xuất bản
+Khoa học kỹ thuật, 2010.
+▪ English 
+- Fundamentals of Database Systems, Ramez
+Elmasri, Shamkant B. Navathe, Addison Wesley, 7th
+Edition, 2016.
+- Database Systems: The Complete Book ,Hector 
+Garcia-Molina, Jeffrey D. Ullman, Jennifer Widom, 
+Prentice Hall, 2000.
+- Database system concepts, Abraham Silberschatz, 
+Henry F. Korth, S. Sudarshan, McGraw-Hill, 2002.
+© Information System department - University of Science, HCMC 9
+
+--- PAGE 10 ---
+4.0
+4.0
+fit@hcmus Learning resource
+▪ Website (Moodle)
+- Notifications, exchange and discussion forum, slides, 
+exercises, assignments, etc. 
+▪ Learning resource 
+- Slides
+- Theoretical exercises
+- Practical document guides
+- Reference
+▪ Moodle link: https://courses.ctda.hcmus.edu.vn/
+© Information System department - University of Science, HCMC 10
+--- PAGE 11 ---
+4.0
+4.0
+fit@hcmus Tools and software  
+▪ MS SQL Server:
+- 2005
+- 2008
+- 2012 
+- 2016 
+Information System department - University of Science, HCMC
+11
+
+--- PAGE 12 ---
+4.0
+4.0
+fit@hcmus Requirements/ Rules
+▪ Preparation for online sessions
+- Download Zoom.us Client or Microsoft Teams and install on your PC for 
+online courses if required
+- Register using email fit, do not use other email
+▪ Rules 
+- Students are not allowed to be absent more than 30% of the total class 
+time (i.e., more than 3 sessions).
+- If two students submit identical exercises or exams, both will receive a 
+score of 0.
+- The final exam score must be greater than 2 to pass.
+- Do not record online lessons yourself. Any video recordings will be made 
+and uploaded to Moodle at the teacher’s discretion.
+- Do not share any class videos with others.
+© Information System department - University of Science, HCMC 12
+--- PAGE 13 ---
+4.0
+4.0
+fit@hcmus
+© Information System department -
+University of Science, HCMC
+13

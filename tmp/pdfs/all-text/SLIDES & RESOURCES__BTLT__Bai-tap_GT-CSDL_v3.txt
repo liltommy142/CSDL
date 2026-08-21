@@ -1,0 +1,807 @@
+
+--- PAGE 1 ---
+Chương 1 TỔNG QUAN VỀ CƠ SỞ DỮ LIỆU
+Câu hỏi ôn tập
+1.1) Hãy định nghĩa các khái niệm: dữ liệu, cơ sở dữ liệu, hệ quản trị cơ sở dữ liệu, hệ
+cơ sở dữ liệu.
+1.2) Hãy nêu một cách ngắn gọn ba hoạt động chính liên quan đến các cơ sở dữ liệu. 
+1.3)  Hãy trình bày những thuận lợi trong việc quản lý dữ liệu do hướng tiếp cận cơ sở
+dữ liệu mang lại so với hướng tiếp cận tập tin.
+1.4) Hãy nêu một số mô hình dữ liệu mà bạn biết?
+1.5) Người sử dụng cơ sở dữ liệu gồm có những loại nào? Hãy cho biết vai trò của từng
+loại người dùng.
+1.6) Người dùng cuối là gì? Trình bày một số công việc chính của họ. 
+Bài tập
+1.7) Hãy tìm một vài ứng dụng thực tế có thể áp dụng cơ sở dữ liệu để quản lý dữ liệu.
+Với mỗi ứng dụng, hãy trình bày ngắn gọn mô tả về ứng dụng, và xác định sơ lược
+một vài bảng dữ liệu và thuộc tính cho các bảng dữ liệu đó (cách thức trình bày theo
+Hình I-11 sách giáo khoa). 
+Bài tập chương 2: MÔ HÌNH THỰC THỂ KẾT HỢP
+Câu hỏi ôn tập
+2.1) Cho biết vai trò của mô hình dữ liệu cấp cao trong quá trình thiết kế cơ sở
+dữ liệu?
+2.2)  Hãy định nghĩa các khái niệm của mô hình thực thể kết hợp: thực thể, thuộc
+tính, giá trị thuộc tính, thể hiện mối kết hợp, thuộc tính của tập mối kết hợp,
+thuộc tính đa trị, thuộc tính suy diễn, thuộc tính khóa.
+2.3) Loại thực thể là gì? Tập thực thể là gì? Giải thích sự khác biệt giữa thực thể,
+loại thực thể và tập thực thể.
+2.4) Giải thích sự khác biệt giữa một thuộc tính và một tập giá trị.
+--- PAGE 2 ---
+2.5) Loại mối kết hợp là gì? Hãy giải thích sự khác biệt giữa thể hiện mối kết
+hợp, loại mối kết hợp và tập mối kết hợp.
+2.6) Loại mối kết hợp đệ qui nghĩa là gì? Cho một vài ví dụ về loại mối kết hợp
+này.
+2.7) Khi nào khái niệm thực thể yếu được sử dụng trong mô hình hóa dữ liệu. 
+Bài tập 
+2.8) Hãy xây dựng mô hình ER cho Hệ thống quản lý bán hàng được mô tả như
+sau:  
+Một cửa hàng chuyên bán sỉ và lẻ các mặt hàng đủ l oại. Người quản lý cửa hàng cần xây dựng
+một ứng dụng quản lý công việc đặt hàng, giao hàng và bán hàng tại cửa hàng. Sau đây là kết
+quả của việc phân tích yêu cầu ứng dụng:
+ Cửa hàng bán ra trên 300 mặt hàng với nguồn hàng lấy từ các nhà cung cấp. Một nhà
+cung cấp có một mã nhà cung cấp, tên, địa chỉ và điện th oại của nhà cung cấp. Mỗi nhà
+cung cấp có thể cung ứng nhiều mặt hàng khác nhau và mỗi mặt hàng cũng có thể được
+cung cấp bởi nhiều nhà cung cấp khác nhau, cần ghi nhận lại nhà cung cấp nào có thể
+cung ứng những mặt hàng gì.
+ Cần lưu lại thông tin về tất cả các mặt hàng mà cửa hàng có mua bán: mã mặt hàng, tên
+hàng, hàng thuộc l oại nào, đơn vị tính, quy cách, số lượng tồn. Mỗi l oại hàng có mã loại
+hàng, tên loại hàng.
+ Mỗi lần đặt hàng, cửa hàng sẽ điền một phiếu đặt hàng gửi đến nhà cung cấp. Cửa hàng
+phải điền các thông tin sau vào đơn đặt hàng: số đơn đặt hàng, ngày đặt hàng, đặt tại nhà
+cung cấp nào, số lượng cần đặt đối với từng mặt hàng là bao nhiêu. Cuối mỗi đơn đặt
+hàng có thông tin về tổng số mặt hàng cần đặt. Trên phiếu đặt hàng chỉ có các mặt hàng
+mà nhà cung cấp có thể cung ứng.
+ Mỗi khi đến giao hàng, nhà cung cấp giao cho cửa hàng một phiếu giao hàng, gồm các
+thông tin sau: số phiếu giao, ngày giao, giao cho đơn đặt hàng nào, mỗi mặt hàng số
+lượng giao và đơn giá là bao nhiêu. Ứng với 1 lần đặt hàng, nhà cung cấp có thể giao
+hàng tối đa là 3 lần và không được trễ hơn 7 ngày so với ngày đặt. Nhà cung cấp chỉ được
+giao các mặt hàng mà nhà cung cấp có đặt với số lượng giao không lớn hơn số lượng đặt.
+--- PAGE 3 ---
+ Khi khách hàng đến mua hàng, cửa hàng sẽ lưu lại thông tin tất cả các hóa đơn bán hàng
+để tiện việc kiểm hàng. Thông tin hóa đơn gồm: số hóa đơn, ngày lập hóa đơn, tên khách
+hàng, địa chỉ khách hàng, điện thọai khách hàng, khách hàng đã mua những mặt hàng nào
+với số lượng mua, đơn giá mua là bao nhiêu.
+2.9) Sau đây là mô tả về Hệ thống quản lý tồn kho. Hãy xây dựng mô hình ER
+cho hệ thống này.
+Hệ thống quản lý tồn kho của các mặt hàng trong các kho hàng của một công ty được mô
+tả như sau:
+ Kho hàng là nơi quản lý các mặt hàng của công ty. Mỗi kho hàng có một mã số
+duy nhất (MÃ_KHO) dùng để phân biệt các kho hàng khác, một tên kho hàng và
+một loại hàng mà kho đó chứa. Mỗi kho có một địa điểm nhất định được xác định
+bởi mã số địa điểm (MÃ_ĐĐ), địa chỉ của địa điểm, có một nhân viên phụ trách
+địa điểm và số điện thoại để liên lạc với kho tại địa điểm trên. Một kho chỉ chứa
+một loại hàng, một địa điểm có thể có nhiều kho.
+ Một mặt hàng có một mã số duy nhất (MÃ_MH) để phân biệt các mặt hàng khác,
+có một tên hàng. Một mặt hàng được xếp vào một loại hàng, và một loại hàng có
+nhiều mặt hàng. Mỗi loại hàng có một mã số duy nhất để phân biệt (MÃ_LH), và
+có một tên loại hàng. Một mặt hàng có thể chứa ở nhiều kho, một kho có thể chứa
+nhiều mặt hàng cùng loại.
+ Số lượng tồn kho của mỗi mặt hàng được xác định bởi phiếu nhập và phiếu xuất
+hàng. Mỗi phiếu nhập hàng có số phiếu nhập (SỐ_PN) duy nhất để phân biệt, và
+có ngày lập phiếu, phiếu nhập cho biết nhập tại kho nào, và có chữ ký của nhân
+viên phụ trách địa điểm của kho đó. Trong chi tiết của phiếu nhập cho biết số
+lượng nhập cho các mặt hàng của một phiếu nhập.
+ Mỗi phiếu xuất hàng có số phiếu nhất (SỐ_PX) duy để phân biệt, và có ngày lập
+phiếu, phiếu xuất cho biết xuất tại kho nào, chữ ký của nhân viên đi nhận hàng tại
+kho đó. Trong chi tiết của phiếu xuất cho biết số lượng xuất cho các mặt hàng của
+một phiếu xuất.
+--- PAGE 4 ---
+Thông tin của nhân viên phụ trách địa điểm tại các kho và nhân viên đi nhận hàng từ các
+kho bao gồm: Mã số nhân viên (MÃ_NV) để phân biệt giữa các nhân viên, có họ tên,
+phái, năm sinh, địa chỉ thường trú, số điện thoại của nhân viên.
+2.10) Hãy xây dựng mô hình ER cho Hệ thống quản lý chuyên đề được mô tả như
+sau:
+Phòng giáo vụ tại một trường đại học muốn tin học hóa việc quản lý đăng ký học các
+chuyên đề của sinh viên. Sau đây là kết quả của việc phân tích thiết kế ứng dụng trên:
+ Mỗi sinh viên có một mã số duy nhất, có họ tên, thuộc một phái, có một ngày sinh,
+một địa chỉ và theo học một ngành duy nhất. 
+ Mỗi ngành có một mã ngành duy nhất, có một tên ngành duy nhất và một con số
+cho biết tổng số sinh viên đã từng theo học ngành này. Đối với từng ngành, số
+lượng chuyên đề mà 1 sinh viên phải hòan tất đã được trường quy định trước, và
+con số này không được vượt quá 5. Ngòai ra, trường cũng quy định trước danh
+sách các chuyên đề đối với từng ngành cụ thể để một sinh viên thuộc một ngành
+biết được mình phải học những chuyên đề nào.
+ Mỗi chuyên đề có một mã duy nhất và có một tên duy nhất. Cần lưu lại thông tin
+về số sinh viên tối đa có thể chấp nhận được mỗi khi có 1 lớp mở cho chuyên đề
+cụ thể.
+ Vào đầu mỗi học kỳ của mỗi năm học, phòng giáo vụ lên danh sách các chuyên đề
+được mở đề sinh viên có thể đăng ký học. Sinh viên chỉ được đăng ký học những
+chuyên đề có mở.
+ Khi sinh viên đăng ký học, cần ghi nhận lại việc đăng ký học một chuyên đề của
+một sinh viên vào một năm của một học kỳ nào đó. Mỗi năm có 2 học kỳ. Sinh
+viên chỉ được đăng ký tối đa là 3 chuyên đề trong một học kỳ mà thôi. 
+2.11) Hãy xây dựng mô hình ER cho Hệ thống quản lý cửa hàng nước giải khát
+được mô tả như sau:
+--- PAGE 5 ---
+Cửa hàng bán lẻ nước giải khát đủ loại (nước suối, rượu, nước ngọt, bia,…). Các loại
+nước giải khát này thuộc nhiều hiệu khác nhau (ví dụ: nước cam hiệu Tribeco và Rừng
+Hương). Mỗi loại nước trong mỗi hiệu có một giá bán lẻ khác nhau. Cửa hàng có một số
+khách quen mua nước đều đặn ở cửa hàng – đối với số khách này, cửa hàng ghi nhận tên,
+địa chỉ và số điện thoại. Mỗi lần khách đến mua nước, sau khi kiểm tra các mặt hàng và
+số lượng cần mua, cửa hàng lập một hóa đơn trong đó có hóa đơn trong đó có ghi các
+thông tin về khách hàng và chi tiết các loại nước trong mỗi hiệu cùng số lượng (đơn vị
+tính là chai) và số tiền tương ứng. Ở cuối hóa đơn ghi tổng số tiền phải trả. Khách sẽ
+thanh toán và nhận hàng ở bộ phận giao hàng. Riêng đối với khách quen, có trong hồ sơ
+của khách hàng, thì cửa hàng chấp nhận cho lấy hàng trước (tại cửa hàng) và thanh toán
+hóa đơn trong vòng 3 ngày.
+Cuối mỗi ngày, cửa hàng kiểm tra lượng hàng còn trong mỗi loại nước của mỗi hiệu. Nếu
+lượng tồn ở dưới mức tối thiểu thì cửa hàng sẽ đặt mua thêm ngày hôm sau. Lượng tồn
+tối thiểu này được xác định dựa trên kinh nghiệm kinh doanh của cửa hàng. Mỗi loại
+nước trong mỗi hiệu được cung cấp tại một nơi duy nhất gọi là đơn vị cung ứng. Đơn vị
+cung ứng này có thể là xí nghiệp sản xuất hay công ty cung ứng nước giải khát. Mỗi lần
+đặt hàng thì cửa hàng sẽ điền vào một phiếu đặt hàng trong đó có ghi ngày đặt, số lượng
+cho từng loại. Đơn vị cung ứng sẽ áp dụng cho những đơn giá khác nhau cho mỗi lần đặt
+hàng. Đơn vị cung ứng có thể giao hàng làm nhiều lần, tối đa là 3 lần trong vòng một
+tuần. Mỗi lần giao hàng sẽ có một phiếu giao hàng kiêm hóa đơn trong đó có chi tiết các
+loại nước giải khát, nhắc lại tổng lượng đặt, lượng đã giao, lượng giao đợt này, đơn giá,
+số tiền tương ứng cho loại đó và số tiền tổng cộng phải trả. Cửa hàng phải thanh toán
+ngay khi nhận hàng.
+2.12) Sau đây là mô tả về việc quản lý bán hàng tại một siêu thị. Hãy xây dựng mô
+hình ER cho hệ thống này.
+Siêu thị hoạt động kinh doanh bán tất cả các mặt hàng tiêu dùng, ăn uống, thời trang…
+Sau đây là mô tả hoạt động của siêu thị:
+--- PAGE 6 ---
+Bán hàng: Khách đến mua hàng tại siêu thị có thể tự do vào siêu thị chọn hàng, hoặc nếu
+có yêu cầu về hàng hóa thì có thể báo cho nhân viên bán hàng tìm hộ hoặc vào kho lấy
+thêm. Sau đó, khách hàng sẽ đến quày tính tiền để thanh toán. Nếu những khách hàng nào
+có thể VIP (very important person) thì hóa đơn thanh toán sẽ được giảm giá theo tỉ lệ
+phần trăm ghi trên thẻ. Mỗi thể VIP sẽ có giá trị trong một số lần thanh toán nhất định (số
+lần được giảm giá tối đa được ghi rất rõ trên thẻ).
+Hậu mãi: Sau khi khách hàng mua hàng trong vòng 30 ngày, nếu khách hàng không vừa
+ý với mặt hàng mình mua thì có thể đem hàng để đổi hoặc trả lại. Và khách hàng chỉ có
+thể trả hoặc đổi hàng nếu khách hàng đáp ứng đầy đủ 3 yêu cầu sau:
+1. Hàng đổi và trả phải có chất lượng giống như lúc mua.
+2. Khách hàng phải có hóa đơn mua hàng của những mặt hàng muốn đổi hoặc trả lại.
+3. Khách hàng đã sử dụng thẻ VIP khi mua những mặt hàng muốn đổi hoặc trả lại.
+Nếu hàng trả, nhân viên tính tiền sẽ kiểm tra thời gian hợp lệ, và lập phiếu chi cho khách
+hàng. Trên phiếu chi sẽ ghi rất rõ về ngày, số phiếu chi, lý do, họ tên khách, số tiền, lý do
+chi và phiếu chi này là của hóa đơn mua hàng nào.
+Nếu đổi hàng thì nhân viên tính tiền sau khi kiểm tra sẽ lập phiếu đổi hàng trên đó gồm
+số phiếu đổi, ngày lập, mã số hàng trả, số tiền trả, mã số hàng nhận, số tiền hàng nhận, số
+tiền chênh lệch. Nếu số tiền hàng trả lớn hơn số tiền hàng nhận thìn khách sẽ nhận lại số
+tiền chênh lệch. Nếu không khách hàng sẽ phải trả thêm số tiền chênh lệch cho siêu thị.
+Tồn kho: cuối mỗi ngày, nhân viên thống kê sẽ xem xét tồn kho cuối ngày. Nếu số lượng
+tồn kho nhỏ hơn số lượng tồn kho tối thiểu thì sẽ lập phiếu  xin nhập hàng.
+Quản lý thẻ VIP : cứ mỗi kỳ siêu thị sẽ tặng và bán một lượng thẻ VIP. Khách hàng sẽ
+dùng thẻ này để giảm giá khi mua hàng và có thể sử dụng cho dịch vụ hậu mãi. Khi
+khách hàng mua hàng, siêu thị sẽ cập nhật lại số lần còn sử dụng được của thẻ.
+--- PAGE 7 ---
+Chương 3 MÔ HÌNH DỮ LIỆU QUAN HỆ
+Câu hỏi ôn tâ ̣p
+3.1) Hãy định nghĩa các khái niê ̣m sau: lược đồ quan hê ̣, quan hê ̣, bô ̣, thuô ̣c tính của mô ̣t
+quan hê ̣, miền giá trị của thuô ̣c tính, bâ ̣c của mô ̣t quan hê ̣, thể hiê ̣n quan hê ̣, khóa,
+khóa ứng viên, khóa chính, thuô ̣c tính khóa, siêu khóa, khóa ngoại, lược đồ CSDL,
+thể hiê ̣n CSDL.
+3.2) Cách lưu trữ dữ liệu dùng quan hệ có những đặc điểm gì khác so với cách lưu trữ dữ
+liệu dùng bảng hoặc tập tin thông thường?
+3.3) Hãy cho biết khóa chính của quan hê ̣ có vai trò gì?
+3.4) Hãy phân biê ̣t khóa và siêu khóa của mô ̣t quan hê ̣?
+3.5) Hãy cho biết khóa ngoại của quan hê ̣ có vai trò gì? Nếu không khai báo khóa ngoại
+khi cài đặt một cơ sở dữ liệu thì gặp phải vấn đề gì?
+3.6) Cho FK là khóa ngoại của quan hê ̣ r2 tham chiếu đến PK là khóa chính của quan hê ̣
+r1. Hãy cho biết:
+a. Số lượng thuô ̣c tính của FK có nhất thiết bằng với số lượng thuô ̣c tính của PK hay
+không?
+b. Tên của các thuô ̣c tính trong FK c ó nhất thiết trùng tên v ới các thuô ̣c tính trong
+PK hay không?
+c. Các thuô ̣c tính trong FK c ó nhất thiết cùng miền giá trị với các thuô ̣c tính trong
+PK hay không?
+3.7) Hãy cho bi ết mô ̣t thuô ̣c tính của mô ̣t quan hê ̣ có thể mang gi á trị rỗng (null) trong
+những trường hợp nào ?
+3.8) Giá trị của mô ̣t bô ̣ tại các thuô ̣c tính tham gia l àm khóa chính của mô ̣t quan hê ̣ có
+thể là rỗng (null) hay không? Vì sao?
+3.9) Giá trị của mô ̣t bô ̣ tại các thuô ̣c tính tham gia l àm khóa ngoại của mô ̣t quan hê ̣ có
+thể là rỗng (null) hay không? Vì sao?
+--- PAGE 8 ---
+3.10) Khi chuyển mô hình ER sang mô hình dữ liệu quan hệ, trong những trường hợp
+nào thì phải tạo ra một quan hệ mới? Hãy cho ví dụ cụ thể cho những trường hợp
+nhận biết được.
+3.11) Hãy trình bày cách thức chuyển đổi các dạng loại mối kết hợp từ mô hình ER sang
+mô hình quan hệ. Với mỗi dạng loại mối kết hợp, hãy cho ví dụ minh họa.
+Bài tâ ̣p
+3.12) Hãy chuyển các mô h ình ER trong b ài tâ ̣p chương 2 sang mô h ình quan hê ̣. Hãy
+xác định khóa chính, khóa ngoại cho từng quan hê ̣.
+3.13) Phòng giáo vụ tại một trường đại học muốn tin học hóa việc quản lý đăng ký học
+các chuyên đề của sinh viên. Sau đây là kết quả của việc phân tích thiết kế ứng dụng
+trên:
+SINHVIÊN (MÃSV, HỌTÊN, PHÁI, NGÀYSINH, ĐCHỈ, MÃNGÀNH)
+Tân từ: Mỗi sinh viên có một mã số duy nhất, một họ tên, thuộc một phái, có một
+ngày sinh, một địa chỉ và theo học một ngành.
+NGÀNH (MÃNGÀNH, TÊNNGÀNH, SỐCĐ, TSSV)
+Tân từ: Mỗi ngành có một mã ngành duy nhất, có một tên ngành duy nhất. SỐCĐ
+cho biết số lượng chuyên đề mà 1 sinh viên theo học ngành có mã là MÃNGÀNH
+phải học. TSSV cho biết tổng số sinh viên đã từng theo học ngành này từ trước đến
+nay.
+CHUYÊNĐỀ (MÃCĐ, TÊNCĐ, SỐSVTĐ)
+Tân từ: Mỗi chuyên đề có một mã duy nhất và có một tên duy nhất. SỐSVTĐ cho
+biết số sinh viên tối đa có thể chấp nhận được mỗi khi có 1 lớp mở cho chuyên đề có
+mã là MÃCĐ.
+CĐ_NGANH (MÃCĐ, MÃNGÀNH)
+Tân từ : Mỗi chuyên đề có thể được học bởi nhiều ngành và mỗi ngành phải học
+nhiều chuyên đề. 
+CĐ_MỞ (MÃCĐ, HỌCKỲ, NĂM)
+--- PAGE 9 ---
+Tân từ: Mỗi bộ của quan hệ trên thể hiện một chuyên đề được mở ra vào một học kỳ
+của một năm học.
+ĐĂNGKÝ (MÃSV, MÃCĐ, HỌCKỲ, NĂM, ĐIỂM)
+Tân từ: Mỗi bộ của quan hệ trên thể hiện việc đăng ký học một chuyên đề của một
+sinh viên vào một học kỳ của một năm học. ĐIỂM cho biết điểm số mà sinh viên đó
+đạt được khi học chuyên đề. Sinh viên chỉ được đăng ký học chuyên đề khi chuyên
+đề đó có mở.
+Sinh viên theo học mỗi ngành không được học quá 5 chuyên đề. Sinh viên không
+được đăng ký học quá 3 chuyên đề trong một học kỳ. Mỗi một học kỳ mở tối đa là 5
+chuyên đề.
+Hãy xác định khóa chính, khóa ngoại cho các lược đồ quan hệ trên. Chỉ rõ các thuộc
+tính mà từng khóa ngoại tham chiếu đến.
+3.14) Cho lược đồ CSDL sau:
+NHÀCC(MÃNCC, TÊNNCC, ĐỊACHỈ, ĐT)
+Tân từ: Một nhà cung cấp có một mã nhà cung cấp, tên, địa chỉ và điện thọai của
+nhà cung cấp. 
+HÀNGHÓA(MÃHH, TÊNHH, ĐVT, QUYCÁCH, SLTỒN)
+Tân từ: Cần lưu lại thông tin về tất cả các mặt hàng mà cửa hàng có mua bán: mã
+mặt hàng, tên hàngđơn vị tính, quy cách, số lượng tồn. 
+CUNGỨNG(MÃNCC, MÃHH)
+Tân từ: Mỗi nhà cung cấp có thể cung ứng nhiều mặt hàng khác nhau và mỗi mặt
+hàng cũng có thể được cung cấp bởi nhiều nhà cung cấp khác nhau, cần ghi nhận lại
+nhà cung cấp nào có thể cung ứng những mặt hàng gì.
+ĐĐH(SỐĐĐH, NGÀYĐH, MÃNCC)
+Tân từ: Mỗi đơn đặt hàng có một số đơn đặt hàng duy nhất, ngày đặt hàng, đặt tại
+nhà cung cấp nào. 
+CTĐĐH(SỐĐĐH, MÃHH, SỐLƯỢNG)
+--- PAGE 10 ---
+Tân từ: Mỗi đơn đặt hàng đặt nhiều mặt hàng khác nhau, mỗi mặt hàng ghi rõ số
+lượng đặt hàng. Đơn đặt hàng gửi đến một nhà cung cấp chỉ gồm các mặt hàng mà
+nhà cung cấp đó có thể cung ứng.
+GIAOHÀNG(SỐGH, NGÀYGH, SỐĐĐH)
+Tân từ: Mỗi phiếu giao hàng có một số phiếu giao duy nhất, có ngày giao, giao cho
+đơn đặt hàng nào
+CTGH(SỐGH, MÃHH, SỐLƯỢNG)
+Tân từ: Trong phiếu giao hàng cần ghi nhận mỗi mặt hàng có số lượng giao và đơn
+giá là bao nhiêu.
+HÓAĐƠN(SỐHĐ, NGÀYHĐ, TÊNKH)
+Tân từ: Mối hóa đơn có số hóa đơn duy nhất, ngày lập hóa đơn, tên khách hàng. 
+CTHĐ(SỐHĐ, MÃHH, SỐLƯỢNG, ĐƠNGIÁ)
+Tân từ: Cần ghi nhận đối với từng hóa đơn khách hàng đã mua những mặt hàng nào
+với số lượng mua, đơn giá mua là bao nhiêu.
+Ngoài ra, ứng với 1 lần đặt hàng, nhà cung cấp có thể giao hàng tối đa là 3 lần và
+không được trễ hơn 7 ngày so với ngày đặt. Nhà cung cấp chỉ được giao các mặt
+hàng mà nhà cung cấp có đặt với số lượng giao không lớn hơn số lượng đặt.
+Hãy xác định khóa chính, khóa ngoại cho các lược đồ quan hệ trên. 
+3.15) Cho lược đồ CSDL sau:
+ĐỀÁN(MÃĐA, NGÀYBĐ, NGÀYKT, TTRẠNG, MÃPB, CHIPHÍĐA)
+Tân từ: Mỗi đề án có một mã số duy nhất để phân biệt với các đề án khác, có thời
+gian  thực  hiện  đề  án  tính  từ  ngày  bắt  đầu  (NGÀYBĐ)  đến  ngày  kết  thúc
+(NGÀYKT). Tình trạng cho biết đề án chưa thực thi, đang thực thi, thành công hay
+thất bại. Đề án do một phòng ban phụ trách và có một chi phí để thực hiện đề án.
+CÔNGĐOẠN(MÃĐA, STTCĐ, NGÀYBĐ, NGÀYKT, MÃCV)
+Tân từ:  Mỗi công đoạn của một đề án có số thứ tự (STTCĐ) khác nhau dùng để
+phân biệt với các công đoạn khác nhau trong đề án đó, có ngày bắt đầu (NGÀYBĐ)
+--- PAGE 11 ---
+và kết thúc (NGÀYKT) công đoạn. Mỗi công đoạn triển khai duy nhất cho một
+công việc (MÃCV).
+THAMGIACĐ(MÃNV, MÃĐA, STTCĐ)
+Tân từ:  Mỗi bộ của quan hệ trên cho biết một nhân viên tham gia vào một công
+đoạn trong một đề án. 
+CÔNGVIỆC(MÃCV, TÊNCV, CHIPHÍCV)
+Tân từ: Một công việc có một mã số duy nhất (MÃCV), có tên công việc (TÊNCV)
+và chi phí để triển khai công việc (CHIPHÍCV).
+KHẢNĂNG(MÃNV, MÃCV)
+Tân từ:  Một nhân viên có khả năng thực hiện một số công việc nào đó mà thôi.
+Nhân viên chỉ được tham gia vào các công đoạn thuộc công việc mà nhân viên đó có
+khả năng thực hiện.
+Hãy xác định khóa chính, khóa ngoại cho c ác lược đồ quan hê ̣ trong lược đồ CSDL
+trên. 
+Chương 4 PHỤ THUỘC HÀM VÀ DẠNG CHUẨN
+Câu hỏi ôn tập
+4.1) Hãy cho biết thế nào là thêm, xóa, sửa dị thường? Hãy cho ví dụ minh họa.
+4.2) Tại sao “hạn chế sử dụng giá trị rỗng càng nhiều trong quan hệ càng tốt”? Trình
+bày về vấn đề xuất hiện các bộ dữ liệu sai liên quan đến giá trị rỗng? Làm sao có thể
+ngăn chặn vấn đề này?
+4.3) Phụ thuộc hàm là gì? Phụ thuộc hàm được xây dựng dựa trên ý nghĩa của lược đồ
+quan hệ hay dựa trên thể hiện của lược đồ quan hệ? Hãy giải thích lý do cho mỗi lựa
+chọn.
+4.4) Các luật dẫn Armstrong dùng để làm gì? 
+4.5) Bao đóng của tập phụ thuộc hàm là gì? Cho ví dụ minh họa.
+--- PAGE 12 ---
+4.6) Hai tập phụ thuộc hàm được gọi là tương đương khi nào? Làm sao có thể xác định
+được chúng là tương đương?
+4.7) Phủ tối tiểu là gì? Có phải mỗi tập phụ thuộc hàm luôn có một phủ tối tiểu hay
+không? Có phải phủ tối tiểu của  một tập phụ thuộc hàm là duy nhất?
+4.8) Thế nào là một lược đồ không dạng chuẩn? Hãy cho ví dụ minh họa?
+4.9) Hãy định nghĩa dạng chuẩn 1, dạng chuẩn 2, dạng chuẩn 3, dạng chuẩn Boyce-
+Code. Với mỗi dạng chuẩn, hãy cho một ví dụ minh họa?
+4.10) Lược đồ đạt dạng chuẩn 2 không được chứa loại phụ thuộc hàm nào?
+4.11) Lược đồ đạt dạng chuẩn 3 không được chứa loại phụ thuộc hàm nào?
+4.12)  Hãy cho biết sự khác biệt giữa dạng chuẩn 3 và dạng chuẩn Boyce-Code? Tại sao
+Boyce-Code được xem là dạng chuẩn mạnh hơn dạng chuẩn 3?
+4.13)  Trình bày ý nghĩa của dạng chuẩn trong quá trình thiết kế cơ sở dữ liệu?
+Bài tập
+4.14) Hãy xác định các khoá, một phủ tối tiểu, dạng chuẩn của từng Q i,Fi, được cho như
+sau:
+a) Q1(ABCDEGH), F1 = {AH; ABC; BCD; GB}
+b) Q2(ABCSXYZ),  F2 = {SA; AXB; SB; BYC; CZX}
+c) Q3(ABCD), F3 = {A  B; BCD; DA}
+d) Q4(ABCSXYZ), F4 = {SA; AXB; BYC; YZ;  CZX}
+e) Q5(ABCDEG), F5 = {ABC; CDE; AGB; BD; AD}
+f) Q6(ABCDE), F6 = {ACB; EB; BCA; DA; DEC}
+g) Q7(ABCDEGHIJ),  F7 =  {BG D;  GJ;  AIC;  CEH;  BDG;  JHA;
+DI}
+h) Q8(ABCDMNOP), F 8 = {AM N; BN C; AM B; A P; D M; BN M;
+PCA; DOA}
+--- PAGE 13 ---
+i) Q9(MNOPRSTU),  F9 =  {M S;  MRT;  TR;  ORT;  MU;  MTP;
+NPO; SUR}
+j) Q10(ABCDEGHIJ), F10 = {BHI; GCA; IJ; AEG; DB; IH}
+k) Q11(ABCDEHI), F11 = {ABC; BDEI; EIAH}
+l) Q12(ABCDHIGL), F12 = {ABCD; CDHI; IGBL}
+m) Q13(ABCDGH), F 13 = {GH A; AG B; CD G; HG D; BH C; CD H;
+CA}
+n) Q14(ABCDGHI), F14 = {GH; ACD; CI G; BCI; BC; AB}
+o) Q15(MNLPRS), F15 = {MN; MRN; PNLR; LS; SR}
+p) Q16(ABCDE), F16 = {DEA; CDE; ADB; BEC}
+4.15) Cho  danh  sách  SINHVIÊN  gồm  có  các  thuộc  tính  TênSV,  Email1,  Email2,
+Điệnthoại1, Loại ĐT1, Điệnthoại2, LoạiĐT2, ChuyênNgành. Địa chỉ email của sinh
+viên được ưu tiên sử dụng là địa chỉ email 1, tương tự điện thoại của sinh viên ưu tiên
+sử dụng là điện thoại 1. Thuộc tính chuyên ngành dùng để lưu trữ chuyên ngành hoặc
+môn học sinh viên đó đã tham gia học, ví dụ như chuyên ngành kiến trúc sư, hội họa,
+triết học,…)
+a) Giải thích tại sao danh sách SINHVIÊN không đạt dạng chuẩn 1.
+b) Hãy thiết kế lại để được bảng SINHVIÊN đạt dạng chuẩn 1 và vẽ lược đồ quan hệ.
+4.16) Cho bảng dữ liệu BÁNHÀNG bên dưới, mỗi cửa hàng sẽ lưu trữ các mặt hàng
+quan trọng nhất mà cửa hàng có bán:
+Vị trí Mặt hàng
+Cửa hàng tạp hóa và thực phẩm Sữa, Trứng, Chuối
+Cửa hàng văn phòng phẩm Giấy, bút chì, copa, bút bi
+Bưu điện Tem , bao thư
+Cửa hàng máy tính Đĩa từ, đĩa mềm, đĩa cứng, chuột
+--- PAGE 14 ---
+a) Giải thích tại sao bảng dữ liệu trên không đạt dạng chuẩn 1.
+b) Hãy thiết kế lại để được bảng dữ liệu mới đạt dạng chuẩn 1 (có xác định khóa
+chính cho bảng).
+4.17) Với bảng dữ liệu đã được xây dựng ở câu 4.16):
+a) Hãy giải thích tại sao bảng dữ liệu không đạt dạng chuẩn 2? 
+b) Hãy chuẩn hóa quan hệ về dạng chuẩn 2. 
+4.18) Xét bảng NHÂNVIÊN sau, với TÊNNV là khóa chính:
+TÊNNV DỰÁN PHÒNGBAN
+Anh Phân công việc Phòng thí nghiệm mạng
+Bình Định tuyến mạng Phòng thí nghiệm mạng
+Duy Thiết kế khảo sát Phòng quản lý nhân sự
+Hạ Phân công việc Phòng thí nghiệm mạng
+Tâm Thiết kế khảo sát Phòng quản lý nhân sự
+Minh Định tuyến mạng Phòng thí nghiệm mạng
+Hùng Dịch vụ phân tích tin tức Phòng quản lý nhân sự
+a) Giải thích vì sao NHÂNVIÊN không đạt dạng chuẩn 3?
+b) Hãy chuẩn hóa NHÂNVIÊN thành dạng chuẩn 3. 
+4.19) Một hệ thống thông tin quản lý sinh viên được mô tả như sau:
+ Lưu trữ thông tin của sinh viên gồm có tên (TÊNSV), mã số sinh viên
+(MSSV), số chứng minh nhân dân (SỐCMND), địa chỉ (ĐỊACHỈ), điện
+thoại (ĐIỆNTHOẠI), ngày sinh (NGÀYSINH), giới tính (GIỚITÍNH), học
+năm thứ mấy (NĂMHỌC), phòng ban quản lý (MÃPHG), chương trình học
+(CHƯƠNGTRÌNH). Mỗi sinh viên được xác định thông qua MSSV hoặc
+SỐCMND.
+ Mỗi phòng ban gồm có tên phòng (TÊNPHG), mã phòng ban (MÃPHG),
+số phòng (SỐPHG), điện thoại (ĐTPHG), tòa nhà (TÒANHÀ). Mỗi phòng
+ban được xác định duy nhất thông qua MÃPHG hoặc SỐPHG.
+--- PAGE 15 ---
+ Mỗi  môn  học  có  tên  môn  hoc  (TÊNMH),  mô  tả  (MÔTẢ),  mã  môn
+(MÃMH),  số  tín  chỉ  (SỐTC),  mức  độ  (MỨCĐỘ),  phòng  ban  quản  lý
+(PHGQL). Mỗi môn học được xác định duy nhất thông qua mã môn học.
+ Mỗi học phần mở ra học kỳ (HỌCKỲ), năm học (NĂMHỌC) có một mã
+học phần (MÃHP), liên quan đến một môn học (MÃMH) và do một giáo
+viên giảng dạy (TÊNGV). Mỗi học phần có một mã phân biệt với các học
+phần khác trong cùng một khóa học được giảng dạy trong suốt học kỳ của
+năm. Mã học phần tăng dần từ 1, 2, 3, …đến tổng số học phần được dạy
+trong suốt mỗi học kỳ. 
+ Mỗi sinh viên (SỐCMND) tham gia học trên mỗi học phần sẽ có một điểm
+(ĐIỂMTHI) cụ thể. 
+a) Hãy thiết kế một lược đồ cơ sở dữ liệu quan hệ cho hệ thống quản lý sinh
+viên này. 
+c) Hãy xác định tất cả các phụ hàm nhận diện được. Thiết kế lược đồ cơ sở dữ
+liệu cho ứng dụng này đạt dạng chuẩn 3 hoặc Boyce-Code. Hãy chỉ ra
+thuộc tính khóa của mỗi quan hệ. Lưu ý: không đưa vào thêm bất kỳ yêu
+cầu hay giả định nào trong quá trình thực hiện bài tập này.
+Chương 5 NGÔN NGỮ ĐẠI SỐ QUAN HỆ
+Câu hỏi ôn tâ ̣p
+5.1) Hãy liệt kê các ph ép toán đại số quan hê ̣, cho biết k ý hiê ̣u và vai trò của từng phép
+toán.
+5.2) Hãy phát biểu mô ̣t cách tổng quát bằng ngôn ngữ tự nhiên về từng phép toán đại số
+quan hê ̣, điều kiê ̣n thực hiê ̣n phép toán và kết quả của chúng.
+Ví dụ: “Phép chọn từ quan hê ̣ r với điều kiê ̣n chọn C cho ra k ết quả là mô ̣t quan hê ̣
+có các thuô ̣c tính là các thuô ̣c tính của quan hê ̣ r ban đầu, số bô ̣ là số bô ̣ của quan hê ̣
+r ban đầu thỏa mãn điều kiê ̣n C”.
+--- PAGE 16 ---
+5.3) Thế nào là hai lược đồ quan hệ kh ả hợp? Các phép toán đại số quan hê ̣ nào đòi hỏi
+các quan hê ̣ tham gia v ào phép toán phải khả hợp? Kết quả của chúng có đă ̣c điểm
+chung gì?
+5.4) Khi nào thì ta thực hiê ̣n kết bằng? Khi nào thì ta có thể thực hiê ̣n phép kết tự nhiên
+thay vì thực hiê ̣n kết bằng? Kết quả phép kết bằng và phép kết tự nhiên giống nhau
+và khác nhau như thế nào?
+5.5) Cho biết vai trò của phép đổi tên? Cho ví dụ minh họa. Có nhu cầu truy vấn nào mà
+nếu không dùng phép đổi tên thì sẽ không thể hiện được b ằng đại số quan hệ hay
+không? Nếu có, hãy cho ví dụ minh họa.
+5.6) Vai trò của phép gán là gì? Cho ví dụ minh họa.
+5.7) Vai trò của phép kết ngoài (outer join)? Cho bi ết sự khác nhau c ủa phép kết trong
+(inner join) và phép kết ngoài?
+5.8) Thông thường, kết quả của phép tích Đề-các không ph ải luôn luôn c ó ý nghĩa thực
+tế. Hãy cho mô ̣t ví dụ cho biết rằng vẫn có trường hợp tất cả các dòng trong kết quả
+của phép tích Đề-các là có ý nghĩa thực tế.
+5.9) Cho hai bảng T1 và T2 như sau. Hãy cho biết kết quả của những phép toán sau :
+P Q R A B C
+10 a 5 10 b 6
+15 b 8 25 c 3
+25 a 6 10 b 5
+a. T1 kết trong (inner join) T2 với điều kiê ̣n kết là T1.P = T2.A
+b. T1 kết trong T2 với điều kiê ̣n kết là T1.Q = T2.B
+c. T1 kết trái (left outer join) T2 với điều kiê ̣n kết là T1.P = T2.A
+d. T1 kết phải (right outer join) T2 với điều kiê ̣n kết là T1.Q = T2.B
+e. T1  T2
+--- PAGE 17 ---
+f. T1 kết trong (inner join) T2 với điều kiê ̣n kết là (T1.P = T2.A AND T1.R =
+T2.C)
+Bài tâ ̣p
+5.10) Cho lược đồ CSDL Quản lý Đề tài nghiên cứu khoa học như hình bên dưới, h ãy
+thực hiê ̣n những nhu cầu truy vấn sau dùng ngôn ngữ đại số quan hê ̣:
+MãGV HọTên Lương Phái NgàySinh SốNhà Đường Quận ThànhPhố GVQL MãBM
+MãGV ĐiệnThoại
+MãKhoa TrưởngBM NgàyNhậnChức ĐiệnThoại MãBM TênBM Phòng
+TrưởngKhoa NgàyNhậnChức TênKhoa NămTL Phòng ĐiệnThoại MãKhoa
+GVCNĐT MãĐT TênĐT KinhPhí CấpQL NgàyBĐ NgàyKT MãCĐ
+MãCĐ TênCĐMãĐT STT TênCV NgàyBĐ NgàyKT
+MãGV MãĐT STT PhụCấp KếtQuả
+GIÁOVIÊN
+GV_DT
+BỘMÔN
+KHOA
+ĐỀTÀI
+CHỦĐỀCÔNGVIỆC
+PHÂNCÔNG
+a) Cho biết danh sách giáo viên gồm mã, họ tên, phái, ngày sinh.
+b) Cho danh sách đề tài gồm mã đề tài, tên đề tài, kinh phí.
+c) Cho biết danh sách giáo viên có lương lớn hơn 2000.
+d) Cho biết danh sách giáo viên thuộc bộ môn có mã là HTTT.
+e) Cho biết danh sách giáo viên thuộc bộ môn mã là HTTT có lương lớn hơn 2000.
+f) Cho biết những bộ môn chưa biết người làm trưởng bộ môn.
+g) Cho biết những bộ môn đã phân công giáo viên làm trưởng bộ môn.
+h) Cho biết danh sách gồm mã, họ tên, phái, ngày sinh của các giáo viên có lương lớn
+hơn 2000.
+--- PAGE 18 ---
+i) Cho biết danh sách gồm mã các giáo viên có tham gia đề tài mã số 001 hoặc đề tài
+có mã là 002.
+j) Cho biết danh sách gồm mã các giáo viên vừa có tham gia đề tài mã số 001 vừa có
+tham gia đề tài mã số 002.
+k) Cho biết danh sách gồm mã các giáo viên có tham gia đề tài mã số 001 nhưng
+không có tham gia đề tài mã số 002.
+l) Cho biết các thể hiện cho biết tất cả các giáo viên thuộc bộ môn HTTT tham gia
+tất cả các công việc của các đề tài cấp trường. Danh sách kết xuất gồm mã giáo
+viên, mã đề tài, số thứ tự.
+m) Liệt kê danh sách các thể hiện cho biết các giáo viên thuộc bộ môn mã là MMT
+tham gia tất cả các công việc liên quan đến đề tài mã là 001.
+n) Liệt kê danh sách các thể hiện cho biết các giáo viên thuộc bộ môn tên là ‘Mạng
+máy tính’ tham gia tất cả các công việc liên quan đề tài tên là ‘Ứng dụng hóa học
+xanh’.
+o) Liệt kê danh sách các thể hiện cho biết giáo viên mã là 003 tham gia tất cả các
+công việc liên quan đến đề tài mã là 001.
+p) Cho biết danh sách giáo viên và mã, tên bộ môn mà giáo viên trực thuộc. Danh
+sách kết xuất gồm MÃGV, HỌTÊN, PHÁI, NGÀYSINH, MÃBM, TÊNBM.
+q) Cho biết danh sách các trưởng khoa.
+r) Cho biết danh sách các bộ môn và tên của người làm trưởng bộ môn.
+s) Cho biết danh sách gồm thông tin các bộ môn và tên của người làm trưởng bộ
+môn, đối với những bộ môn chưa biết giáo viên nào làm trưởng bộ môn thì tại các
+cột cho biết mã và tên của trưởng bộ môn mang giá trị rỗng (null).
+t) Cho biết danh sách gồm thông tin giáo viên và đề tài mà giáo viên đã tham gia,
+những giáo viên nào chưa có tham gia đề tài thì tại các cột cho biết thông tin đề tài
+hiện  giá  trị  rỗng.  Danh  sách  kết  xuất  gồm  MÃGV,  HỌTÊN,  MÃĐT,  STT,
+TÊNCV, TÊNĐT.
+u) Cho biết danh sách gồm mã, họ tên, phái, ngày sinh của các giáo viên thuộc bộ
+môn tên là ‘Hệ thống thông tin’.
+--- PAGE 19 ---
+v) Với những đề tài cấp trường và cấp Đại học quốc gia thuộc chủ đề là ‘Quản lý
+giáo dục’, cho biết mã và tên các giáo viên làm chủ nhiệm đề tài.
+w) Cho biết danh sách giáo viên và tên người quản lý chuyên môn với kết quả gồm
+các cột sau: MÃGV, HỌTÊN, NGÀYSINH, TÊN_GVQLCM. Chỉ xuất thông tin
+các giáo viên có người quản lý chuyên môn.
+x) Cho biết danh sách gồm mã và tên các giáo viên có tham gia đề tài tên là ‘HTTT
+quản lý các trường ĐH’ hoặc đề tài có tên là ‘HTTT quản lý giáo vụ cho một
+Khoa’.
+y) Cho biết danh sách gồm mã và tên các giáo viên vừa có tham gia đề tài tên là ‘Ứng
+dụng hóa học xanh’ vừa có tham gia đề tài có tên là ‘Nghiên cứu tế bào gốc’.
+z) Những giáo viên nào chưa từng tham gia đề tài (mã giáo viên, tên giáo viên).
+aa) Cho biết danh sách các giáo viên có người quản lý chuyên môn không ở cùng một
+thành phố. 
+bb)Cho biết danh sách các giáo viên tham gia tất cả các công việc của đề tài mã là
+001.
+cc) Có tất cả bao nhiêu giáo viên.
+dd)Mỗi bộ môn có bao nhiêu giáo viên (mã bộ môn, tên bộ môn, số giáo viên).
+ee) Mỗi bộ môn có bao nhiêu giáo viên sinh trước năm 1975 (mã bộ môn, tên bộ môn,
+số giáo viên).
+ff) Cho biết những bộ môn có số giáo viên nữ lớn hơn 5 (mã bộ môn, tên bộ môn, số
+giáo viên nữ).
+gg)Có bao nhiêu đề tài được thực hiện từ năm 2007 đến năm 2010.
+hh)Thêm vào bảng THAMGIAĐT các bộ dữ liệu cho biết giáo viên mã là 003 tham
+gia tất cả các công việc của đề tài mã là 001.
+ii) Xóa các dòng dữ liệu liên quan đến đề tài 002 trong bảng THAMGIAĐT.
+jj) Cập nhật lương của những giáo viên thuộc bộ môn mã là HTTT tăng 1.5 lần.
+kk)Sửa phụ cấp cho những giáo viên tham gia đề tài mã là 006 thành 2.
+5.11) Cho lược đồ CSDL sau (mô tả ở 3.13)):
+SINHVIÊN (MÃSV, HỌTÊN, PHÁI, NGÀYSINH, ĐCHỈ, MÃNGÀNH)
+--- PAGE 20 ---
+NGÀNH (MÃNGÀNH, TÊNNGÀNH, SỒCĐ, TSSV)
+CHUYÊNĐỀ (MÃCĐ, TÊNCĐ, SỐSVTĐ)
+CĐ_NGÀNH (MÃCĐ, MÃNGÀNH)
+CĐ_MỞ (MÃCĐ, HỌCKỲ, NĂM)
+ĐĂNGKÝ (MÃSV, MÃCĐ, HỌCKỲ, NĂM, ĐIỂM)
+Hãy thực hiện những nhu cầu truy vấn sau bằng ngôn ngữ đại số quan hệ:
+a. Liệt kê danh sách sinh viên gồm mã, họ tên, phái, ngày sinh.
+b. Liệt kê danh sách sinh viên thuộc ngành tên là ’Hệ thống thông tin’ (MÃSV,
+HỌTÊN, PHÁI, NGÀYSINH).
+c. Cho biết các ngành có tổng số sinh viên theo học từ trước đến nay lớn hơn 2000
+(MÃNGÀNH, TÊNNGÀNH).
+d. Những chuyên đề nào chỉ cho phép không quá 100 sinh viên đăng ký mỗi khi
+được mở (MÃCĐ, TÊNCĐ).
+e. Danh sách các chuyên đề bắt buộc đối với ngành tên là ’Mạng máy tính’ (MÃCĐ,
+TÊNCĐ).
+f. Mỗi  chuyên  đề  có  tất  cả  bao  nhiêu  ngành  phải  học  (MÃCĐ,  TÊNCĐ,
+SỐ_NGÀNH).
+g. Danh sách các sinh viên đăng ký học một chuyên đề tên là ’Java’ nhiều hơn 1 lần
+(MÃSV, HỌTÊN).
+h. Cho danh sách các sinh viên thuộc ngành tên là ’Hệ thống thông tin’ đã đăng ký
+học chuyên đề “Oracle” (MÃSV, HỌTÊN).
+i. Danh  s ách  c ác  ng ành  ph ải  h ọc  nhi ều  hơn  2  chuyên  đ ề  (MÃNGÀNH,
+TÊNNGÀNH).
+j. Cho danh sách c ác sinh viên đ ã đăng k ý nhiều hơn 2 chuyên đ ề trong h ọc kỳ 1
+năm 2009 (MÃSV, HỌTÊN).
+k. Cho biết các ngành phải học chuyên đề ’Java’ hoặc chuyên đề ’Oracle’.
+l. Cho  biết  các ng ành  vừa ph ải h ọc  chuyên đ ề  ’Java’  vừa ph ải h ọc  chuyên đ ề
+’Oracle’.
+--- PAGE 21 ---
+m. Cho biết các ngành phải học chuyên đề ’Java’ nhưng không phải học chuyên đề
+’Oracle’.
+n. Liệt kê tên các chuyên đề mà sinh viên có mã là “0012345” đã học.
+o. Danh sách các sinh viên đã đăng ký học 2 chuyên đề trong học kỳ 1 năm 2004.
+p. Danh sách các sinh viên đã đăng ký học 2 chuyên đề trong học kỳ 1 năm 2004 đ ều
+có điểm là “Đạt”.
+q. Cho danh s ách các sinh viên đ ã học tất cả các chuyên đ ề bắt buô ̣c đối với ngành
+’Hê ̣ thống thông tin’.
+r. Danh sách các sinh viên đ ã đăng k ý học nhiều hơn 1 chuyên đ ề trong năm h ọc
+2005.
+s. Danh s ách c ác sinh viên thuô ̣c ng ành ’Hê ̣ thống thông tin’ đ ã học chuyên đ ề
+’Oracle’ mà không học chuyên đề ’CSDL phân tán’ trong năm 2005.
+t. Cho đến hiê ̣n tại, cho biết mỗi chuyên ngành có bao nhiêu sinh viên theo học.
+u. Liệt kê các thể hiện dữ liệu cho biết tất cả các sinh viên thuộc ngành tên là ’Hệ
+thống thông tin’ đăng ký học tất cả các chuyên đề bắt buộc đối với ngành ’Hệ
+thống thông tin’ trong học kỳ 1 năm 2010 (MÃSV, MÃCĐ, HỌCKỲ, NĂM).
+v. Danh sách các sinh viên chưa học chuyên đề nào (MÃSV, HỌTÊN).
+w. Cho biết năm nào, học kỳ nào mở tất cả các chuyên đề bắt buộc cho ngành “Hệ
+thống thông tin”.
+x. Cho biết mã, tên của các chuyên đề thuộc chuyên ngành của sinh viên có mã là
+“0012345” mà sinh viên này chưa đăng ký học.
+y. Danh sách các sinh viên thuộc ngành “Hệ thống thông tin” chỉ học duy nhất 1
+chuyên đề trong học kỳ 1 năm 2005.
+z. Cho biết tên các chuyên đề mà mọi ngành đều phải học chúng.
+aa. Danh sách các chuyên đề bắt buộc đối với chuyên ngành tên là “Mạng máy tính”
+đã được mở ra trong học kỳ 1 năm 2005.
+bb. Danh sách các chuyên đề vừa là chuyên đề bắt buộc cho chuyên ngành tên là “Hệ
+thống thông tin” vừa là chuyên đề bắt buộc cho chuyên ngành tên là “Công nghệ tri
+--- PAGE 22 ---
+thức”.
+cc. Cho danh sách các sinh viên chưa từng học lại một chuyên đề nào.
+5.12 Cho CSDL sau:
+THỦYTHỦ(MÃTT, TÊNTT, BẬC, TUỔI)
+TÀU (MÃTÀU, TÊNTÀU, MÀU)
+ĐĂNGKÝ (MÃTT, MÃTÀU, NGÀY)
+Hãy viết bằng đại số quan hệ đối với những yêu cầu truy vấn sau đây:
+a. Tên của những thủy thủ đã đăng ký tàu mã là 103. 
+b. Tên của những thủy thủ có bậc lớn hơn 7.
+c. Tên và tuổi của những thủy thủ có bậc lớn hơn 7.
+d. Tìm tên thủy thủ, tên tàu và ngày đăng ký của tất cả những lần đăng ký.
+e. Tên của những thủy thủ đã đăng ký tàu màu đỏ.
+f. Tìm màu của những con tàu mà thủy thủ tên là Hùng đã đăng ký.
+g. Tên của những thủy thủ đã đăng ký ít nhất 1 con tàu.
+h. Tên của những thủy thủ đã đăng ký 1 con tàu màu đỏ hoặc 1 con tàu màu xanh.
+i. Tên của những thủy thủ đã đăng ký 1 con tàu màu đỏ và 1 con tàu mày xanh.
+j. Tên của những thủy thủ đã đăng ký tối thiểu 2 con tàu.
+k. Tìm mã của những thủy thủ có tuổi lớn hơn 20 chưa từng đăng ký con tàu màu đỏ.
+l. Tên của những thủy thủ đã đăng ký tất cả các con tàu.
+m. Tên của những thủy thủ đã đăng ký tất cả những con tàu có tên là “Marine” 
+n. Tên thủy thủ đã đăng ký tất cả những con tàu màu đỏ.
+Bài tập chương 6: NGÔN NGỮ TRUY VẤN SQL
+Câu hỏi ôn tập
+6.1) Sự khác biệt giữa khái niệm bảng dữ liệu trong SQL so với định nghĩa về quan hệ
+trong lược đồ cơ sở dữ liệu quan hệ là gì? Tại sao SQL cho phép các bộ trong một
+bảng hay kết quả của câu truy vấn có thể trùng nhau?
+--- PAGE 23 ---
+6.2) Cho biết các loại kiểu dữ liệu được sử dụng để khai báo cho các thuộc tính trong
+ngôn ngữ SQL.
+6.3) SQL cung cấp các hàm tính toán nào để thực hiện trên một tập các bộ dữ liệu?
+Cách sử dụng chúng như thế nào trong quá trình viết câu truy vấn?
+6.4) Truy vấn lồng là gì? Thế nào là lồng phân cấp và lồng tương quan? So sánh cách
+thực thi của hai loại truy vấn này thông qua ví dụ minh họa.
+6.5) Các toán tử IN, EXISTS, UNIQUE, ANY, và ALL được sử dụng như thế nào
+trong quá trình viết truy vấn lồng? Tại sao chúng lại hữu ích? Minh họa câu trả lời của
+bạn thông qua việc thực hiện phép chia trong SQL.
+6.6) Hãy phân biệt sự khác nhau khi sử dụng mệnh đề WHERE và HAVING
+trongtrong một câu truy vấn SQL. Hãy cho ví dụ minh họa để giải thích cho câu
+trả lời.
+6.7) Giá trị rỗng (NULL) là gì? Chúng ảnh hưởng như thế nào đến ngữ nghĩa của
+câu truy vấn? Có cho phép các thuộc tính tham gia làm khóa chính chứa giá trị
+rỗng không? 
+6.8) Hãy cho biết các từ khóa nào được sử dụng, cách khai báo của chúng trong
+cú pháp lệnh của ngôn ngữ SQL (cho ví dụ minh họa) khi khai báo cho các loại
+ràng buộc sau:
+a. Khóa chính
+b. Khóa ngoại
+c. Ràng buộc giá trị cho một thuộc tính
+d. Ràng buộc duy nhất cho một hoặc một tập thuộc tính
+e. Ràng buộc giá trị mặc định cho một thuộc tính
+6.9) Trigger là gì? Cấu trúc khi khai báo một trigger gồm có những phần chính
+nào? Mục đích của trigger là để làm gì? Hãy giải thích sự khác biệt khi khai
+báo một ràng buộc toàn vẹn bắt buộc phải dùng kỹ thuật trigger so với các kỹ
+thuật khác của SQL?
+--- PAGE 24 ---
+Bài tập 
+6.10) Hãy dùng ngôn ngữ SQL để thể hiê ̣n những biểu thức đại số quan hê ̣ sau:
+a. A,B (R(A, B, C))
+b. E (R(A, B)) 
+c. R(A, B)  S (C, D)
+d. R(A, B) * S (B, C)
+e. R(A, B)  ⋈ S(B, C)
+f. R(A, B)  S (B)
+g. C, D (R(A, B))
+h. ℑCOUNT(*) (R(A, B))
+i. AℑCOUNT(*) (R(A, B))
+j. COUNT(*)  c (AℑCOUNT(*) (R(A, B)))) với  là mô ̣t phép so sánh, c là hằng số.
+6.11) Hãy thực hiện các nhu cầu truy vấn được mô tả ở bài tập 5.10); 5.11); 5.12)
+bằng ngôn ngữ SQL.
+6.12) Cho lược đồ Ứng dụng Quản lý đề tài nghiên cứu khoa học như trong bài tập
+5.10). Hãy trả lời các câu hỏi sau bằng ngôn ngữ SQL:
+a) Hãy cho biết thông tin giáo viên (MAGV, HOTEN) làm trưởng bộ môn hoặc trưởng
+khoa.
+b) Hãy cho biết thông tin giáo viên nào trùng ngày sinh với người quản lý chuyên môn
+của mình. Kết quả cho ra thông tin: mã giáo viên, tên giáo viên, mã giáo viên quản lý,
+tên giáo viên quản lý.
+c) Cho biết mã, tên các giáo viên thuộc bộ môn Hệ thống thông tin và chưa từng tham
+gia đề tài nào.
+d) Cho biết khoa nào (tên khoa) có nhiều bộ môn trực thuộc nhất.
+e) Với mỗi đề tài, cho biết giáo viên nào tham gia đề tài đó với tổng phụ cấp lớn nhất.
+Thông tin xuất ra gồm có tên đề tài, tên giáo viên, tổng tiền phụ cấp.
+f) Cho biết trưởng khoa (tên trưởng khoa) có tuổi nhỏ nhất trong tất cả các trưởng khoa.
+g) Cho biết giáo viên nào (mã giáo viên, tên giáo viên) tham gia đã tham gia tất cả các
+công việc thuộc một đề tài bất kỳ.
+h) Cho biết đề tài nào (mã đề tài, tên đề tài) thuộc cấp quản lý ‘Quốc gia’ được tất cả các
+giáo viên thuộc bộ môn hệ thống thông tin tham gia thực hiện.
+i) Hãy cho biết giáo viên (mã giáo viên, tên giáo viên) nào tham gia thực hiện nhiều đề
+tài nhất trong từng bộ môn của họ.
+--- PAGE 25 ---
+Chương 7 PHÉP TÍNH QUAN HỆ
+Câu hỏi ôn tâ ̣p
+7.1) Đối v ới phép tính quan hê ̣ có biến là bô ̣, h ãy định ngh ĩa c ác khái niê ̣m: bi ến bô ̣,
+quan hê ̣ miền, công thức nguyên tố, công thức.
+7.2) Kết quả của mô ̣t biểu thức phép tính quan hê ̣ biến bô ̣ là gì?
+7.3) Đối với phép tính quan hê ̣ có biến là miền, hãy định nghĩa các khái niê ̣m: biến miền,
+quan hê ̣ miền, công thức nguyên tố, công thức.
+7.4) Kết quả của mô ̣t biểu thức phép tính quan hê ̣ biến miền là gì?
+7.5) Phép tính quan hê ̣ có biến là bô ̣ khác phép tính quan hê ̣ có biến là miền như thế nào?
+7.6) Hãy dùng ngôn ngữ phép tính quan hê ̣ có biến là bô ̣ và ngôn ngữ phép tính quan hê ̣
+có biến là miền để thể hiê ̣n những biểu thức đại số quan hê ̣ sau:
+a. A,B (R(A, B, C))
+b. A=C (R(A, B, C))
+c. R(A, B, C)  S (A, B, C)
+d. R(A, B, C)  S (A, B, C)
+e. R(A, B, C) - S (A, B, C)
+f. R(A, B, C)  S (D, E, F)
+g. R(A, B, C) * S (C, D, E)
+h. R(A, B)  S(B, C)⋈
+i. R(A, B)  S (B)
+Bài tâ ̣p
+7.7) Hãy dùng ngôn ngữ phép tính quan hệ biến bộ và biến miền để thực hiện các nhu
+cầu truy vấn trong bài tập 5.10). Có những nhu cầu truy vấn nào ngoài khả năng thể
+hiện của ngôn ngữ phép tính quan hệ không ? Vì sao ?
+--- PAGE 26 ---
+7.8) Hãy dùng ngôn ngữ phép tính quan hệ biến bộ và biến miền để thực hiện các nhu
+cầu truy vấn trong bài tập 5.11). Có những nhu cầu truy vấn nào ngoài khả năng thể
+hiện của ngôn ngữ phép tính quan hệ không? Vì sao ?
+7.9) Hãy dùng ngôn ngữ phép tính quan hệ biến bộ và biến miền để thực hiện các nhu
+cầu truy vấn trong bài tập 5.12. Có những nhu cầu truy vấn nào ngoài khả năng thể
+hiện của ngôn ngữ phép tính quan hệ không ? Vì sao ?
+Chương 8 RÀNG BUỘC TOÀN VẸN
+Câu hỏi ôn tập
+8.1) Tại sao ràng buộc toàn vẹn là quan trọng đối với mỗi cơ sở dữ liệu? Ràng buộc
+toàn vẹn đảm bảo được những vấn đề gì khi khai thác một cơ sở dữ liệu?
+8.2) Bối cảnh của một RBTV là gì? 
+8.3) Có thể biểu diễn nội dung của RBTV bằng những ngôn ngữ hình thức nào?
+8.4) Bảng tầm ảnh hưởng của một RBTV gồm có những thành phần nào? Hãy mô tả ý
+nghĩa từng thành phần trong bảng tầm ảnh hưởng.
+8.5) Ràng buộc toàn vẹn được phân ra những loại nào? Hãy đưa ra một cơ sở dữ liệu
+để minh họa cho mỗi loại ràng buộc đã trình bày (mỗi ràng buộc toàn vẹn cần trình
+bày 3 nội dung: bối cảnh, nội dung và bảng tầm ảnh hưởng).
+Bài tập
+8.6) Với lược đồ Ứng dụng Quản lý đề tài nghiên cứu khoa học trong Giáo trình– trang
+53, hãy xác định một cách có phân loại toàn bộ các ràng buộc toàn vẹn nhận diện
+được .
+8.7) Với tất cả các mô hình ER xây dựng được từ bài tập chương 2, hãy chuyển sang
+mô hình dữ liệu quan hệ. Với mỗi lược đồ CSDL , hãy xác định một cách có phân loại
+các ràng buộc toàn vẹn có thể có.
+8.8) Hãy liệt kê có phân loại toàn bộ các ràng buộc toàn vẹn trong lược đồ CSDL bài
+3.13); 3.14); 3.15)
+--- PAGE 27 ---
+8.9) Cho lược đồ cơ sở dữ liệu quản lý hàng hóa của một cửa hàng như sau:
+MẶTHÀNG(MÃMH, TÊNMH, ĐVT, ĐƠNGIÁ)
+Tân từ: Thông tin mặt hàng được lưu trữ trong quan hệ MẶTHÀNG. Mỗi mặt hàng
+gồm có các thông tin: mã mặt hàng ( MÃMH), tên mặt hàng (TÊNMH), đơn vị tính
+(ĐVT) và đơn giá (ĐƠNGIÁ). Mỗi mặt hàng có một mã mặt hàng để phân biệt với
+các mặt hàng khác.
+NHÀCUNGCẤP(MÃNCC, TÊNNCC, ĐỊACHỈ)
+Tân từ: Nhà cung cấp là đơn vị cung ứng mặt hàng cho cửa hàng, thông tin nhà cung
+cấp được lưu trữ trong quan hệ NHÀCUNGCẤP. Mỗi nhà cung cấp gồm có thông tin
+mã nhà cung cấp ( MÃNCC), tên nhà cung cấp (TÊNNCC), địa chỉ (ĐỊACHỈ). Mỗi
+nhà cung cấp có một mã nhà cung cấp để phân biệt với nhà cung cấp khác.
+CungỨng (MÃNCC,MÃMH)
+Tân từ: Mỗi nhà cung ứng có thể cung ứng nhiều mặt hàng và mỗi mặt hàng có thể do
+nhiều nhà cung ứng cung ứng. 
+HÓAĐƠN (MÃHĐ, NGÀYHĐ, MÃNCC, TỔNGTIỀN, TỔNGSỐ_MH)
+Tân từ: Hóa đơn dùng để ghi nhận lại thông tin đặt đã đặt hàng từ nhà cung cấp. Mỗi
+hóa đơn gồm có mã hóa đơn ( MÃHĐ), ngày lập hóa đơn (NGÀYHĐ), hóa đơn gởi
+cho nhà cung cấp nào (MÃNCC), tổng tiền hóa đơn (TỔNGTIỀN) và tổng số mặt
+hàng đã đặt (TỔNGSỐ_MH). Mỗi hóa đơn có một mã hóa đơn để phân biệt với các
+hóa đơn khác.
+CTHD (MÃHĐ,MÃMH, SỐLƯỢNG)
+Tân từ: Chi tiết hóa đơn biết hóa đơn đã đặt mua những mặt hàng nào và số lượng
+(SỐLƯỢNG) là bao nhiêu.
+GIAOHÀNG(MÃGH, NGÀYGH, SỐHĐ, TỔNGTIỀN,TỔNGSỐ_MH)
+Tân từ:  Quan hệ giao hàng dùng để lưu trữ lại hóa đơn cho mỗi lần giao hàng. Mỗi
+hóa đơn giao hàng gồm có mã giao hàng ( MÃGH), ngày giao (NGÀYGH), giao cho
+hóa đơn nào (SỐHĐ), tổng tiền thanh toán cho lần giao hàng đó (TỔNGTIỀN), và
+tổng số mặt hàng đã giao (TỔNGSỐ_MH). Mỗi hóa đơn giao hàng được phân biệt
+bởi mã giao hàng duy nhất.
+--- PAGE 28 ---
+CTGH(MÃGH, MÃMH, SỐLƯỢNG)
+Tân từ: Chi tiết giao hàng dùng để ghi nhận lại chi tiết cho mỗi lần giao hàng gồm đã
+giao những mặt hàng nào và số lượng bao nhiêu (SỐLƯỢNG).
+Yêu cầu: Biểu diễn tất cả các loại ràng buộc toàn vẹn sau:
+a) Tất cả các thuộc tính mang tính chất kiểu số có giá trị luôn lớn hơn 0.
+b) Nhà cung cấp chỉ được cung cấp các mặt hàng có khả năng
+c) Tổng số tiền của hóa đơn phải bằng tổng tiền của chi tiết hóa đơn đó.
+d) Tổng số mặt hàng của hóa đơn phải bằng tổng số mặt hàng của chi tiết hóa đơn
+đó.
+e) Tổng tiền của hóa đơn phải lớn hơn hoặc b ằng tổng tiền của tất cả các lần giao
+hàng
+f) Tổng số mặt hàng của hóa đơn phải lớn hơn hoặc b ằng tổng số mặt hàng của
+tất cả các lần giao hàng.
+g) Tổng tiền của giao hàng phải bằng với tổng tiền của chi tiết các lần giao
+h) Tổng số mặt hàng của mỗi lần giao hàng phải b ằng với tổng số mặt hàng của
+tất cả các chi tiết  giao hàng của lần giao hàng đó.
+i) Chỉ được phép giao những mặt hàng mà có đặt hàng.
+j) Mỗi hóa đơn chỉ có tối đa 3 lần giao hàng
+k) Khoảng cách của ngày giao hàng và ngày đặt hàng không vượt quá 1 tuần.
+l) Ngày giao hàng phải luôn lớn hơn ngày đặt hàng.
+Chương 9 TỐI ƯU TRUY VẤN
+Câu hỏi ôn tâ ̣p
+9.1) Tối ưu truy vấn là gì? Vì sao HQT CSDL phải thực hiện tối ưu truy vấn?
+9.2) Vì sao HQT CSDL phải chuyển câu truy vấn từ ngôn ngữ SQL sang ngôn ngữ đại
+số quan hệ trước khi thực hiện tối ưu truy vấn?
+--- PAGE 29 ---
+9.3) Hãy phân biệt hai phương pháp tối ưu: dựa trên các luật heuristic và ước lượng chi
+phí.
+9.4) Hãy phân biê ̣t chiến lược thực thi mức logic và chiến lược thực thi mức vâ ̣t lý? Cho
+mỗi loại một ví dụ minh họa.
+9.5) Hãy giải thích ý nghĩa tối ưu đối với từng luật heuristic. Hãy kể ra 3 luật tối ưu
+thường dùng nhất.
+Bài tâ ̣p
+9.6) Cho lược đồ CSDL như trong bài tập 5.10), có các nhu cầu truy vấn sau:
+ Danh sách các giáo viên nữ thuộc bộ môn Hệ thống thông tin. Kết quả gồm
+MÃGV, HỌTÊN. 
+ Cho danh sách các giáo viên thuộc bộ môn mã là ‘HTTT’ đã tham gia các đề tài
+cấp trường. Kết quả gồm MÃGV, HỌTÊN.
+ Danh sách các giáo viên thuộc bộ môn ‘Hệ thống thông tin’ sinh trước năm 1975
+đã tham gia các đề tài có kinh phí lớn hơn 50 triệu. Kết quả gồm MÃGV,
+HỌTÊN.
+ Các đề tài thuộc chủ đề ‘Quản lý giáo dục’ do giáo viên thuộc bộ môn ‘Hệ thống
+thông tin’ làm chủ nhiệm gồm có công việc tên là ‘Thiết kế hệ thống’. Kết quả
+gồm MÃĐT, TÊNĐT.
+a) Hãy thực hiện các nhu cầu truy vấn trên dùng ngôn ngữ SQL.
+b) Với mỗi nhu cầu truy vấn hãy viết 2 biểu thức đại số quan hệ khác nhau. Dùng cây
+truy vấn thể hiện lại 2 biểu thức đại số quan hệ này.
+c) Cho biết cây truy vấn ban đầu đối với từng nhu cầu truy vấn. Thực hiện tối ưu dần
+dùng các luật heuristic để cho ra cây truy vấn tối ưu cuối cùng.
+d) So sánh hai cây truy vấn có được ở câu b. với cây truy vấn ban đầu và cây truy vấn
+cuối cùng ở câu c.

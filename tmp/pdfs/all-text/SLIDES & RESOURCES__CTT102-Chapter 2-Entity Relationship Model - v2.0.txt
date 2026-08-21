@@ -1,0 +1,635 @@
+
+--- PAGE 1 ---
+fit@hcmus
+4.0
+Chapter 2
+Entity-Relationship Model
+--- PAGE 2 ---
+4.0
+fit@hcmus Outline
+▪ Process of Database design
+▪ Entity-Relationship Model
+▪ Design principles
+▪ Exercises/Quiz
+2
+--- PAGE 3 ---
+4.0
+fit@hcmus
+Process of database design
+3
+Identify high-level user queries 
+and operations of data
+- Used to
+communicate with non-
+technical users. 
+- Used as a reference to 
+ensure that all users’ 
+data requirements are 
+met and not conflict.
+--- PAGE 4 ---
+4.0
+fit@hcmus Content
+▪ Process of Database design
+▪ Entity-Relationship Model
+▪ Design principles
+▪ Exercices
+4
+--- PAGE 5 ---
+4.0
+fit@hcmus Entity-Relationship Model
+• Given by Peter Pin-Shan Chen in 1976, cf. “The
+Entity-Relationship Model-Toward a Unified View
+of Data”
+• Is used to design a DB at the conceptual level
+• Is supported by tools with graphical interface
+• Consists of 2 parts: basic and extended
+• Principle:
+• A database is designed as a set of entities and
+relationships between them
+5
+--- PAGE 6 ---
+4.0
+fit@hcmus Entity set
+•Entity
+• An entity is an abstract object in the real world
+with an independent existence.
+• Example:
+• A car, an invoice, an employee, a student, a pencil
+▪ Entity classification:
+• Physical object (Observable)
+• 1 students, 1 building, 1 car,…
+• Conceptual object
+• 1 company, 1 project, 1 department,…
+6
+--- PAGE 7 ---
+4.0
+fit@hcmus Entity set
+• Entity type / Entity set (tập thực thể)
+• Is formed by a collection of similar entities (similar
+structure)
+• Example:
+• 2 persons “NVA” and “NVB” who study in a university,
+have different name, different student ID, different
+date of birth. But they have a same information
+structure. Such “information” form an entity set named
+“Student”.
+7
+Entity set name Student Car
+--- PAGE 8 ---
+4.0
+fit@hcmus Entity sets
+•Example: “Scientific Research Project
+Management”
+• A lecturer is an entity.
+• The collection of lecturers forms an entity set.
+• A faculty is an entity.
+• The collection of faculties forms an entity set.
+• A department (bộ môn) is an entity.
+• The collection of departments forms an entity
+set.
+8
+
+--- PAGE 9 ---
+4.0
+fit@hcmus Attribute
+• Attribute
+• is particular charactersitic/feature of the
+entities
+• has specific value
+• Example:
+• An entity «Nguyễn Văn A» has the following
+attributes:
+• Name: Nguyễn Văn A
+• Age: 20
+• Identity card: 0123456789
+9
+--- PAGE 10 ---
+4.0
+fit@hcmus Attribute
+•Notation:
+•Example:
+•Attributes are atomic values
+• String
+• Integer
+• Real 10
+Name
+Student
+Attribute name
+Age Identity card
+--- PAGE 11 ---
+4.0
+fit@hcmus Attribute
+•Types of attribute:
+• Single-valued attribute (thuộc tính đơn
+trị)
+• Multi-valued attribute (thuộc tính đa trị)
+• Composite attribute (Thuộc tính kết hợp)
+• Derived attribute (Thuộc tính dẫn
+xuất/suy diễn)
+11
+--- PAGE 12 ---
+4.0
+fit@hcmus Attribute
+•Single-valued attribute:
+• Have only a single value
+•Notation:
+•Example:
+12
+Attribute 
+name
+Student
+StudentID
+Name
+Date of birth
+--- PAGE 13 ---
+4.0
+fit@hcmus Attribute
+•Multi-valued attribute
+• receives many values for an entity
+•Notation:
+•Example:
+• Teachers have many phone numbers. Phone number
+attribute is a multi-valued attribute
+13
+Phone numberTeacher
+Attribute name
+--- PAGE 14 ---
+4.0
+fit@hcmus Attribute
+•Composite attribute
+• Can be further subdivided to yield additional attributes.
+•Notation:
+•Example
+• Address Attribute can be subdivided into 4 parts: number, street,
+district, city
+14
+Attr 1
+Attr 2
+Attr 3
+Composite attribute name
+Number
+Street
+District
+Address
+City
+--- PAGE 15 ---
+4.0
+fit@hcmus Attribute
+•Derived attribute
+• Whose value is calculated (derived) from other attributes
+•Notation:
+Example:
+15
+Attribute 
+name
+Student
+Date of 
+birth
+Age
+--- PAGE 16 ---
+4.0
+fit@hcmus Key attribute
+•Key attribute / identifier (thuộc tính khóa/ định danh)
+• one or more attributes that uniquely identify each entity instance
+•Notation:
+•Example
+16
+Key attribute name
+Student
+StudentID
+Name
+Date of birth
+Employee
+EmployeeID
+Name
+--- PAGE 17 ---
+4.0
+fit@hcmus Key attribute
+•Combined key (Khoá hợp)
+• Key having multiple attributes
+⮚A “COURSE” is identified by a year (Năm học) and a
+semester (Học kỳ)
+• If an entity set has many keys ⇒ only one is selected
+for primary key
+17
+COURSE
+Year
+Semester
+--- PAGE 18 ---
+4.0
+fit@hcmus
+Assignment #1
+18
+⬜Requirements: list out the entities and their attributes.
+⬜Work in groups, each group consisting of 2-4 randomly assigned members.
+⬜Two groups will be randomly selected to present their results in class.
+⬜This assignment must be submitted on the Moodle page (this week).
+Company project management: 
+■ The company is organized into departments. Each department has a unique name, a unique number, and a 
+particular employee who manages the department. We keep track of the start date when that employee began 
+managing the department. A department may have several locations.
+■ A department controls a number of projects, each of which has a unique name, a unique number, and a 
+single location.
+■ The database will store each employee’s name, Social Security number, address, salary, sex (gender), and 
+birth date. An employee is assigned to one department, but may work on several projects, which are not 
+necessarily controlled by the same department. It is required to keep track of the current number of hours per 
+week that an employee works on each project, as well as the direct supervisor of each employee (who is 
+another employee).
+■ The database will keep track of the dependents of each employee for insurance purposes, including each 
+dependent’s first name, sex, birth date, and relationship to the employee
+--- PAGE 19 ---
+4.0
+fit@hcmus
+Assignment #1
+19
+⬜Requirements: list out the entities and their attributes.
+⬜Work in groups, each group consisting of 2-4 randomly assigned members.
+⬜Two groups will be randomly selected to present their results in class.
+⬜This assignment must be submitted on the Moodle page (this week).
+QUẢN LÝ ĐỀ ÁN: CSDL đề án của một công ty theo dõi các thông tin liên quan đến nhân viên, 
+phòng ban và đề án
+•Công ty có nhiều phòng ban, mỗi phòng ban có tên duy nhất, mã phòng duy nhất, một trưởng
+phòng và ngày nhận chức trưởng phòng. Mỗi phòng ban có thể ở nhiều địa điểm khác nhau.
+•Mỗi đề án có tên duy nhất, mã duy nhất, do 1 một phòng ban chủ trì và được triển khai ở 1 địa
+điểm.
+•Nhân viên có mã số, tên, địa chỉ, ngày sinh, phái và lương. Mỗi nhân viên thuộc 1 phòng ban, 
+tham gia vào các đề án với tổng số giờ làm việc trong tuần khác nhau cho mỗi đề án. Mỗi nhân
+viên đều có một người quản lý trực tiếp.
+•Một nhân viên có thể có nhiều thân nhân cho mục đích bảo hiểm. Mỗi thân nhân có tên, phái, 
+ngày sinh và mối quan hệ với nhân viên đó.
+--- PAGE 20 ---
+4.0
+fit@hcmus Relationship
+•Relationship (mối kết hợp)
+• The connection among two or more entites
+•Example:
+• Relationship between an employee and a department: E100
+works at technical department, E101 works at technical
+deparment, E102 works at business department
+20
+E100
+E101
+E102
+Technical
+Business
+Employee Department
+--- PAGE 21 ---
+4.0
+fit@hcmus Relationship
+•Relationship with attributes
+• The connection among two or more entites
+•Example:
+• E100 works at technical department 10-09-2009
+21
+E100
+E101
+E102
+Technical
+Business
+Employee Department
+--- PAGE 22 ---
+4.0
+fit@hcmus Relationship
+•Present the relationships
+• Table
+• Graph
+22
+Employee Department Start day
+E100 Technical 10-09-2009
+E100 Business 20-09-2010
+E101 Technical 18-07-2008
+E102 Business 12-05-2011
+E100
+E101
+E102
+Technical
+Business
+--- PAGE 23 ---
+4.0
+fit@hcmus Relationship set
+•Relationship type / set (Loại / tập mối kết hợp)
+• Is formed by a collection of similar relationships
+•Notation:
+•Example
+23
+Relationship set 
+name Name = Verb / verb phrase
+DepartmentEmployee Works
+Start day
+--- PAGE 24 ---
+4.0
+4.0
+fit@hcmus Relationship set - Example
+24
+•Relationship between entity set
+GIÁOVIÊN and BỘMÔN:
+- A teacher belongs to a department (Work at)
+- A department is managed by a department head (Is
+headed by)
+
+--- PAGE 25 ---
+4.0
+4.0
+fit@hcmus
+Recursive relationships or self-referencing
+relationships (phản thân)
+25
+•Example:
+• An entity relates to itself
+
+--- PAGE 26 ---
+4.0
+fit@hcmus Cardinality
+•Cardinality (Bản số)
+• Specifies how many an entity relates to
+another entities
+• Is represented by a pair of indicators
+(mincard, maxcard):
+• Min: represents minimum number of times for an
+entity to participate in this relationship set
+• values: 0, 1,2, …, a (a constant)
+• Max: represents maximum number of times for an
+entity to participate in this relationship set
+• values: 1→ n
+26
+--- PAGE 27 ---
+4.0
+fit@hcmus Cardinality
+•Notation
+•Basic samples:
+• (0,1) – 0 or 1
+• (1,1) – only 1
+• (0,n) – 0 or many
+• (1,n) – 1 or many
+• (0, a), (1, a), (a, n): a is constant > 1
+27
+E FRelationship(min, max) (min, max)
+
+--- PAGE 28 ---
+4.0
+fit@hcmus Cardinality
+•Example
+28
+Employee DepartmentWorks(1,n)
+(0,n)
+NV001
+NV002
+NV003
+NV004
+Technical
+Business
+Research
+NV005
+NV-P1
+NV-P2
+NV-P3
+NV-P4
+NV-P5
+--- PAGE 29 ---
+4.0
+fit@hcmus Relationship: Classification
+•One-to-one (1:1): if maxcard(E1,R) = 1 and
+maxcard(E2,R) = 1
+29
+E1 E2R
+
+--- PAGE 30 ---
+4.0
+fit@hcmus Relationship: Classification
+•One-to-many (1:N): if maxcard(E1,R) = 1 and
+maxcard(E2,R) = n
+•Many-to-many (N:N): if maxcard(E1,R) = n and
+maxcard(E2,R) = m, (m,n >1)
+30
+
+--- PAGE 31 ---
+4.0
+fit@hcmus Relationship: Classification
+•Examples
+31
+Employee has CV(0,1) (1,1)
+A CV belongs to an employee. An employee has a ( or has no) CV
+Employee Participates Project(0,n) (0,n)
+Manages
+(1,1)(0,n)
+An employee can participate to many projects, and a project can be 
+performed/executed by many employees.
+An employee can manage many projects, and a project must be 
+managed by an employee.
+--- PAGE 32 ---
+4.0
+fit@hcmus Weak entity set
+•Weak entity set (thực thể yếu)
+• An entity set whose key is composed of attributes
+which belong to another entity set
+• Weak identifier or No key attribute
+• Depends on other entity sets through relationship set
+•Notation
+33
+Weak entity set 
+name
+--- PAGE 33 ---
+4.0
+fit@hcmus Weak entity set
+•Example
+• Detail Invoice has no identifier
+• The identifier is defined: Number + InvoiceID (of Invoice)
+• The existence of Detail depends on the existence of Invoice
+34
+Invoice Detail InvoiceContains
+InvoiceID Date Customer name
+Total
+Number Product
+Amount Price
+(1,n)
+--- PAGE 34 ---
+4.0
+fit@hcmus Weak entity set
+•Example
+• A Dependent is a supplement information to the
+Employee
+• The company need not to manage ID for Dependents
+• Key of DEPENDENT: Name (DEPENDENT)+ ID
+(EMPLOYEE)
+35
+EMPLOYEE DEPENDENTEM-DE
+(0,n)
+ID
+Name BirthYear
+--- PAGE 35 ---
+4.0
+fit@hcmus
+Dependent vs Weak entity
+36
+Feature Weak entity Dependent entity
+Primary Focus
+Identification: It cannot be 
+uniquely identified by its own 
+attributes alone.
+Existence: It cannot 
+exist in the database 
+without its associated 
+owner entity.
+Structural 
+Trait
+Defined by the lack of a 
+primary key.
+Defined by its reliance 
+on a parent for its 
+lifecycle.
+Relationship
+Must have an identifying 
+relationship with an owner 
+entity.
+Often referred to as 
+having an existence 
+dependency.
+--- PAGE 36 ---
+4.0
+fit@hcmus
+Quiz
+⬜Dependent or Weak Entity? 
+37
+Driver Driver License
+--- PAGE 37 ---
+4.0
+fit@hcmus Content
+▪ Process of Database design
+▪ Entity-Relationship Model
+▪ Design principles
+▪ Exercises
+38
+--- PAGE 38 ---
+4.0
+fit@hcmus
+Assignment #2
+⬜Extend and refine the assignment #1 by 
+adding the relationships between 
+entities, and weak entities, dependent 
+entities (if any)
+39
+--- PAGE 39 ---
+4.0
+fit@hcmus Design principles
+•An attribute represents a particular
+property of only one entity
+40
+Product Customer
+Order
+has Belong to
+Name
+Name
+Customer
+ProductID
+Customer
+ID
+OrderID
+Address
+Unit
+Date
+--- PAGE 40 ---
+4.0
+fit@hcmus Design principles
+•All branches connected to the relationship
+must be required
+41
+SINH VIEN MON HOCHọc
+Điểm
+HOC KY
+SINH VIEN MON HOC
+HOC KY
+Tổng
+kết
+Học
+Điểm TB
+Điểm
+--- PAGE 41 ---
+4.0
+fit@hcmus Design principles
+•In a same entity set, if an attribute depends
+on another attribute, there exists a hidden
+entity.
+42
+XE
+Số xe
+Màu
+Loại
+Trọng
+lượng Số chỗ
+XE
+Số xe
+Màu
+Tên loại
+Số
+chỗ
+LOAI XEThuộc
+Trọng
+lượng
+Loại → Trọng
+lượng
+--- PAGE 42 ---
+4.0
+fit@hcmus Design principles
+•An attribute or an entity set
+• Address?
+•An entity set or a relationship set?
+•An entity set or a weak entity set?
+43
+Customer Productbuys
+--- PAGE 43 ---
+4.0
+fit@hcmus Content
+▪ Process of Database design
+▪ Entity-Relationship Model
+▪ Design principles
+▪ Exercises
+44
+--- PAGE 44 ---
+4.0
+fit@hcmus
+Assignment #3
+45
+Hoạt động của một công ty môi giới nhà đất được mô tả như sau:
+• Công ty có nhiều chi nhánh, mỗi chi nhánh có một mã, nằm trên một đường, tại một quận, ở một khu vực,
+thành phố, có số điện thoại và số FAX. Công ty có nhiều nhân viên, mỗi nhân viên có một mã, tên, địa chỉ,
+điện thoại, giới tính, ngày sinh, lương và làm việc cho 1 chi nhánh.
+• Mỗi nhà có một mã số, thông tin định vị (đường, quận, thành phố, khu vực) thuộc một loại nhà nào đó, có
+thông tin về số lượng phòng ở, tiền thuê 1 tháng, của chủ nhà nào, do nhân viên nào phụ trách, và thông tin
+về chi nhánh nơi mà nhà được đăng ký cho thuê.
+• Mỗi chủ nhà có nhà cho thuê có 1 mã, tên, địa chỉ và điện thoại liên lạc.
+• Mỗi loại nhà có thông tin mã loại nhà và tên loại nhà. Mỗi loại nhà sẽ có nhiều nhà thuộc loại này.
+• Mỗi người thuê (khách hàng) có các thông tin sau: có mã người thuê, thông tin để liên lạc (tên, địa chỉ, điện
+thoại), có thông tin về loại nhà yêu cầu thuê, có khả năng thuê và được 1 chi nhánh quản lý.
+• Khi có nhà phù hợp với yêu cầu của khách hàng, nhân viên sẽ thông báo khách hàng đến xem nhà. Mỗi nhà
+có thể có nhiều khách đến xem. Mỗi người có thể xem nhiều nhà khác nhau vào các ngày khác nhau. Sau
+khi xem nhà thì sẽ có một nhận xét.
+--- PAGE 45 ---
+4.0
+fit@hcmus
+Assignment #4
+46
+….
+GIẤY BÁO TIỀN NƯỚC
+Kỳ: 12/2013 Từ: 15/11 Đền:14/12
+Khách Hàng: Nguyễn Văn A
+Địa chỉ: 1 Bùi Thị Xuân, P.3, Tân Bình
+Chỉ số mới: …. Chỉ số cuối:… Tiêu thụ:
+Thanh toán trước ngày: Tiền nước: ………
+../../…. Thuế GTGT: ………
+Phí BVMT: ………
+Tổng cộng: ………
+LNTT (m3) Đơn giá Thành Tiền
+Tiền
+Nước
+Phí BV 
+môi
+trường
+--- PAGE 46 ---
+4.0
+fit@hcmus
+47
+
+--- PAGE 47 ---
+4.0
+fit@hcmus
+48

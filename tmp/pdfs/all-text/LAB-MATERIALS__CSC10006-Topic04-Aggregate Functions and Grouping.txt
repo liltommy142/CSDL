@@ -1,0 +1,162 @@
+
+--- PAGE 1 ---
+Information department – FIT- VNUHCM-US page 1
+Aggregate Functions and Grouping
+CSC10006 – Introduction to Database
+--- PAGE 2 ---
+TABLE OF CONTENTS
+1 Objectives................................................................................................................................... 1
+2 Detailed Instructions................................................................................................................... 1
+2.1 Using Aggregate Functions in Queries................................................................................. 1
+2.2 Group Queries with GROUP BY:........................................................................................ 3
+2.3 Queries with GROUP BY and HAVING............................................................................. 4
+2.4 GROUP BY with Extended Attributes................................................................................. 5
+3 In-class exercises........................................................................................................................ 6
+Information department – FIT- VNUHCM-US page 2
+--- PAGE 3 ---
+1 Objectives 
+After completing this lab, students will be able to:
+- Aggregate queries using COUNT, SUM, AVG, MIN, MAX
+- GROUP BY grouping queries
+- GROUP BY and HAVING grouping queries
+2 Detailed Instructions 
+2.1 Using Aggregate Functions in Queries
+Aggregate functions: are functions used in queries whose returned results are
+obtained by combining multiple values together.
+Aggregate functions: SQL supports the following aggregate functions:
+- COUNT:  counts  the  number  of  rows  or  the  number  of  values  of  an
+attribute.
+- AVG: calculates the average value.
+- MAX: returns the maximum value.
+- MIN: returns the minimum value.
+- SUM: calculates the total sum.
+Note: Except for COUNT(*), which is used to return the number of rows, the
+other aggregate functions are calculated on a specific attribute across all rows
+in the query result.
+Example 1: Find the total number of teachers in the entire school.
+SELECT COUNT(*)
+FROM GIAOVIEN   
+Explanation: The COUNT function is used to count the total number of rows in the 
+GIAOVIEN table. Since each row represents one teacher, the result is the total number of 
+teachers in the school.
+Information department – FIT- VNUHCM-US page 1
+--- PAGE 4 ---
+Example 2: Find the total number of lecturers belonging to the Information 
+Systems department.
+SELECT COUNT(MAGV)
+FROM GIAOVIEN
+WHERE MABM = ‘HTTT’
+Example   3  : Calculate the number of lecturers who have an academic 
+(professional) supervisor.
+SELECT COUNT(GVQLCM)
+FROM GIAOVIEN
+Or
+SELECT COUNT(*)
+FROM GIAOVIEN
+WHERE GVQLCM IS NOT NULL
+Example 4: Calculate the number of lecturers who act as academic supervisors
+for other lecturers and belong to the Information Systems (IS) department.
+SELECT COUNT(DISTINCT GVQLCM)
+FROM GIAOVIEN
+WHERE MABM = ‘HTTT’
+Note: Use the DISTINCT keyword to count unique records, as demonstrated above.
+Example 5: Calculate the average salary of lecturers in the Information Systems
+department.
+SELECT AVG(LUONG)
+FROM GIAOVIEN GV, BOMON BM
+WHERE GV.MABM = BM.MABM AND BM.TENBM = N‘Hệ thống thông tin’
+Information department – FIT- VNUHCM-US page 2
+--- PAGE 5 ---
+2.2 Group Queries with GROUP BY: 
+GROUP BY is used when there is a need to group data in order to perform aggregate 
+calculations. Therefore, GROUP BY is often used together with aggregate functions.
+When GROUP BY is used with aggregate functions, the aggregate functions are 
+applied only to rows within the same group.
+The groups created using the GROUP BY clause consist of rows that share the same 
+value in the grouping attribute.
+Example 6: For each department, display the department code (MAMB) and the 
+number of lecturers in that department..
+SELECT MABM, COUNT(*)
+FROM GIAOVIEN
+GROUP BY MABM
+Explanation: The above query operates on the GIAOVIEN table. The GROUP BY MABM clause 
+specifies that the query groups data based on the MABM attribute. It performs the following 
+steps:
+(1) Group the rows of the GIAOVIEN table into separate groups according to the MABM 
+attribute. (Note: all rows within the same group have the same value of the MABM 
+attribute.)
+(2) For each group, output the MABM value and the number of rows in that group.
+Example 7: For each lecturer, display the lecturer ID (MAGV) and the number of 
+tasks in which the lecturer has participated.
+SELECT MAGV, COUNT(*) AS SLCV
+FROM THAMGIADT
+GROUP BY MAGV
+Example 8: For each lecturer, display the lecturer ID (MAGV) and the number of 
+projects in which the lecturer has participated.
+SELECT MAGV, COUNT( DISTINCT MADT ) AS SLDT
+Information department – FIT- VNUHCM-US page 3
+--- PAGE 6 ---
+FROM THAMGIADT
+GROUP BY MAGV
+Note: Be careful when using COUNT( … ) and COUNT(DISTINCT … ), as 
+illustrated in Examples 7 and 8.
+Example 9: For each department, display the number of projects led by lecturers of
+that department.
+SELECT GV.MABM, COUNT(*)
+FROM DETAI DT, GIAOVIEN GV
+WHERE DT.GVCNDT = GV.MAGV
+GROUP BY GV.MABM
+Example 10: For each department, display the department name and the number of 
+lecturers in that department.
+SELECT BM.TENBM, COUNT(*)
+FROM GIAOVIEN GV, BOMON BM
+WHERE GV.MABM=BM.MABM
+GROUP BY BM.MABM, BM.TENBM
+Note: All attributes appearing in the SELECT clause must be group attributes. This 
+means that they must satisfy one of the following conditions:
+- They are attributes included in the GROUP BY clause, or
+- They are derived from aggregate functions.
+2.3 Queries with GROUP BY and HAVING
+The HAVING clause is used when a query requires conditions that involve the results 
+of grouping, such as the results of aggregate functions.
+The condition specified in the HAVING clause is applied after the grouping operation.
+In this condition, only group attributes may be used.
+Information department – FIT- VNUHCM-US page 4
+--- PAGE 7 ---
+Example 11: List the departments that have at least two lecturers.
+SELECT MABM
+FROM GIAOVIEN
+GROUP BY MABM
+HAVING COUNT (*) > 2
+Example 12: Display the names of lecturers and the number of projects for those 
+lecturers who have participated in three or more projects.
+SELECT GV.HOTEN, COUNT( DISTINCT TG.MADT) AS SOLUONGDT
+FROM GIAOVIEN GV, THAMGIADT TG
+WHERE GV.MAGV = TG.MAGV
+GROUP BY GV.MAGV, GV.HOTEN
+HAVING COUNT( DISTINCT TG.MADT)  >= 3
+2.4 GROUP BY with Extended Attributes
+In addition to using existing table attributes, the GROUP BY clause syntax also allows
+the use of extended attributes, which are formed by applying functions to attributes.
+Example 13: Display the number of projects carried out in each year.
+SELECT YEAR(NGAYBD), COUNT(*)
+FROM DETAI
+GROUP BY YEAR(NGAYBD)
+Information department – FIT- VNUHCM-US page 5
+--- PAGE 8 ---
+3 In-class exercises
+Requirement: Write SQL queries Q27  Q34 for the “Quản lý đề tài” exercise
+Duration: 1 hour.
+Q27. Display the number of lecturers and their total salary.
+Q28. Display the number of lecturers and the average salary for each department.
+Q29. Display the topic name and the number of projects belonging to that topic.
+Q30. Display the lecturer name and the number of projects in which the lecturer has
+participated.
+Q31.  Display the lecturer name and the number of projects for which the lecturer
+serves as the project leader.
+Q32. For each lecturer, display the lecturer name and the number of relatives of that
+lecturer.
+Q33. Display the names of lecturers who have participated in three or more projects.
+Q34. Display the number of lecturers who have participated in the project “Ứng dụng
+hoá học xanh”.
+Information department – FIT- VNUHCM-US page 6

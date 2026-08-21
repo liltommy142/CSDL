@@ -1,0 +1,471 @@
+
+--- PAGE 1 ---
+ 
+Information department – FIT- VNUHCM-US 
+ 
+Installation guide for MSSQL  
+CSC10006 – Introduction to Database 
+LAB TUTORIALs 
+
+--- PAGE 2 ---
+ 
+TABLE OF CONTENTS 
+ 
+1 Objectives ...................................................................................................................................................................1 
+2 Detailed Instructions .............................................................................................................................................1 
+2.1 Install SQL server instance .........................................................................................................................1 
+2.2 SQL Server for Windows (2022)..............................................................................................................2 
+2.2.1 Install SQL Server 2022 Developer Edition .........................................................................2 
+2.2.2 Install Microsoft SQL Server Management Studio ........................................................ 17 
+2.3 Connect to SQL Server ............................................................................................................................... 19 
+SQL Server authentication ways ........................................................................................................................ 19 
+SQL Management Studio ........................................................................................................................................ 20 
+2.4 Basic Operations Using the SQL Server GUI .................................................................................... 21 
+2.4.1 Creating a New Database: ............................................................................................................... 21 
+2.4.2 Creating Tables, Constraints, and Inputting Data ................................................................ 22 
+2.4.3 Attach/detach a database ............................................................................................................... 26 
+2.4.4 Generating database creation scripts ........................................................................................ 31 
+2.4.5 Data Export/Import .......................................................................................................................... 36 
+3 In-class exercise.................................................................................................................................................... 40 
+4 Homework exercise ............................................................................................................................................ 41 
+--- PAGE 3 ---
+ 
+Information department – FIT- VNUHCM-US Page 1 
+ 
+1 Objectives  
+- Installation and hands-on work with SQL Server Management Studio (SSMS), 
+including: how to install the software; how to create databases and enter data; 
+how to generate database creation scripts; how to import and export data; and 
+how to attach and detach databases. 
+- After completing this exercise, students will be able to: 
+o Install Microsoft SQL Server 
+o Start and stop the required SQL Server services 
+o Perform basic operations such as creating databases, creating tables, 
+defining primary keys and foreign keys, and entering data 
+o Attach and detach databases 
+o Generate scripts for database creation 
+o Import and export databases to and from other databases 
+- Link download:  
+o https://www.microsoft.com/en-us/sql-server/sql-server-downloads  
+o SQL Management Studio: 
+https://go.microsoft.com/fwlink/?linkid=87312 6  
+2 Detailed Instructions  
+2.1 Install SQL server instance 
+There are 2 ways to install SQL Server instance: 
+● SQL Server for Windows: Only applicable for Windows users 
+● SQL Server for Linux: Applicable for all platforms such as Linux, Mac, Windows 
+via Docker 
+You can freely choose any way to use SQL Server in almost lab assignments with an 
+exception that some assignments can only be done on Windows (SQL Management 
+Studio), please complete them in lab. It is recommended that you should try both 
+ways. 
+   
+--- PAGE 4 ---
+ 
+2.2 SQL Server for Windows (2022) 
+In this tutorial, you will learn to install the SQL Server 2022 Developer Edition and SQL 
+Server Management Studio (SSMS) 
+2.2.1 Install SQL Server 2022 Developer Edition 
+● Download Sql Server 2022 Developer Edition 
+ 
+● Double-click the file SQL2022-SSEI-Dev.exe file to launch the downloader. 
+ 
+ 
+● The downloader will ask you to select the installation type, choose Basic. 
+
+--- PAGE 5 ---
+ 
+Information department – FIT- VNUHCM-US Page 3 
+ 
+ 
+● Click Accept button > Specify SQL server install location. 
+ 
+ 
+ 
+ 
+ 
+
+--- PAGE 6 ---
+ 
+ 
+ 
+● Then click Install button. 
+
+--- PAGE 7 ---
+ 
+Information department – FIT- VNUHCM-US Page 5 
+ 
+ 
+ 
+● The downloader will start downloading the installation files. It could take a 
+while. 
+
+--- PAGE 8 ---
+ 
+ 
+● Once the download completes, open the folder that stores the downloaded file.  
+ 
+● Open the installation folder and click the setup.exe file to launch the installer 
+
+--- PAGE 9 ---
+ 
+Information department – FIT- VNUHCM-US Page 7 
+ 
+● Install SQL Server 2022 developer edition 
+o After double click setup.exe, you will see the following window: select the 
+installation option on the left: 
+ 
+o Click the first link to launch a wizard to install SQL Server 2022 > Next. 
+
+--- PAGE 10 ---
+ 
+ 
+o Click Next > New installation 
+
+--- PAGE 11 ---
+ 
+Information department – FIT- VNUHCM-US Page 9 
+ 
+ 
+o Specify the edition that you want to install, select Developer edition, and 
+click the Next button 
+ 
+
+--- PAGE 12 ---
+ 
+ 
+o Select the “I accept the license terms.” and click the Next button: 
+
+--- PAGE 13 ---
+ 
+Information department – FIT- VNUHCM-US Page 11 
+ 
+ 
+o Uncheck the “Azure extension for SQL server” if you do not want and click 
+the Next button 
+
+--- PAGE 14 ---
+ 
+ 
+o Select the features that you want to install. For learning purposes, you need 
+the Database Engine Services; check the checkbox and click the Next 
+button to continue 
+
+--- PAGE 15 ---
+ 
+Information department – FIT- VNUHCM-US Page 13 
+ 
+ 
+o Provide the instance ID of the SQL Server and click the Next button 
+
+--- PAGE 16 ---
+ 
+ 
+o Click Next button to continue 
+
+--- PAGE 17 ---
+ 
+Information department – FIT- VNUHCM-US Page 15 
+ 
+ 
+o Select the Mixed Mode, provide the password for system administration (sa) 
+account (you need to store this password in a secure place so that you can 
+use it to connect to the SQL Server later), click the Add Current User to 
+specify the SQL Server Administrators, and click the Next button 
+
+--- PAGE 18 ---
+ 
+ 
+o Verify the SQL Server 2022 features to be installed: 
+
+--- PAGE 19 ---
+ 
+Information department – FIT- VNUHCM-US Page 17 
+ 
+ 
+o Click the Close button to complete the installation 
+2.2.2 Install Microsoft SQL Server Management Studio 
+To interact with SQL Server, you need to have a SQL Server client tool. Microsoft 
+provides you with the SQL Server Management Studio (SSMS). The SQL Server 
+Management Studio is software for querying, designing, and managing SQL Server 
+on your local computer or in the cloud. It provides you with tools to configure, 
+monitor, and administer SQL Server instances. 
+● First, download the SSMS from the Microsoft website 
+
+--- PAGE 20 ---
+ 
+ 
+o The latest version is labeled Microsoft SQL Server Management Studio v19.0.2. 
+o Double-click the installation file SSMS-Setup-ENU.exe to launch the SSM installer 
+ 
+o Click the Install button 
+
+--- PAGE 21 ---
+ 
+Information department – FIT- VNUHCM-US Page 19 
+ 
+ 
+o Wait for a few minutes while the installer sets up the software 
+o Once setup is completed, click the Close button 
+o Now, you should have SQL Server 2022 and SQL Server Management Studio 
+installed on your computer. 
+o Use SQL Server Configuration Manager to start or stop SQL Server instance 
+o OR Start menu > services > MS sqlserver > start/stop service 
+2.3 Connect to SQL Server 
+SQL Server authentication ways 
+There are 2 main authentication ways to connect to an SQL Server instance, you 
+should try: 
+● Windows Authentication: Only applicable for SQL Server for Windows, just 
+use the same Windows machine to connect 
+
+--- PAGE 22 ---
+ 
+Username/Password: Applicable for all SQL Server. Default user is sa (super admin), 
+password can be set while installing (docker way) or use tools (after login 
+successfully) 
+Connect to SQL server using Windows Authentication  
+ 
+SQL Management Studio 
+ 
+
+--- PAGE 23 ---
+ 
+Information department – FIT- VNUHCM-US Page 21 
+ 
+Interface after connecting to SQL server
+ 
+ 
+2.4 Basic Operations Using the SQL Server GUI  
+2.4.1 Creating a New Database:  
+Right-click on Databases > New Database. A dialog box appears allowing you to enter 
+a name for the database you want to create. SQL Server will automatically create two 
+files (.mdf: data file and .ldf: log file). You can specify the initial size for the newly 
+Script execution screen. 
+Select the database to be operated on 
+--- PAGE 24 ---
+ 
+created database; if not specified, SQL Server will use the default settings.
+ 
+2.4.2 Creating Tables, Constraints, and Inputting Data 
+Creating tables 
+
+--- PAGE 25 ---
+ 
+Information department – FIT- VNUHCM-US Page 23 
+ 
+ 
+Interface for designing columns, data types, and data constraints (NULL/NOT NULL, 
+UNIQUE, PRIMARY KEY…). 
+ 
+Creating FOREIGN KEY 
+
+--- PAGE 26 ---
+ 
+ 
+A dialog box appears allowing the selection of tables for which constraints are to be 
+created. The selected tables are then displayed on the screen as follows.  
+ 
+For example, to create a relationship between HocSinh and LopHoc, drag and drop the 
+malop field from the HocSinh table onto the malop field of the LopHoc table. The 
+resulting interface is shown below: 
+
+--- PAGE 27 ---
+ 
+Information department – FIT- VNUHCM-US Page 25 
+ 
+ 
+Inputting data: 
+ 
+Notes: In some cases, when attempting to modify information (such as column names 
+or data types), an error message may appear and prevent the modification. To make 
+
+--- PAGE 28 ---
+ 
+changes in such situations, the existing object must be deleted and then recreated, as 
+illustrated below. 
+ 
+Therefore, to disable this feature, go to the menu Tools > Options > Designer > Table 
+and Database Designers, and uncheck the option “Prevent saving changes that require 
+table re-creation. 
+ 
+ 
+2.4.3 Attach/detach a database 
+This feature allows a database to be transferred from one machine to another. 
+
+--- PAGE 29 ---
+ 
+Information department – FIT- VNUHCM-US Page 27 
+ 
+Detach: To perform this operation, ensure that the database to be detached is not the 
+current (active) database. Then proceed as follows: 
+ 
+After a successful detach operation, SQL Server will disconnect from the detached 
+database. You can then access the SQL Server installation directory (as shown below) 
+to copy the two files (.mdf and .ldf) and transfer them to another machine, where the 
+database can be recreated by performing an “attach” operation. 
+
+--- PAGE 30 ---
+ 
+ 
+Attach: Right-click on Databases and select Attach 
+
+--- PAGE 31 ---
+ 
+Information department – FIT- VNUHCM-US Page 29 
+ 
+ 
+A dialog box appears, prompting you to select the paths to the two files: .mdf and .ldf. 
+
+--- PAGE 32 ---
+ 
+ 
+After completion, the newly attached database will appear in the list of databases.  
+
+--- PAGE 33 ---
+ 
+Information department – FIT- VNUHCM-US Page 31 
+ 
+ 
+2.4.4 Generating database creation scripts 
+In cases where you want SQL Server to generate scripts for creating a database 
+(without generating data insertion scripts), use the “Generate Scripts” feature as 
+follows: 
+The newly attached database 
+--- PAGE 34 ---
+ 
+ 
+A dialog box appears allowing the generation of scripts. Click Next. Select the database 
+for which the script is to be generated. 
+
+--- PAGE 35 ---
+ 
+Information department – FIT- VNUHCM-US Page 33 
+ 
+ 
+After choosing the database and clicking Next, a screen is displayed that allows you to 
+select the tables, stored procedures, and functions (if any have been created 
+previously) for which scripts will be generated. 
+
+--- PAGE 36 ---
+ 
+ 
+ 
+ 
+Select the script generation option: save the script to a file (either as a single file or 
+multiple files), save it to memory, or open it directly in the SQL Server script execution 
+window.  
+
+--- PAGE 37 ---
+ 
+Information department – FIT- VNUHCM-US Page 35 
+ 
+ 
+Result: 
+
+--- PAGE 38 ---
+ 
+ 
+2.4.5 Data Export/Import 
+This feature allows data to be exported to various formats (such as text files, Microsoft 
+Access, Excel, SQL Server, etc.). 
+Export: Right-click on the database > Tasks > Export Data. Enter the connection 
+information and select the database to be exported. 
+
+--- PAGE 39 ---
+ 
+Information department – FIT- VNUHCM-US Page 37 
+ 
+ 
+Select and specify the type and storage location of the destination database. 
+
+--- PAGE 40 ---
+ 
+ 
+Click Next, then choose the data transfer method: copying data from tables/views in 
+the source database or writing a query to retrieve data from the source. In this case, 
+the first method is selected. 
+
+--- PAGE 41 ---
+ 
+Information department – FIT- VNUHCM-US Page 39 
+ 
+ 
+Then click Next and select the tables or views to be exported. Below is the result of the 
+data exported to an Excel file, which includes two sheets corresponding to the two 
+tables selected for export. 
+ 
+ 
+
+--- PAGE 42 ---
+ 
+Import: Performed in a similar manner. 
+3 In-class exercise  
+Requirements: 
+a. Study how to connect to and use SQL Server in the computer lab. 
+b. Study how to start and stop services. 
+c. Open and review the online documentation (online book). 
+d. Use the graphical interface to create a database named QLLopHoc with the 
+following table structure: 
+ 
+ 
+e. Enter data into the QLLopHoc database created above (each table must contain 
+at least 5 rows of data). 
+f. f. Perform detach / attach operations on the QLLopHoc database. 
+g. g. Generate scripts for QLLopHoc into two files: CauTruc.sql (storing scripts for 
+creating the database structure and constraints) and DuLieu.sql (storing scripts 
+for inserting data into the QLLopHoc database). 
+h. h. Export the data of QLLopHoc to an Excel file. 
+ 
+Duration: 02 hours. 
+HOCSINH 
+LOPHOC 
+GIAOVIEN 
+mahs 
+ hoten 
+ gioitinh 
+ ngaysinh diachi malop 
+malop tenlop nam gvcn lop_tr 
+magv hoten gioitinh ngaysinh diachi 
+--- PAGE 43 ---
+ 
+Information department – FIT- VNUHCM-US Page 41 
+ 
+ 
+4 Homework exercise 
+Requirements:  
+a. Download and install SQL Server. 
+b. Study the GUI components in SQL Server. 
+c. Use the graphical interface to create a database named QLBanHang with the 
+following table structure: 
+ 
+ 
+ 
+ 
+ 
+d. Enter data into the QLBanHang database created above (each table must 
+contain at least 5 rows of data). 
+e. Perform detach / attach operations on the QLBanHang database. 
+f. Generate scripts for QLBanHang into two files: CauTruc.sql (containing scripts 
+for creating the database structure and constraints) and DuLieu.sql (containing 
+scripts for inserting data into the QLBanHang database). 
+KHACH_HANG 
+SAN_PHAM 
+CT_HOA_DON 
+makh 
+ hoten 
+ gioitinh 
+ dthoai diachi 
+masp tensp ngaysx dongia 
+mahd masp 
+ 
+HOA_DON 
+ 
+soluong dongia 
+mahd ngaylap makh 
+--- PAGE 44 ---
+ 
+g. Export the data of QLBanHang to an Excel file. 
+ 
+ 
+Duration: 03 hours. 
+ 

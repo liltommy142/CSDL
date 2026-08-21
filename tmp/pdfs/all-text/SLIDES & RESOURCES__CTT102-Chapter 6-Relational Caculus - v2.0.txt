@@ -1,0 +1,612 @@
+
+--- PAGE 1 ---
+fit@hcmus
+4.0
+Chapter 6
+Relational Calculus
+--- PAGE 2 ---
+4.0
+fit@hcmus
+Content 
+Introduction 
+Tuple Relational Calculus (TRC)
+Domain Relational Calculus (DRC)
+2
+--- PAGE 3 ---
+4.0
+fit@hcmus
+Introduction 
+Is the formal query language 
+Introduced by Codd in 1972, “Data Base Systems”, 
+Prentice Hall, p33-98
+Properties 
+▪ Nonprocedural language – declarative language 
+Calculus expression specifies what to be retrieved rather than 
+how to retrieve
+▪ Declarative expression to specify a retrieval request
+There is no description of how to evaluate query
+▪ Calculus expression may be written in different way 
+The way it is written has no bearing on how a query should be 
+evaluated 
+3
+--- PAGE 4 ---
+4.0
+fit@hcmus
+Introduction 
+Categories 
+▪ Tuple relational calculus – TRC
+SQL
+▪ Domain relational calculus  – DRC
+QBE (Query By Example)
+DataLog (Database Logic)
+4
+--- PAGE 5 ---
+4.0
+fit@hcmus
+Content 
+Introduction
+Tuple relational calculus
+Domain relational calculus 
+Introduction
+2DB - FIT -
+HCMUS 
+5
+--- PAGE 6 ---
+4.0
+fit@hcmus
+Tuple relational calculus – TRC
+⬜A simple tuple calculus query is of the form
+▪ t is a tuple variable 
+◼ Its value is any individual tuple from a relation 
+◼ t.A is a value of a tuple t at an attribute A
+▪ | (vertical bar) is used to divide the query into two 
+parts:
+◼ P: is a conditional expression involving t
+▪ P(t) has the TRUE or FALSE value depending on t
+◼ t.A: The result is the set of all tuples t that satisfy P(t)
+6
+{ t.A | P(t) }
+--- PAGE 7 ---
+4.0
+fit@hcmus
+Example 1 
+⬜Retrieve employees whose salary is larger than 30.000
+▪ EMPLOYEE(t) : TRUE
+◼ If t is an instance/tuple of the relation EMPLOYEE
+▪ t.SALARY > 30000 : TRUE
+◼ If the attribute SALARY of tuple t has a value greater than 30.000
+⬜The result is all tuples t that satisfy the condition:
+▪ t  EMPLOYEE and t.SALARY > 30000 
+Introduction
+2DB - FIT -
+HCMUS 
+7
+{ t | EMPLOYEE(t)  t.SALARY > 30000 }
+P(t) P(t)
+--- PAGE 8 ---
+4.0
+fit@hcmus
+Example 2 
+Retrieve the SSN and first name of 
+employees whose salary is larger than 
+30.000
+▪ The set of SSNs and first names of 
+employees t such that t is a tuple of the 
+relation EMPLOYEE and their values of the 
+attribute SALARY is greater than 30000
+8
+{ t.SSN, t.FNAME | EMPLOYEE(t)  t.SALARY > 30000 }
+--- PAGE 9 ---
+4.0
+fit@hcmus
+Example 3 
+⬜Find employees (SSN) who work for the department 
+‘Research’
+▪ Select tuples t that belong to relation EMPLOYEE
+▪ Compare t to a certain tuple s to find employees working for 
+the department ‘Research’
+▪ Use the existential quantifier
+9
+s  DEPARTMENT s.DNAME = ‘Research’
+t.SSN | EMPLOYEE(t)
+(t)(Q(t))
+Existing a tuple t of the relation R such that the expression Q(t) is TRUE → the result of the existential 
+quantifier is TRUE
+--- PAGE 10 ---
+4.0
+fit@hcmus
+Example 3 
+⬜Find employees (SSN) who work for the 
+department ‘Research’
+10
+Q(s)
+{ t.SSN | EMPLOYEE(t) 
+(s) (DEPARTMENT(s) 
+s.DNAME = ‘Research’ 
+s.DNUMBER = t.DNO ) }
+--- PAGE 11 ---
+4.0
+fit@hcmus
+Example 4 
+⬜Retrieve the first name (FNAME) of 
+employees who either work on projects or 
+have dependents 
+Introduction
+2DB - FIT -
+HCMUS 
+11
+{ t.FNAME | EMPLOYEE(t)  (
+(s) (WORKS_ON(s)  (t.SSN = s.ESSN) ) 
+(u) (DEPENDENT(u)  (t.SSN = u.ESSN) ) ) }
+--- PAGE 12 ---
+4.0
+fit@hcmus
+Example 5 
+⬜Retrieve the FNAME of employees who 
+participate in projects and have dependents
+12
+{ t.FNAME | EMPLOYEE(t) 
+(s) (WORKS_ON(s)  (t.SSN = s.ESSN) ) 
+(u) (DEPENDENT(u)  (t.SSN = u.ESSN) ) }
+--- PAGE 13 ---
+4.0
+fit@hcmus
+Example 6 
+⬜Find the FNAME of employees who work 
+on projects and have no dependents 
+13
+{ t.FNAME | EMPLOYEE(t) 
+(s) (WORKS_ON(s)  (t.SSN = s.ESSN) ) 
+(u) (DEPENDENT(u)  (t.SSN = u.ESSN)) }
+--- PAGE 14 ---
+4.0
+fit@hcmus
+Example 7 
+⬜For each project located in ‘TP HCM’, retrieve
+the project number, the department number that 
+controls the project, and the first name 
+(FNAME) of the department manager
+14
+{ s.PNUMBER, s.DNUM, t.FNAME | PROJECT(s) EMPLOYEE(t) 
+(s.PLOCATION = ‘TP HCM’)  (u) (DEPARTMENT(u) 
+(u.DNUMBER = s.DNUM 
+u.MGRSSN = t.SSN)) }
+--- PAGE 15 ---
+4.0
+fit@hcmus
+Example 8 
+⬜Retrieve employees (SSN) who work on 
+all projects 
+▪ Use the universal quantifier
+Introduction
+2DB - FIT -
+HCMUS 
+15
+(t) (Q(t))
+If Q is TRUE with all tuples t of relation R, the universal quantifier is 
+TRUE; otherwise FALSE. 
+--- PAGE 16 ---
+4.0
+fit@hcmus
+Example 8a
+⬜Retrieve employees (SSN, FNAME, 
+LNAME) with the highest salary.
+16
+{ t.SSN, t.LNAME, t.FNAME | EMPLOYEE(t) 
+(e) (EMPLOYEE(e)  (t.Salary >=  e.Salary)) }
+--- PAGE 17 ---
+4.0
+fit@hcmus
+Example 8
+⬜Retrieve employees (SSN, FNAME, 
+LNAME) who work on all projects
+17
+{ t.SSN, t.LNAME, t.FNAME | EMPLOYEE(t) 
+(s) (PROJECT(s)  (u) (WORKS_ON(u) 
+u.PNO = s.PNUMBER 
+u.ESSN = t.SSN )) }
+--- PAGE 18 ---
+4.0
+fit@hcmus
+Example 9 
+⬜Retrieve employees (SSN, LNAME, FNAME) 
+who work on all projects controlled by the 
+department 4
+18
+{ t.SSN, t.LNAME, t.FNAME | EMPLOYEE(t)
+(s) (PROJECT(s) 
+s.DNUM = 4  (u) (WORKS_ON(u) 
+u.PNO = s.PNUMBER 
+u.ESSN = t.SSN )) }
+--- PAGE 19 ---
+4.0
+fit@hcmus
+Example 9 
+⬜Retrieve employees (SSN, LNAME, 
+FNAME) who work on all projects controlled 
+by the department 4
+▪ Use the “implies” operator 
+19
+P  Q
+If P then Q 
+--- PAGE 20 ---
+4.0
+fit@hcmus
+Example 9
+⬜Retrieve employees (SSN, LNAME, FNAME) 
+who work on all projects controlled by the 
+department 4
+20
+{ t.SSN, t.LNAME, t.FNAME | EMPLOYEE(t)
+(s) (PROJECT(s) 
+(s.DNUM = 4)  ((u) (WORKS_ON(u) 
+u.PNO = s.PNUMBER 
+u.ESSN = t.SSN ))) }
+--- PAGE 21 ---
+4.0
+fit@hcmus
+Example 9 – Solution 2
+Retrieve employees (SSN, LNAME, FNAME) 
+who work on all projects controlled by the 
+department 4
+21
+{ t.SSN, t.LNAME, t.FNAME | EMPLOYEE(t)
+(s) (PROJECT(s) 
+s.DNUM  4  (u)(WORKS_ON(u) 
+u.PNO = s.PNUMBER 
+u.ESSN = t.SSN )) }
+--- PAGE 22 ---
+4.0
+fit@hcmus
+Example 10
+⬜a. Retrieve employees whose salary is 
+greater than at least one  employee of the 
+department 4.
+⬜b. Retrieve employees whose salary is 
+greater than all  employees of the 
+department 4.
+22
+--- PAGE 23 ---
+4.0
+fit@hcmus
+Formal definition 
+⬜A general expression is of the form 
+▪ t1, t2, …, tn are tuple variables
+▪ Ai, Aj, …, Am are attributes of tuples t
+▪ P is a condition or well-formed formula 
+◼ P is made up of predicate calculus atoms
+23
+{ t1.Ai, t2.Aj, …, tn.Am | P(t1, t2, …, tn, …, tn+m) }
+--- PAGE 24 ---
+4.0
+fit@hcmus
+Tuple variable 
+⬜Free variable
+⬜Bound variable
+24
+{ t | t  EMPLOYEE  t.SALARY > 30000 
+}
+t is a free variable
+{ t | t  EMPLOYEE (s) (DEPARTMENT(s)  (s.DNUMBER = t.PNO) 
+}
+Bound variableFree variable
+--- PAGE 25 ---
+4.0
+fit@hcmus
+Atoms
+⬜(i)
+▪ t is a tuple variable 
+▪ R is a relation 
+⬜(ii)
+▪ A is an attribute of the tuple variable t
+▪ B is an attribute of the tuple variable s
+▪  is comparison operators, eg.  ,  ,  ,  ,  , =
+⬜(iii) 
+▪ C is a constant
+▪ A is an attribute of the tuple variable t
+▪  is comparison operators, eg.   ,  ,  ,  ,  , =
+25
+t  R
+t.A  s.B
+t.A  c
+t  EMPLOYEE
+t.SSN = s.ESSN
+t.SALARY > 30000
+--- PAGE 26 ---
+4.0
+fit@hcmus
+Atoms
+⬜Each of atoms evaluates to either TRUE or FALSE for 
+a specific combination of tuples
+⬜Formula (i) 
+▪ TRUE value if t is a tuple of the specified relation R
+▪ FALSE value if t does not belong to R
+26
+A B
+
+R
+
+10
+20
+C
+1
+1
+t1 = <, 10, 1>
+t2 = <, 20, 2>
+t1  R has the TRUE value
+t2  R has the FALSE value
+t  R
+--- PAGE 27 ---
+4.0
+fit@hcmus
+Atoms 
+⬜Formula (ii)                   and (iii) 
+▪ If the tuple variables are assigned to tuples such that they 
+satisfy the condition, then the atom is TRUE 
+27
+A B
+
+R
+
+10
+20
+C
+1
+1
+If t is the tuple <, 10, 1>
+Then t.B > 5 has the TRUE value (10 > 5)
+t.A  s.B t.A  c
+--- PAGE 28 ---
+4.0
+fit@hcmus
+Rules
+(1) Every atom is formula
+(2) If P is a formula then
+▪ P is a formula 
+▪ (P) is a formula
+(3) If P1 and P2 are formulas then 
+▪ P1  P2 is a formula
+▪ P1  P2 is a formula
+▪ P1  P2 is a formula 
+28
+--- PAGE 29 ---
+4.0
+fit@hcmus
+Rules
+⬜(4) If P(t) is a formula then
+▪ t  R (P(t)) is a formula
+◼ TRUE when P(t) is TRUE for all tuples in R
+◼ FALSE when there is one tuple that makes P(t)
+FALSE
+▪ t  R (P(t)) is a formula
+◼ TRUE when there exists some tuple that makes 
+P(t) TRUE
+◼ FALSE when P(t) is FALSE for all tuples t in R
+29
+--- PAGE 30 ---
+4.0
+fit@hcmus
+Rules 
+(5) If P is an atom then
+▪ Tuple variables t in P are free variables
+(6) Formulas P=P1P2 , P=P1P2 , 
+P=P1P2
+▪ A variable t in P is free or bound variable will 
+depends on its role in P1 and P2
+30
+--- PAGE 31 ---
+4.0
+fit@hcmus
+Transform 
+⬜(i) P1  P2 =  (P1  P2)
+⬜(ii) tR (P(t)) = tR (P(t))
+⬜(iii) tR (P(t)) = tR (P(t))
+⬜(iv) P  Q = P  Q
+Introduction
+2DB - FIT -
+HCMUS 
+31
+--- PAGE 32 ---
+4.0
+fit@hcmus
+Safe expression 
+⬜Examine 
+⬜Unsafe
+▪ Many tuples in the universe that are not 
+EMPLOYEE tuples 
+▪ Even though they do not exist in the 
+database 
+▪ The result is infinitely numerous 
+Introduction
+2DB - FIT -
+HCMUS 
+32
+{ t | (EMPLOYEE(t)) }
+--- PAGE 33 ---
+4.0
+fit@hcmus
+Safe expression 
+Safe expression
+▪ Guarantee to yield a finite number of tuples
+A formula P is called safe expression 
+▪ If its resulting values are from the domain of P
+The domain of a tuple relational calculus expression: 
+DOM(P)
+The set of all values 
+Either appear as constant values in P 
+Or exist in any tuple in the relation referenced in P 
+Introduction
+2DB - FIT -
+HCMUS 
+33
+--- PAGE 34 ---
+4.0
+fit@hcmus
+Safe expression
+⬜Example
+▪ DOM(EMPLOYEE(t) t.SALARY > 30000)
+▪ The set of values
+◼ Lager than 30000 at the attribute SALARY 
+◼ Other values at the remaining attributes that 
+appear in EMPLOYEE 
+▪ Safe expression 
+Introduction
+2DB - FIT -
+HCMUS 
+34
+{ t | EMPLOYEE(t) t.SALARY > 30000 }
+--- PAGE 35 ---
+4.0
+fit@hcmus
+Content 
+⬜Introduction
+⬜Tuple relational calculus
+⬜Domain relational calculus 
+Introduction
+2DB - FIT -
+HCMUS 
+35
+--- PAGE 36 ---
+4.0
+fit@hcmus
+Domain relational calculus 
+⬜An expression of the domain calculus is of the 
+form 
+▪ x1, x2, …, xn are domain variables
+◼ Accepting single values from the domain of attributes 
+▪ P is a formula of variables x1, x2, …, xn
+◼ P is formed from atoms 
+▪ The result 
+◼ The set of values such that when assigned to variables xi, 
+they make P TRUE
+Introduction
+2DB - FIT -
+HCMUS 
+36
+{ x1, x2, …, xn | P(x1, x2, …, xn) }
+--- PAGE 37 ---
+4.0
+fit@hcmus
+Example 1
+Find employees whose salary is larger 
+than 30000
+Introduction
+2DB - FIT -
+HCMUS 
+37
+{ r, s | (x) (EMPLOYEE(p, q, r, s, t, u, v, x, y, z) 
+x > 30000 ) }
+--- PAGE 38 ---
+4.0
+fit@hcmus
+Example 3 
+⬜Find employees (SSN) who work for the 
+department ‘Nghien cuu’
+Introduction
+2DB - FIT -
+HCMUS 
+38
+{ s | (z) (EMPLOYEE(p, q, r, s, t, u, v, x, y, z) 
+(a, b) (DEPARTMENT(a, b, c, d) 
+a = ‘Nghien cuu’ b = z )) }
+--- PAGE 39 ---
+4.0
+fit@hcmus
+Example 10 
+⬜Find employees (SSN, LNAME, FNAME) 
+who have no dependents
+Introduction
+2DB - FIT -
+HCMUS 
+39
+{ p, r, s | (s) (EMPLOYEE(p, q, r, s, t, u, v, x, y, z) 
+(a) (DEPENDENT(a, b, c, d, e)  a = s )) }
+--- PAGE 40 ---
+4.0
+fit@hcmus
+Atoms 
+⬜(i)
+▪ xi is a domain variable
+▪ R is a relation with n attributes 
+⬜(ii)
+▪ x, y are domain variables 
+▪ Domains of x and y are identical 
+▪  is comparison operators, eg.   ,  ,  ,  ,  , =
+⬜(iii) 
+▪ c is a constant 
+▪ x is a domain variable 
+▪  is comparison operators, eg.  ,  ,  ,  ,  , =
+Introduction
+2DB - FIT -
+HCMUS 
+40
+<x1, x2, …, xn>  R
+x  y
+x  c
+--- PAGE 41 ---
+4.0
+fit@hcmus
+Discussion 
+⬜Atoms evaluate to either TRUE or 
+FALSE for a set of values 
+▪ Called the truth values of the atoms
+⬜Rules and transforms are in the similar 
+way to the tuple calculus
+Introduction
+2DB - FIT -
+HCMUS 
+41
+--- PAGE 42 ---
+4.0
+fit@hcmus
+Safe expression 
+Examine 
+▪ Values in the result do not belong to the 
+domain of the expression
+▪ Unsafe 
+Introduction
+2DB - FIT -
+HCMUS 
+42
+{ p, r, s |  EMPLOYEE(p, q, r, s, t, u, v, x, y, z) }
+--- PAGE 43 ---
+4.0
+fit@hcmus
+Safe expression 
+⬜Examine 
+▪ R is a relation with a finite number of values
+▪ We also have a finite number of values that does not 
+belong to R
+▪ Formula 1: examine values in R only
+▪ Formula 2: could not validate cause we do not know 
+the finite number of values of variable z
+Introduction
+2DB - FIT -
+HCMUS 
+43
+{ x | y (R(x, y))  z ( R(x, z)  P(x, z)) }
+Formula 1 Formula 2
+--- PAGE 44 ---
+4.0
+fit@hcmus
+Safe expresion 
+Expression     
+is safe if :
+▪ Values that appear in tuples of the expression must belong to 
+the domain of P
+▪  quantifiers: expression x (Q(x)) is TRUE if 
+Values of x belong to DOM(Q) and make Q(x) TRUE
+▪  quantifiers: expression x (Q(x)) is TRUE if
+Q(x) is TRUE for all values of x belonging to DOM(Q)
+Introduction
+2DB - FIT -
+HCMUS 
+44
+{ x1, x2, …, xn | P(x1, x2, …, xn) }
+--- PAGE 45 ---
+4.0
+fit@hcmus
+Introduction
+2DB - FIT -
+HCMUS 
+45

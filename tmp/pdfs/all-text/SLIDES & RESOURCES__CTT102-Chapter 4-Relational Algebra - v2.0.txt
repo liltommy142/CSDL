@@ -1,0 +1,1592 @@
+
+--- PAGE 1 ---
+fit@hcmus
+4.0
+Chapter 4
+Relational Algebra
+--- PAGE 2 ---
+4.0
+fit@hcmus
+Content
+1. Introduction
+2. Relational Algebra Operations From Set Theory
+3. Select Operation
+4. Projection Operation
+5. CARTESIAN Operations
+6. Join Operation
+7. Division Operation
+8. Additional Relational Operations
+9. Update Operations
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 2
+--- PAGE 3 ---
+4.0
+fit@hcmus
+1. Introduction
+⬜Operations that make changes (update) to relations
+▪ Add a new faculty ‘Hóa học’ into the relation
+▪ Move “CNTT” to the room “B12”
+⬜Operations that extract data from to relations
+▪ Query: name of the faculty found from the year 1980
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 3
+MÃKHOA TÊNKHOA NĂMTL PHÒNG ĐIỆNTHOAI TRƯỞNGKHOA NGÀYNHẬNCHỨC
+CNTT Công nghệ thông tin 1995 B11 0838123456 002 20/02/2005
+VL Vật lý 1976 B21 0838223223 005 18/09/2003
+SH Sinh học 1980 B31 0838454545 004 11/10/2000
+B12
+HH Hóa học 1980 B41 NULL 007 15/10/2001
+TÊNKHOA
+Sinh học
+Hóa học
+--- PAGE 4 ---
+4.0
+fit@hcmus
+1. Introduction (cont.)
+⬜Query Language – QL: 
+▪ Allow to extract or update data stored in a database schema
+⬜Types of Relational Query:
+▪ Relational Algebra
+◼ A sequence of relational algebra operations forms a relational algebra 
+expression, whose result will also be a relation that represents the result 
+of a database query (or retrieval request).
+▪ Relational Calculus
+◼ Considered to be a nonprocedural language. This differs from relational 
+algebra, where we must write a sequence of operations to specify a 
+retrieval request; hence relational algebra can be considered as a 
+procedural way of stating a query
+▪ SQL (Structured Query Language)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 4
+--- PAGE 5 ---
+4.0
+fit@hcmus
+1. Introduction (cont.)
+⬜Algebra
+▪ Operators (toán tử): +, -, *, /
+▪ Operand (toán hạng) or variables: x, y, z
+▪ Constant
+▪ Expression
+◼ (x+7) / (y-3)
+◼ (x+y)*z  and/or (x+7) / (y-3)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 5
+--- PAGE 6 ---
+4.0
+fit@hcmus
+1. Introduction (cont.)
+Relational Algebra
+⬜Operands – variables are relations
+▪ Or set (tập hợp)
+⬜Operators are relational operations
+▪ Relational Algebra Operations From Set Theory
+◼ Union   (hội)
+◼ Intersect  (giao)
+◼ Difference set/ Minus   − (trừ)
+▪ Unary Relational Operations 
+◼ Selection   (chọn)
+◼ Projection   (chiếu)
+▪ Additional relational operations
+◼ Cartesian product  (Tích Cartesian)
+◼ Join        (kết)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 6
+--- PAGE 7 ---
+4.0
+fit@hcmus
+1. Introduction (cont.)
+⬜A query is expressed through a relational 
+algebra expression:
+▪ The result of a retrieval is a new relation, which may 
+have been formed from one or more relations. 
+▪ Algebra operations produce new relations, which 
+can be further manipulated using operations of the 
+same algebra
+▪ It is formed by a sequence of relational algebra 
+operations
+▪ the result of the previous operation is input to the 
+next operation.
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 7
+--- PAGE 8 ---
+4.0
+fit@hcmus
+1. Introduction (cont.)
+Algebra Relational algebra
+Operand - Variable : x, y, z, …
+- Constant : 150, …
+- Schema : NhanVien, …
+- Relation/Instances/ tuples : t, v, … 
+Operator - Operations between operands to 
+form a new value: +, -, *, /, …
+- Operations between relations to form a new 
+relation: selection , union  , 
+projection …
+Expression - Sequence of algebra operators
+- Return a new value
+(x+7) / (y-3)
+(x+y)*z  and/or (x+7) / (y-3)
+- Sequence of relational algebra (query)
+- Return a new relation
+MANV (NHANVIEN  EMPLOYEE)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 8
+--- PAGE 9 ---
+4.0
+fit@hcmus
+Content
+1. Introduction
+2. Relational Algebra Operations From Set 
+Theory
+3. Select Operation
+4. Projection Operation
+5. CARTESIAN Operations
+6. Join Operation
+7. Division Operation
+8. Additional Relational Operations
+9. Update Operations
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 9
+--- PAGE 10 ---
+4.0
+fit@hcmus
+2. Relational Algebra Operations 
+From Set Theory
+⬜Operations
+▪ Union  r  s
+▪ Intersect  r  s
+▪ Difference set/ Minus  r − s
+⬜Union Compatibility (khả hợp)
+▪ The operand relations R(A1, A2, …, An) and S(B1, B2, …, Bn):
+▪ Two are compatible if 
+◼ R and S have the same number of attributes (e.g. n)
+◼ and DOM(Ai)=DOM(Bi) , 1 i  n
+⬜The resulting relation for R∪S, R ∩ S, or R-S  has the same 
+attribute names as the first operand relation R (by 
+convention).
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 10
+--- PAGE 11 ---
+▪ Example
+2. Union
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 11
+TENSV NGSINH PHAI
+Tung 12/08/1955 Nam
+Hang 07/19/1968 Nu
+Nhu 06/20/1951 Nu
+Hung 09/15/1962 Nam
+SINHVIEN TENGV NG_SINH GIOITINH
+Trinh 04/05/1986 Nu
+Khang 10/25/1983 Nam
+Phuong 05/03/1958 Nu
+Minh 02/28/1942 Nam
+GIAOVIEN
+Chau 12/30/1988 Nu
+Degree n=3
+DOM(TENSV) = DOM(TENGV)
+DOM(NGSINH) = DOM(NG_SINH)
+DOM(PHAI) = DOM(GIOITINH)
+--- PAGE 12 ---
+4.0
+fit@hcmus
+2. Union
+⬜Given two compatible relations r and s
+⬜Union of r and s
+❑ Notation: r  s
+❑ The result of the union operation includes tuples in r
+or in s, or in both relations (duplicated tuples are 
+eliminated)
+⬜Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 12
+r  s = { t / t  r  t  s }
+A B
+
+r
+
+
+1
+2
+1
+A B
+
+s
+
+2
+3
+A B
+
+r  s
+
+
+1
+2
+1
+ 3
+ 2
+--- PAGE 13 ---
+4.0
+fit@hcmus
+2. Union - example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 13
+SinhVien
+HOTEN DIACHI
+Đinh Bá Tiến 119 Cống Quỳnh, Tp HCM
+Nguyễn Thanh 
+Tùng
+222 Nguyễn Văn Cừ, Tp
+HCM
+Lê Quỳnh Như 291 Hồ Văn Huê,  Tp HCM
+GiaoVien
+HOTEN DIACHI
+Đinh Bá Tiến 119 Cống Quỳnh, Tp HCM
+Trần Thanh Tâm 553 Mai Thị Lựu,  Tp HCM
+SinhVien  GiaoVien
+HOTEN DIACHI
+Đinh Bá Tiến 119 Cống Quỳnh, Tp HCM
+Nguyễn Thanh 
+Tùng
+222 Nguyễn Văn Cừ, Tp
+HCM
+Lê Quỳnh Như 291 Hồ Văn Huê,  Tp HCM
+Trần Thanh Tâm 553 Mai Thị Lựu,  Tp HCM
+--- PAGE 14 ---
+4.0
+fit@hcmus
+2. Intersect
+⬜Given two compatible relations r and s
+⬜Intersect of r and s
+❑ Notation: r  s
+❑ The result relation of the intersect operation includes 
+tuples that are both in r and s
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 14
+r  s = { t / t  r  t  s }
+A B
+
+r
+
+
+1
+2
+1
+A B
+
+s
+
+2
+3
+A B
+
+r  s
+2
+--- PAGE 15 ---
+4.0
+fit@hcmus
+2. Intersect (cont.) - Example
+SinhVien
+HOTEN DIACHI
+Đinh Bá Tiến 119 Cống Quỳnh, Tp HCM
+Nguyễn Thanh 
+Tùng
+222 Nguyễn Văn Cừ, Tp
+HCM
+Lê Quỳnh Như 291 Hồ Văn Huê,  Tp HCM
+15
+GiaoVien
+HOTEN DIACHI
+Đinh Bá Tiến 119 Cống Quỳnh, Tp HCM
+Trần Thanh Tâm 553 Mai Thị Lựu,  Tp HCM
+SinhVien  GiaoVien
+HOTEN DIACHI
+Đinh Bá Tiến 119 Cống Quỳnh, Tp HCM
+--- PAGE 16 ---
+4.0
+fit@hcmus
+2. Minus
+⬜Given two compatible relations r and s
+⬜Minus of r and s
+❑ Notation: r − s
+❑ The result of the minus operation includes tuples in r 
+and not in s
+16
+r − s = { t / t  r  t  s }
+A B
+
+r
+
+
+1
+2
+1
+A B
+
+s
+
+2
+3
+A B
+
+r − s
+
+1
+1
+--- PAGE 17 ---
+4.0
+fit@hcmus
+2. Minus - example
+SinhVien
+HOTEN DIACHI
+Đinh Bá Tiến 119 Cống Quỳnh, Tp HCM
+Nguyễn Thanh Tùng 222 Nguyễn Văn Cừ, Tp HCM
+Lê Quỳnh Như 291 Hồ Văn Huê,  Tp HCM
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 17
+GiaoVien
+HOTEN DIACHI
+Đinh Bá Tiến 119 Cống Quỳnh, Tp HCM
+Trần Thanh Tâm 553 Mai Thị Lựu,  Tp HCM
+SinhVien – GiaoVien
+HOTEN DIACHI
+Nguyễn Thanh 
+Tùng
+222 Nguyễn Văn Cừ, Tp
+HCM
+Lê Quỳnh Như 291 Hồ Văn Huê,  Tp HCM
+--- PAGE 18 ---
+4.0
+fit@hcmus
+2. Characteristics
+⬜Notice that both union and intersection are 
+commutative operations (tính giao hoán); that is
+⬜Both union and intersection can be treated as n-ary 
+operations applicable to any number of relations as both 
+are associative operations (tính kết hợp); that is
+⬜The minus operation is not commutative; that is, in 
+general
+R - S ≠ S – R
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 18
+r  s = s  r
+r  s = s  r
+r  (s  t) = (r  s)  t
+r  (s  t) = (r  s)  t
+--- PAGE 19 ---
+4.0
+fit@hcmus
+Content
+1. Introduction
+2. Relational Algebra Operations From Set Theory
+3. Select Operation
+4. Projection Operation
+5. CARTESIAN Operations
+6. Join Operation
+7. Division Operation
+8. Additional Relational Operations
+9. Update Operations
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 19
+--- PAGE 20 ---
+4.0
+fit@hcmus
+3. SELECT Operation
+⬜Is used to select a subset of the tuples from a relation 
+that satisfy a selection condition P. It is a filter that 
+keeps only those tuples that satisfy a qualifying 
+condition – those satisfying the condition are selected 
+while others are discarded
+⬜Denoted by
+: sigma
+⬜P is an expression consisting of clauses as:
+▪ <attribute> <comparison> <constant>
+▪ <attribute> <comparison> <attribute>
+◼ <comparison>:  ,  ,  ,  ,  , =
+◼ Clauses are connected by  logical connections  ,  , 
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 20
+ P (r)
+--- PAGE 21 ---
+4.0
+fit@hcmus
+3. SELECT Operation (cont.)
+⬜The result relation: 
+▪ Attributes: the same attributes of the relation r
+▪ Tuples: less or equal of r
+⬜Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 21
+ (A=B)(D>5) (r) 
+A B
+
+r
+
+
+C
+1
+5
+12
+ 23
+D
+7
+7
+3
+10
+
+
+
+
+A B
+
+C
+1
+ 23
+D
+7
+10
+
+
+--- PAGE 22 ---
+▪ The select is commutative operations; that 
+is
+3. Select Operation (cont.)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 22
+ p1 ( p2 (r))  =  p2 ( p1 (r)) =  p1  p2 (r)
+--- PAGE 23 ---
+4.0
+fit@hcmus
+Content
+1. Introduction
+2. Relational Algebra Operations From Set Theory
+3. Select Operation
+4. Projection Operation
+5. CARTESIAN Operations
+6. Join Operation
+7. Division Operation
+8. Additional Relational Operations
+9. Update Operations
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 23
+--- PAGE 24 ---
+4.0
+fit@hcmus
+4. PROJECTION Operation
+⬜This operation selects certain columns from a relation r
+and discards the other columns
+⬜Notation
+⬜The result is a relation
+❑ having k attributes
+❑ Number of tuples are less than r
+⬜Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 24
+A1, A2, …, Ak(r)
+A B
+
+r
+
+
+10
+20
+30
+C
+1
+1
+1
+ 40 2
+A,C (r)
+A
+
+
+C
+1
+1
+ 2
+A,C (r)
+--- PAGE 25 ---
+4.0
+fit@hcmus
+4. PROJECION Operation (cont.)
+⬜The projection is not commutative operations
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 25
+A1, A2, …, An(A1, A2, …, Am(r)) = A1, A2, …, An (r) , với n  m
+X,Y (r) = X (Y (r)) 
+--- PAGE 26 ---
+4.0
+fit@hcmus
+4. SELECT vs PROJECTION
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 26
+A1, A2, A3 …, 
+An....
+i
+A1, A2, A3 …, 
+An.... j, i>=j
+
+Select
+A1, A2, A3 …, 
+An....
+n
+A1, A2, A3 …, Am
+....
+m, n>=m
+
+Projection
+--- PAGE 27 ---
+4.0
+fit@hcmus
+4. PROJECTION – example 1
+⬜Retrieve the name and salary of female 
+teachers
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 27
+HOTEN, LUONG (PHAI=‘Nữ’ (GIAOVIEN))
+--- PAGE 28 ---
+4.0
+fit@hcmus
+4. PROJECION Operation – example 2
+⬜List out the codes/IDs of teachers who belong 
+to the dept. “HTTT” or who work on the project 
+having ID “001”
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 28
+MAGV (MABM=‘HTTT’ (GIAOVIEN))  MAGV (MAĐT=‘001’ (TG_ĐETAI)) 
+--- PAGE 29 ---
+4.0
+fit@hcmus
+4. Project Operation – example 3
+⬜Retrieve the code/ID of the deans who are also 
+the project managers
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 29
+TRUONGKHOA(KHOA)  GVCNĐT (ĐETAI) 
+--- PAGE 30 ---
+4.0
+fit@hcmus
+4. Project Operation – example 3
+⬜Retrieve the names of the jobs that started 
+between 01/01/2007 and 01/08/2007
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 30
+ (NGAYBĐ>=‘1/1/2007’  NGAYBĐ<=‘1/8/2007’) (CONGVIEC)
+--- PAGE 31 ---
+4.0
+fit@hcmus
+Quiz #1
+⬜Given the schema PHANCONG(MÃNV, 
+MÃĐA, THOIGIAN) and the query “Cho biết
+danh sách mã nhân viên vừa có tham gia đề án
+số 1 vừa có tham gia đề án số 2”. Choose the 
+correct answer:
+A. ΠMÃNV(MÃĐA =1  MÃĐA =2 (PHÂNCÔNG))
+B. ΠMÃNV ((MÃĐA =1 (PHÂNCÔNG))  (MÃĐA =2 (PHÂNCÔNG)))
+C. ΠMÃNV(MÃĐA =1 (PHÂNCÔNG))  ΠMÃNV(MÃĐA =2 (PHÂNCÔNG))
+D. B, C
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 31
+--- PAGE 32 ---
+4.0
+fit@hcmus
+4. PROJECTION Operation - General
+⬜Extend the project operation by adding 
+arithmetical operations in attributes
+⬜Notation  F1, F2, …, Fn (E), where:
+▪ E relation
+▪ F1, F2, …, Fn arithmetical expression 
+containing:
+◼ Constants
+◼ Attributes of E
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 32
+--- PAGE 33 ---
+4.0
+fit@hcmus
+4. PROJECTION Operation - General
+⬜Example
+▪ Retrieve the name and salary of teachers 
+after increasing 10%
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 33
+HOTEN, LUONG*1.1 (GIAOVIEN)
+--- PAGE 34 ---
+4.0
+fit@hcmus
+4. Sequence of Operations
+⬜Combining algebra operations
+▪ Combining expressions 
+▪ Execute step by step
+◼ B1
+◼ B2
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 34
+A1, A2, …, Ak (P (r)) P (A1, A2, …, Ak (r))
+P (r) 
+A1, A2, …, Ak (result of B1)
+Rename the resulting relation
+--- PAGE 35 ---
+4.0
+fit@hcmus
+4. Assignment
+⬜It is used to retrieve a result relation from 
+an algebra operation
+⬜Notation:  
+⬜Example:
+▪ B1
+▪ B2
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 35
+s P (r) 
+KQ A1, A2, …, Ak (s)
+--- PAGE 36 ---
+4.0
+fit@hcmus
+4. Rename Operation
+⬜We may want to apply several relational algebra operations one 
+after the other. Either we can write the operations as a single 
+relational algebra expression by nesting the operations, or we 
+can apply one operation at a time and create intermediate result 
+relations. In the latter case, we must give names to the relations 
+that hold the intermediate results.
+▪ Given relation
+▪ Rename attribute
+▪ Rename relation and attribute:
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 36
+s(r)  :  rename the relation r to s
+r(B, C, D)
+X, C, D (r)  :  rename the attribute B to X
+s(X,C,D)(r) : rename the relation r to s, and the attribute B to X
+--- PAGE 37 ---
+4.0
+fit@hcmus
+4. Example 5
+⬜Retrieve the code/ID and name of 
+teachers who work in the dept. “HTTT”.
+⬜C1:
+⬜C2:
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 37
+MAGV, HOTEN (MABM=‘HTTT’ (GIAOVIEN))
+GV_HTTT   MABM=‘HTTT’ (GIAOVIEN)
+KQ   MAGV, HOTEN (GV_HTTT)
+KQ(MA, TEN)  MAGV, HOTEN (GV_HTTT)
+KQ(MA, TEN) (MAGV, HOTEN (GV_HTTT))
+--- PAGE 38 ---
+4.0
+fit@hcmus
+Content
+1. Introduction
+2. Relational Algebra Operations From Set Theory
+3. Select Operation
+4. Projection Operation
+5. CARTESIAN Operations
+6. Join Operation
+7. Division Operation
+8. Additional Relational Operations
+9. Update Operations
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 38
+--- PAGE 39 ---
+4.0
+fit@hcmus
+5. CARTESIAN Operations
+⬜This operation is used to combine tuples from 
+two relations in a combinatorial fashion.
+⬜Notation
+⬜The result relation is a relation q with:
+▪ Each tuple of q is a combination between 1 tuple in r
+and 1 tuple in s
+▪ If the relation r has u tuples and s has v tuples, then  
+q has u  v tuples
+▪ If r has n attributes and s has m attributes, then q 
+has n + m attributes (R+  S+  =  )
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 39
+r  s
+--- PAGE 40 ---
+4.0
+fit@hcmus
+5. CARTESIAN Operations - Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 40
+A B
+
+r
+
+1
+2
+B C
+
+S
+
+10
+10
+D
++
++
+ 20 -
+ 10 -
+unambiguous
+A R.B
+
+
+1
+2
+ 2
+ 1
+ 1
+ 1
+ 2
+ 2
+S.B C
+
+
+10
+10
+ 10
+ 10
+ 20
+ 10
+ 20
+ 10
+D
++
++
++
++
+-
+-
+-
+-
+r  s
+(X,C,D) (s)
+X
+X
+--- PAGE 41 ---
+4.0
+fit@hcmus
+5. CARTESIAN Operations
+⬜Usually, the Cartesian operation is followed by 
+the select operation
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 41
+r  s
+A R.B
+
+
+1
+2
+ 2
+ 1
+ 1
+ 1
+ 2
+ 2
+S.B C
+
+
+10
+10
+ 10
+ 10
+ 20
+ 10
+ 20
+ 10
+D
++
++
++
++
+-
+-
+-
+-
+A=S.B (r  s)
+A R.B
+ 1
+ 2
+ 2
+S.B C
+ 10
+ 10
+ 20
+D
++
++
+-
+--- PAGE 42 ---
+4.0
+fit@hcmus
+5. CARTESIAN Operations – Example 6
+⬜Retrieve the information of the dept. and the information of the 
+lecturer who is the head of that department
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 42
+HOTEN NGSINH MABM PHAI LUONG ….
+Nguyễn Hoài An 15/02/1973 MMT Nam 2000
+Trần Trà Dương 20/06/1960 HTTT Nu 2500
+Nguyễn Ngọc Anh 11/05/1975 HTTT Nu 2200
+Trương Nam Sơn 20/06/1959 VS Nam 2300
+001
+004
+003
+002
+MAGV
+Hệ thống thông tin
+TENBM MABM TRUONGBM NGAYNHANCHUC
+HTTT 002 20/09/2004
+Công nghệ tri thức CNTT
+Mạng máy tính MMT 001 15/05/2005
+…
+002
+002
+--- PAGE 43 ---
+4.0
+fit@hcmus
+5. CARTESIAN Operations – Example 6
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 43
+TENBM MABM TRUONGBM NGAYNHANCHUC
+Hệ thống thông tin HTTT 002 20/09/2004
+Mạng máy tính MMT 001 15/05/2005
+HOTEN
+Trần Trà Dương
+GV
+Trương Nam Sơn
+…
+002
+001
+--- PAGE 44 ---
+4.0
+fit@hcmus
+5. CARTESIAN Operations – Example 6
+⬜B1: Cartesian operation BOMON and GIAOVIEN
+⬜B2: select tuples that satisfy TRUONGBM = MAGV
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 44
+BM_GV  (GIÁOVIÊN  BỘMÔN)
+KQ  TRUONGBM=MAGV(BM_GV)
+--- PAGE 45 ---
+4.0
+fit@hcmus
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN
+45
+MÃBM TÊNBM PHÒNG …. TRƯỞNGBM ….
+HTTT Hệ thống thông tin B13 …. 002 ….
+CNTT Công nghệ tri thức B15 …. ….
+MMT Mạng máy tính B16 …. 001 ….
+…. …. …. …. …. ….
+BỘMÔN
+GIÁOVIÊN
+GIÁOVIÊN x BỘMÔN
+MÃGV HỌTÊN …. NGÀYSINH …. MÃBM TÊNBM PHÒNG …. TRƯỞNGBM ….
+001 Nguyễn Hoài An …. 15/02/1973 …. HTTT Hệ thống thông tin B13 …. 002 ….
+001 Nguyễn Hoài An …. 15/02/1973 …. CNTT Công nghệ tri thức B15 …. ….
+001 Nguyễn Hoài An …. 15/02/1973 …. MMT Mạng máy tính B16 …. 001 ….
+…. …. …. …. …. …. …. …. …. …. ….
+MÃGV HỌTÊN …. NGÀYSINH SỐNHÀ ….
+001 Nguyễn Hoài An …. 15/02/1973 25/3 ….
+002 Trần Trà Hương …. 20/06/1960 125 ….
+003 Nguyễn Ngọc Ánh …. 11/05/1975 12/21 ….
+…. …. …. …. …. ….
+TRUONGBM=MAGV(BM_GV)
+--- PAGE 46 ---
+4.0
+fit@hcmus
+5. CARTESIAN Operations – Example 7
+⬜Retrieve the highest salary of the 
+lecturers?
+▪ GIANGVIEN(MSGV, HOTEN, LUONG, …)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 46
+HOTEN LUONG …
+Nguyễn Hoài An 2000 …
+Trần Trà Hương 2500 …
+Nguyễn Ngọc Anh 2200 …
+…
+…
+…
+…
+…
+…
+LUONG …
+2000 …
+2500 …
+2200 …
+…
+…
+…
+…
+…
+…
+--- PAGE 47 ---
+4.0
+fit@hcmus
+5. CARTESIAN Operations – Example 7
+⬜B1: Retrieve the salaries that are not highest
+⬜B2: Full salary set minuses the salary set in R3
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 47
+r1  (LUONG (GIAOVIEN))
+r2  GIAOVIEN.LUONG < R1.LUONG(GIAOVIEN  r1)
+r3  R2.LUONG (r2)
+KQ  LUONG (GIAOVIEN) − r3
+--- PAGE 48 ---
+4.0
+fit@hcmus
+5. CARTESIAN Operations – Example 8
+⬜Retrieve the name of lecturers working the 
+same department with ‘Trần Trà Hương’
+❑ Relation: GIAOVIEN
+❑ Attributes: HOTEN, MABM
+❑ Condition: HOTEN = ‘Trần Trà Hương’
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 48
+What dept. “Trần Trà Hương” belongs to? What lecturers belong to that dept.?
+HOTENMABM
+MMT
+HTTT
+HTTT
+VS
+Nguyễn Hoài An
+Nguyễn Ngọc Anh
+Trương Nam Sơn
+Trần Trà Hương
+… …
+HOTENMABM
+MMT
+HTTT
+HTTT
+VS
+Nguyễn Hoài An
+Nguyễn Ngọc Anh
+Trương Nam Sơn
+Trần Trà Hương
+… …
+--- PAGE 49 ---
+4.0
+fit@hcmus
+5. CARTESIAN Operations – Example 8
+⬜B1: Find the dept. of ‘Trần Trà Hương’
+⬜B2: Retrieve the name of lecturers of that 
+dept.
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 49
+r1  MABM,MAGV (HOTEN=‘Trần Trà Hương’ (GIAOVIEN))
+r3  R1.MABM=R2.MABM (r1  r2)
+KQ  HOTEN (r3)
+r2  HOTEN <>’Trần Trà Hương’ (GIAOVIEN)
+--- PAGE 50 ---
+4.0
+fit@hcmus
+Content
+1. Introduction
+2. Relational Algebra Operations From Set Theory
+3. Select Operation
+4. Projection Operation
+5. CARTESIAN Operations
+6. Join Operation
+a) Natural join (kết tự nhiên)
+b) Theta join (kết có điều kiện tổng quát)
+c) Equi join (kết bằng)
+7. Division Operation
+8. Additional Relational Operations
+9. Update Operations
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 51
+--- PAGE 51 ---
+4.0
+fit@hcmus
+6. Join Operation
+⬜To identify and select related tuples from two 
+relations
+⬜Denoted by: r      s
+❑ R(A1, A2, …, An) and S(B1, B2, …, Bm)
+⬜The result relation is a relation q
+❑ Having n + m attributes: Q(A1, A2, …, An, B1, B2, …, 
+Bm)
+❑ Each tuple of q is a combination of 1 in r and 1 in s that 
+satisfy join condition:
+◼ Join condition: Ai  Bj
+◼ Ai attribute of R, Bj attribute of S 
+◼ Ai and Bj have the same value domain
+◼  is a comparision: , =, , , , 
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 52
+--- PAGE 52 ---
+4.0
+fit@hcmus
+6. Join Operation
+⬜Theta join
+▪ Ký hiệu r      C s
+▪ C join condition
+⬜Equi join: when the condition C is a equal join
+⬜Natural join: when two attribute of the 
+condition C have the same name:
+▪ Denoted by:   r       s   or   r  s
+▪ R+  S+  
+▪ The attributes of the result relation are in r or s, 
+minus the attributes in the join condition
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 53
+--- PAGE 53 ---
+4.0
+fit@hcmus
+6. Join Operation
+⬜Theta join - Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 54
+D E
+3
+s
+6
+1
+2
+A B
+1
+r
+4
+2
+5
+C
+3
+6
+7 8 9
+r      B<D s
+1 2 3 3 1
+1 2 3 6 2
+4 5 6 6 2
+A B C D E
+r      C s   = C(r  s)
+--- PAGE 54 ---
+4.0
+fit@hcmus
+6. Join Operation
+⬜Equi join - Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 55
+D E
+3
+s
+6
+1
+2
+A B
+1
+r
+4
+2
+5
+C
+3
+6
+7 8 9
+r      C=D s
+A B
+1 2
+C
+3
+4 5 6
+D
+3
+E
+1
+6 2
+C D
+3
+S
+6
+1
+2
+A B
+1
+r
+4
+2
+5
+C
+3
+6
+7 8 9
+r      C=s.C s
+A B
+1 2
+C
+3
+4 5 6
+s.C
+3
+D
+1
+6 2
+S.C D
+3
+6
+1
+2
+(S.C,D) s
+--- PAGE 55 ---
+4.0
+fit@hcmus
+6. Join Operation
+⬜Natural join - Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 56
+r     s
+C D
+3
+s
+6
+1
+2
+A B
+1
+r
+4
+2
+5
+C
+3
+6
+7 8 9
+A B
+1 2
+C
+3
+4 5 6
+S.
+C
+3
+D
+1
+6 2
+A B
+1 2
+C
+3
+4 5 6
+D
+1
+2
+--- PAGE 56 ---
+4.0
+fit@hcmus
+6. Join Operation – Example 10
+⬜Retrieve the lecturers who have the salary 
+greater than the lecturer ‘Nguyễn Hoài An’
+▪ Relation: GIAOVIEN
+▪ Attribute: LUONG
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 57
+GIAOVIEN(MAGV, HOTEN, LUONG, PHAI, 
+NGAYSINH,…)
+R1(LG)  LUONG (HOTEN=‘Nguyễn Hoài An’ (GIAOVIEN))
+KQ  GIAOVIEN       LUONG>LG R1
+KQ(MAGV, HOTEN, LUONG, PHAI, NGAYSINH,…, LG))
+--- PAGE 57 ---
+4.0
+fit@hcmus
+6. Join Operation – Example 11
+⬜For each lecturer, list out the information of the 
+department that they are working for
+▪ Relation: GIAOVIEN, BOMON
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 58
+BOMON(MABM, TENBM, PHONG, DIENTHOAI, …)
+GIAOVIEN(MAGV, HOTEN, LUONG, PHAI, …, MABM, …)
+KQ  GIAOVIEN        BOMON
+KQ(MAGV, HOTEN, …, MABM, TENBM, PHONG, …))
+--- PAGE 58 ---
+4.0
+fit@hcmus
+6. Join Operation – Example 12
+⬜For each project, list out the information 
+of the lecturers who manage that project
+▪ Relation: ĐETAI, GIAOVIEN
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 59
+ĐETAI(MAĐT, TENĐT, KINHPHI, …, GVCNĐT)
+GIAOVIEN(MAGV, HOTEN, LUONG, PHAI, …)
+KQ  ĐETAI      GVCNĐT = MAGV GIAOVIEN
+KQ(MAĐT, TENĐT, KINHPHI, …, GVCNĐT, MAGV, HOTEN, …)
+--- PAGE 59 ---
+▪ Retrieve the highest salary of the 
+department ‘HTTT’?
+6. Join Operation – Example 13
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 60
+--- PAGE 60 ---
+4.0
+fit@hcmus
+Quiz
+⬜Given the DB schema below:
+▪ PHÒNG(Mã_Phòng, Diện_tích, Giá_tiền, Loại)
+▪ THUÊ(Mã_Phòng, Mã_KH, Ngày_nhận , Số_ngày)
+▪ KHÁCH_HÀNG(Mã_KH, Họ_tên, Điện_thoại, 
+Giới_tính)
+⬜Find out the name of customers who rent the 
+room ‘R101’:
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 61
+A) Họ_Tên ( Mã_Phòng =’R101’ (KHÁCH_HÀNG * THUÊ)) 
+B) Họ_Tên ( Mã_Phòng =’R101’ (KHÁCH_HÀNG      KHÁCH_HÀNG.Mã_KH <>THUÊ.Mã_KH THUÊ)) 
+C) Họ_Tên (KHÁCH_HÀNG      KHÁCH_HÀNG.Mã_KH =THUÊ.Mã_KH AND Mã_Phòng <>’R101’  THUÊ)) 
+D) Chỉ có A và B đúng. 
+E) Tất cả A, B và C đúng. 
+--- PAGE 61 ---
+4.0
+fit@hcmus
+Complete Set of Relational 
+Operations
+⬜The set of operations including select σ, 
+project π , union ∪, set difference - , and 
+cartesian product X is called a complete set 
+because any other relational algebra 
+expression can be expressed by a combination 
+of these five operations.
+❑ Example
+◼ r  s = r  s − ((r−s)  (s−r))
+◼ r      C s = C(rs)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 62
+--- PAGE 62 ---
+4.0
+fit@hcmus
+Content
+1. Introduction
+2. Relational Algebra Operations From Set Theory
+3. Select Operation
+4. Projection Operation
+5. CARTESIAN Operations
+6. Join Operation
+7. Division Operation
+8. Additional Relational Operations
+9. Update Operations
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 63
+--- PAGE 63 ---
+4.0
+fit@hcmus
+7. Division Operation
+⬜To extract tuples in the relation r that satisfy all tuples 
+in the relation s
+⬜Denoted by r  s
+❑ r(Z) và x(X)
+◼ Z are attrbites of r, X are attributes of s
+◼ X  Z
+⬜The result relation of the division t(Y) 
+❑ With Y=Z-X
+❑ t0 is a tuple of t if all tuples tSs, there exists a tuple tRr that 
+satisfies 2 two below conditions:
+◼ tR(Y) = t0
+◼ tR(X) = tS(X)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 64
+X Y
+T(Y)S(X)R(Z)
+--- PAGE 64 ---
+4.0
+fit@hcmus
+7. Division Operation - Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 65
+A B
+
+
+a
+a
+ a
+ a
+ a
+ a
+ a
+ a
+C D
+
+
+a
+b
+ a
+ a
+ b
+ a
+ b
+ b
+E
+1
+3
+1
+1
+1
+1
+1
+1
+r D E
+a
+s
+b
+1
+1
+r  s
+A B C
+ a 
+ a 
+
+--- PAGE 65 ---
+4.0
+fit@hcmus
+7. Division Operation - Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 66
+DANGKY MASV MANH
+SV01 MH01
+SV02 MH01
+SV03 MH01
+SV01 MH02
+SV02 MH02
+SV03 MH03
+SV01 MH03
+SV04 MH01
+MONHOC MANH
+MH01
+MH02
+MH03
+DANGKY 
+MONHOC
+MASV
+SV01
+--- PAGE 66 ---
+4.0
+fit@hcmus
+7. Division Operation – Example 17
+⬜Retrieve the codes/IDs of lecturers who 
+participate all works of the project “001”
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 67
+--- PAGE 67 ---
+4.0
+fit@hcmus
+7. Division Operation – Example 18
+⬜Retrieve the name of the projects that all 
+lecturers of the dept. “Hệ thống thông tin” 
+are working on.
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 68
+--- PAGE 68 ---
+4.0
+fit@hcmus
+7. Division Operation
+⬜Division operation can be expressed 
+through a complete set of relational 
+algebra operations
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 69
+Q1  Y (r)
+Q2  Q1  s
+Q3  Y(Q2 − r)
+KQ  Q1 − Q3
+--- PAGE 69 ---
+4.0
+fit@hcmus
+Recap of Relational Algebra 
+Operations
+© Bộ môn HTTT - Khoa CNTT - Trường 
+ĐH KHTN 70
+
+--- PAGE 70 ---
+4.0
+fit@hcmus
+Content
+1. Introduction
+2. Relational Algebra Operations From Set Theory
+3. Select Operation
+4. Projection Operation
+5. CARTESIAN Operations
+6. Join Operation
+7. Division Operation
+8. Additional Relational Operations
+▪ Aggregate function (Hàm kết hợp)
+▪ Grouping (gom nhóm)
+▪ Outer join (Kết ngoài)
+9. Update Operations
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 71
+--- PAGE 71 ---
+4.0
+fit@hcmus
+8. Aggregate functions 
+⬜A type of request that cannot be expressed in the basic 
+relational algebra is to specify mathematical aggregate 
+functions on collections of values from the database. 
+⬜Examples of such functions include retrieving the average or 
+total salary of all employees or the total number of employee 
+tuples. These functions are used in simple statistical queries 
+that summarize information from the database tuples.
+⬜Common functions applied to collections of numeric values 
+include SUM, AVERAGE, MAXIMUM, and MINIMUM. The 
+COUNT function is used for counting tuples or values.
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 72
+--- PAGE 72 ---
+4.0
+fit@hcmus
+8. Aggregate functions 
+⬜Input: set of values or relation
+⬜Output: single value
+▪ AVG
+▪ MIN
+▪ MAX
+▪ SUM
+▪ COUNT
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 73
+A B
+1
+r
+3
+2
+4
+1
+1
+2
+2
+SUM(B) = 10
+AVG(A) = 1.5
+MIN(A) = 1
+MAX(B) = 4
+COUNT(A) = 4
+--- PAGE 73 ---
+4.0
+fit@hcmus
+8. Grouping
+⬜Grouping the relation into groups based on a 
+grouping condition
+⬜Notation
+▪ E relation/relational algebra expression
+▪ G1, G2, …, Gn attributes defining groups/ grouping 
+condition
+▪ F1, F2, …, Fn aggregate functions
+▪ A1, A2, …, An atrrbitues
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 74
+G1, G2, …, GnF1(A1), F2(A2), …, Fn(An)(E)
+--- PAGE 74 ---
+4.0
+fit@hcmus
+8. Grouping - Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 75
+SUM(C)(r)
+SUM_C
+27
+A B
+
+r
+
+2
+4
+
+
+2
+2
+C
+7
+7
+3
+10 ASUM(C)(r)
+SUM_C
+14
+3
+10
+A
+
+
+
+--- PAGE 75 ---
+4.0
+fit@hcmus
+8. Grouping – Example 19
+⬜Retrieve the number of lecturers and their 
+summary of salary
+⬜GIAOVIEN(MAGV, HOTEN, LUONG, MABM)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 76
+--- PAGE 76 ---
+4.0
+fit@hcmus
+8. Grouping – Example 19
+⬜Retrieve the number of lecturers and 
+average of salary of each department
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 77
+--- PAGE 77 ---
+4.0
+fit@hcmus
+8. Grouping – Example 20
+⬜What is/are the name(s) of the faculty with the 
+most teachers?
+▪ Calculate the number of lecturers according to 
+faculties
+r1  MaKhoa, TênKhoa  COUNT(HoTen) (GIAOVIEN * BOMON * KHOA)
+▪ Get the highest number of lecturers
+r2(MAX_COUNT)   MAX(COUNT_HoTen) (r1)
+▪ Faculty with the most lecturers
+KQ   MaKhoa, TenKhoa (r1          COUNT_HoTen = MAX_COUNT r2) 
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 78
+--- PAGE 78 ---
+4.0
+fit@hcmus
+8. Grouping – Example 21
+⬜What are the subject and the project 
+number of that subject?
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 79
+--- PAGE 79 ---
+4.0
+fit@hcmus
+Quiz
+⬜DB schema:
+▪ PHÒNG(Mã_Phòng, Diện_tích, Giá_tiền, Loại)
+▪ THUÊ(Mã_Phòng, Mã_KH, Ngày_nhận , Số_ngày)
+▪ KHÁCH_HÀNG(Mã_KH, Họ_tên, Điện_thoại, 
+Giới_tính)
+⬜Retrieve the types of rooms that have never 
+been rented :
+A. Loại ( COUNT_Mã_Phòng =0 (Loại  COUNT(Mã_Phòng) (THUÊ * PHÒNG) ) )
+B.  Mã_Phòng, Loại (KHÁCH_HÀNG * THUÊ * PHÒNG)   Mã_Phòng (PHÒNG)
+C.  Mã_Phòng, Loại (PHÒNG)   Mã_Phòng (PHÒNG)
+D. Loại (KHÁCH_HÀNG * THUÊ * PHÒNG) - Loại (PHÒNG)
+E. All wrong
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 80
+--- PAGE 80 ---
+4.0
+fit@hcmus
+8. Outer Join
+⬜Extend the JOIN operation to avoid 
+information loss
+▪ Perform the Join operation
+▪ Get more tuples that do not satisfy the join 
+condition
+⬜3 types:
+▪ Left outer join
+▪ Right outer join 
+▪ Full outer join 
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 81
+--- PAGE 81 ---
+4.0
+fit@hcmus
+8. Outer Join – Example 22
+⬜Retrieve the name of the lecturer and the 
+name of the department he/she is 
+heading, if any
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 82
+R1  GIAOVIEN        MAGV=TRUONGBM BOMON
+KQ  HOTEN, TENBM (R1)
+HOTEN TENBM
+Nguyễn Hoài An Mạng máy tính
+Trần Trà Hương Hệ thống thông tin
+Nguyễn Ngọc Ánh null
+… …
+--- PAGE 82 ---
+4.0
+fit@hcmus
+8. Outer Join – Example 23
+⬜Retrieve the dept. name and dept. head’s 
+name if any
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 83
+--- PAGE 83 ---
+4.0
+fit@hcmus
+Content
+1. Introduction
+2. Relational Algebra Operations From Set Theory
+3. Select Operation
+4. Projection Operation
+5. CARTESIAN Operations
+6. Join Operation
+7. Division Operation
+8. Additional Relational Operations
+9. Update Operations
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 84
+--- PAGE 84 ---
+4.0
+fit@hcmus
+9. Update Operations
+⬜Data can be updated by:
+▪ Insertion
+▪ Deletion
+▪ Update/Modify
+⬜Update Operations is expressed through 
+the assignment:
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 85
+rnew  relational operations rold
+--- PAGE 85 ---
+4.0
+fit@hcmus
+9. Insertion
+⬜Denoted by 
+▪ r relation
+▪ E relational algebra expression
+⬜Example
+▪ Assign lecturer code “001” to participate in work 4 of 
+the project “001” with an allowance level 2.
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 86
+rnew  rold  E
+THAMGIAĐT  THAMGIAĐT  (‘001’, ‘001’, 4, 2)
+--- PAGE 86 ---
+4.0
+fit@hcmus
+9. Deletion
+⬜Denoted by 
+▪ r relation
+▪ E relational algebra expression
+⬜Example
+▪ Remove works of the lecturer “001”
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 87
+rnew  rold − E
+THAMGIAĐT  THAMGIAĐT  − MAGV=‘001’(THAMGIAĐT)
+--- PAGE 87 ---
+4.0
+fit@hcmus
+9. Update/ Modify
+⬜Denoted by 
+▪ r: relation
+▪ Fi: expression that calculates the new value for the updating 
+attribute
+⬜Example
+▪ Increase the allowance for all works up to 1.5 times
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 88
+rnew  F1, F2, …, Fn (rold)
+THAMGIAĐT MAGV, MAĐT, STT, PHUCAP*1.5(THAMGIAĐT)

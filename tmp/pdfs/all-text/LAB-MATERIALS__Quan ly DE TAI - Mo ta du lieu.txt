@@ -1,0 +1,33 @@
+
+--- PAGE 1 ---
+1"Bài"tập"CƠ"SỞ"DỮ"LIỆU""
+©"Bộ"môn"HTTT":"Khoa"CNTT":"Trường"ĐH"Khoa"học"Tự"nhiên,"2013"""""
+QUẢN%LÝ%GIÁO%VIÊN%THAM%GIA%ĐỀ%TÀI%A. LƯỢC"ĐỒ"CƠ"SỞ"DỮ"LIỆU"Lược%đồ%CSDL:"
+"%% %
+
+--- PAGE 2 ---
+2"Bài"tập"CƠ"SỞ"DỮ"LIỆU""
+©"Bộ"môn"HTTT":"Khoa"CNTT":"Trường"ĐH"Khoa"học"Tự"nhiên,"2013"""""
+Một%thể%hiện%dữ%liệu%minh%họa:"CONGVIEC"
+"THAMGIADT"
+"""
+NGUOITHAN"
+""
+"
+
+--- PAGE 3 ---
+3"Bài"tập"CƠ"SỞ"DỮ"LIỆU""
+©"Bộ"môn"HTTT":"Khoa"CNTT":"Trường"ĐH"Khoa"học"Tự"nhiên,"2013"""""
+KHOA"
+"GIAOVIEN"
+"CHUDE"
+"
+
+--- PAGE 4 ---
+4"Bài"tập"CƠ"SỞ"DỮ"LIỆU""
+©"Bộ"môn"HTTT":"Khoa"CNTT":"Trường"ĐH"Khoa"học"Tự"nhiên,"2013"""""
+DETAI""
+"BOMON"
+"
+GV_DT1
+"

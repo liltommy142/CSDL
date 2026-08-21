@@ -1,0 +1,2324 @@
+
+--- PAGE 1 ---
+fit@hcmus
+4.0
+Chapter 5 
+SQL (Structured Query Language)
+--- PAGE 2 ---
+4.0
+fit@hcmus
+Content
+▪ Introduction
+▪ Data definition
+▪ Data manipulation
+▪ Query
+▪ Data update
+▪ View
+▪ Index
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 2
+--- PAGE 3 ---
+4.0
+fit@hcmus
+Introduction
+▪ Relational algebra language (ĐSQH )
+- How to execute the query operations
+- Difficult for users
+▪ SQL (Structured Query Language)
+- High level declarative language interface
+- The user only specifies what the result is to be
+- Developed by IBM (1970s)
+- Also pronounced SEQUEL
+- SQL became a standard of American National 
+Standards Institute (ANSI)
+◼ SQL-86
+◼ SQL-92
+◼ SQL-99
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 3
+--- PAGE 4 ---
+4.0
+fit@hcmus
+Introduction
+▪ SQL includes
+- Data definition language (DDL)
+- Data manipulation language (DML)
+- View definition
+- Integrity constraint 
+- Authorization and security
+- Transaction control
+▪ SQL terms
+- Table ~ relation
+- Column ~ attribute
+- Row ~ tuple
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 4
+SQL-92 standard
+SQL Server 
+--- PAGE 5 ---
+4.0
+fit@hcmus
+Content
+▪ Introduction
+▪ Data definition
+- Data type
+- Data definition commands
+▪ Data manipulation
+▪ View
+▪ Index
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 5
+--- PAGE 6 ---
+4.0
+fit@hcmus
+Data definition
+▪ Describes the structure of information in the DB
+▪ Schema for the relation
+▪ Domain of each attribute
+▪ Integrity constraint
+▪ Index on each relation 
+▪ Consists of
+- CREATE TABLE 
+- DROP TABLE
+- ALTER TABLE
+- CREATE DOMAIN
+- CREATE DATABASE
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 6
+--- PAGE 7 ---
+4.0
+fit@hcmus
+Data definition
+▪ Numeric
+- INTEGER
+- SMALLINT
+- NUMERIC, NUMERIC(p), NUMERIC(p,s)
+- DECIMAL, DECIMAL(p), DECIMAL(p,s)
+- REAL
+- DOUBLE PRECISION
+- FLOAT, FLOAT(p)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 7
+--- PAGE 8 ---
+4.0
+fit@hcmus
+Data definition
+▪ Character string
+- CHARACTER (CHAR)
+- CHARACTER(n) (CHAR (n))
+- CHARACTER VARYING(n) (VARCHAR(n))
+- NATIONAL CHARACTER (n) (NCHAR(n))
+▪ Bit string
+- BIT, BIT(x)
+- BIT VARYING(x)
+▪ Datetime
+- DATE (M/D/YY), DATETIME, TIMESTAMP (M/D/YY hh:mm)
+- TIME (hh:mm)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 8
+--- PAGE 9 ---
+4.0
+fit@hcmus
+Create table command
+▪ Define a new table by giving
+- A name
+- Attributes
+◼ Name
+◼ Date type
+◼ Integrity constraints on attribute
+▪ Syntax
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 9
+CREATE TABLE <Table_name> (
+<Column_name> <Data_type> [<Contraint>],
+<Column_name> <Data_type> [<Contraint>], 
+…
+[<Constraint>]
+)
+--- PAGE 10 ---
+4.0
+fit@hcmus
+Example
+⬜GIAOVIEN table includes:
+▪ MaGV : primary key
+▪ HoTen: not null
+▪ Luong: default value = 1000 
+▪ Phai: ”Nam” or ”Nữ” 
+▪ NgaySinh: date of birth
+▪ SoNha, Duong, Quan, ThanhPho
+▪ GVQLCM: foreign key
+▪ MaBM: foreign key
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 10
+--- PAGE 11 ---
+4.0
+fit@hcmus
+Example
+CREATE TABLEGIAOVIEN (
+MaGV CHAR(9),
+HoTen NVARCHAR(50),
+Luong INT,
+Phai CHAR(3),
+NgaySinh DATETIME,
+SoNha NVARCHAR(10),
+Duong NVARCHAR(50),
+Quan NVARCHAR(50),
+ThanhPho NVARCHAR(50),
+GVQLCM CHAR(9),
+MaBM CHAR(9)
+)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 11
+--- PAGE 12 ---
+4.0
+fit@hcmus
+Create table command
+▪ <Constraint> 
+- NOT NULL
+- NULL
+- UNIQUE
+- DEFAULT
+- PRIMARY KEY
+- FOREIGN KEY / REFERENCES
+- CHECK
+▪ Give a name to constraints
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 12
+CONSTRAINT <Constraint_name> <Constraint>
+--- PAGE 13 ---
+4.0
+fit@hcmus
+Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 13
+CREATE TABLE GIAOVIEN (
+MAGV CHAR(9) PRIMARY KEY,
+HOTEN NVARCHAR(50) NOT NULL,
+LUONG INT DEFAULT (1000),
+PHAI CHAR(3) CHECK (PHAI IN(‘Nam’, ‘Nu’)),
+NGAYSINH DATETIME,
+SONHA NVARCHAR(10),
+DUONG NVARCHAR(50),
+QUAN NVARCHAR(50),
+THANHPHO NVARCHAR(50),
+GVQLCM CHAR(9),
+MABM CHAR(9)
+)
+--- PAGE 14 ---
+4.0
+fit@hcmus
+Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 14
+CREATE TABLE DETAI (
+MADT VARCHAR (10) PRIMARY KEY,
+TENDT NVARCHAR (50) UNIQUE,
+KINHPHI INT,
+CAPQL NVARCHAR (50),
+NGAYBD  DATETIME,
+NGAYKT  DATETIME,
+MACD VARCHAR (10),
+GVCNDT  CHAR (9)
+)
+CREATE TABLE CONGVIEC (
+MADT VARCHAR(10),
+STT INT,
+TENCV NVARCHAR(50),
+NGAYBD DATETIME,
+NGAYKT DATETIME,
+PRIMARY KEY(MADT, STT)
+)
+--- PAGE 15 ---
+4.0
+fit@hcmus
+Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 15
+CREATE TABLE GIAOVIEN (
+MAGV CHAR(9) CONSTRAINT PK_GV PRIMARY KEY,
+HOTEN NVARCHAR(50) CONSTRAINT NN_HOTEN NOT NULL,
+LUONG INT CONSTRAINT DE_LUONG DEFAULT (10000),
+PHAI CHAR(3) CONSTRAINT CK_PHAI CHECK (PHAI IN('Nam', 'Nu'))
+CONSTRAINT NN_PHAI NOT NULL,
+NGAYSINH DATETIME,
+SONHA NVARCHAR(10),
+DUONG NVARCHAR(50),
+QUAN NVARCHAR(50),
+THANHPHO NVARCHAR(50),
+GVQL CHAR(9),
+MABM CHAR(9)
+)
+--- PAGE 16 ---
+4.0
+fit@hcmus
+Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 16
+CREATE TABLE CONGVIEC(
+MADT VARCHAR(10),
+STT INT,
+TENCV NVARCHAR(50),
+NGAYBD DATETIME,
+NGAYKT DATETIME,
+CONSTRAINT PK_CV PRIMARY KEY(MADT, STT),
+CONSTRAINT FK_CONGVIEC_DETAI 
+FOREIGN KEY MADT REFERENCES DETAI(MADT)
+)
+--- PAGE 17 ---
+4.0
+fit@hcmus
+Create table command
+⬜Is used for modification
+▪ The structure of tables
+▪ Integrity constraints
+⬜Add columns
+⬜Drop columns
+⬜Alter columns
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 17
+ALTER TABLE <Table_name> ADD 
+<Column_name> <Data_type> [<Constraint>]
+ALTER TABLE <Table_name> DROP COLUMN <Column_name> 
+ALTER TABLE <Table_name> ALTER COLUMN
+<Column_name> <Data_type>
+--- PAGE 18 ---
+4.0
+fit@hcmus
+Alter table command
+⬜Add constraints
+⬜Drop constraints
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 18
+ALTER TABLE <Table_name> ADD
+CONSTRAINT <Constraint_name> <constraint>,
+CONSTRAINT <Constraint_name> <constraint>,
+…
+ALTER TABLE <Table_name> DROP <Contraint_name> 
+--- PAGE 19 ---
+4.0
+fit@hcmus
+Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 19
+ALTER TABLE GIAOVIEN ADD TUOI INT
+CONSTRAINT CK_TUOI CHECK (TUOI >= 23 AND TUOI <=60) NOT NULL
+ALTER TABLE GIAOVIEN DROP COLUMN HOTEN
+ALTER TABLE GIAOVIEN ALTER COLUMN HOTEN 
+NVARCHAR(100)
+--- PAGE 20 ---
+4.0
+fit@hcmus
+Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 20
+CREATE TABLE BOMON(
+MABM INT NOT NULL,
+TENBM NVARCHAR(50),
+PHONG CHAR(10),
+DIENTHOAI CHAR(15),
+TRUONGBM CHAR(9),
+MAKHOA CHAR(4),
+NGAYNHANCHUC DATETIME 
+)
+ALTER TABLE BOMON ADD
+CONSTRAINT PK_BOMON PRIMARY KEY (MABM),
+CONSTRAINT FK_TRBOMON FOREIGN KEY (TRUONGBM)
+REFERENCES GIAOVIEN(MAGV),
+CONSTRAINT UNI_TENBM UNIQUE(TENBM),
+CONSTRAINT DF_NGAYNHANCHUC DEFAULT(GETDATE()) FOR NGAYNHANCHUC
+Must ensure 
+that GIAOVIEN
+exists
+PRIMARY KEY constraint must 
+be defined as NOT NULL
+--- PAGE 21 ---
+4.0
+fit@hcmus
+Drop table command
+⬜Is used for deleting the structure of tables
+▪ All the data in a table are also deleted
+⬜Syntax
+⬜Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 21
+DROP TABLE <Table_name>
+DROP TABLE GIAOVIEN 
+DROP TABLE BOMON 
+DROP TABLE THAMGIADT
+--- PAGE 22 ---
+4.0
+fit@hcmus
+Drop table command
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 22
+MãGV HọTên Lương Phái NgàySinh SốNhà Đường Quận ThànhPhố GVQL MãBM
+MãKhoa TrưởngBM NgàyNhậnChức ĐiệnThoại MãBM TênBM Phòng
+TrưởngKhoa NgàyNhậnChức TênKhoa NămTL Phòng ĐiệnThoại MãKhoa
+GIÁOVIÊN
+BỘMÔN
+KHOA
+
+--- PAGE 23 ---
+▪ For creating a new data type
+▪ Syntax
+▪ Ví dụ
+Create type command
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN
+23
+CREATE TYPE <New_data_type> AS <Data_type>
+CREATE TYPE MyString30 AS VARCHAR(30)
+--- PAGE 24 ---
+4.0
+fit@hcmus
+Content
+⬜Introduction
+⬜Data definition
+⬜Data manipulation
+▪ Basic queries
+▪ Set, set/multiset comparison and nested 
+queries
+▪ Aggregate functions and grouping
+⬜View
+⬜Index
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 24
+--- PAGE 25 ---
+4.0
+fit@hcmus
+Basic Query
+Is used for retrieving some tuples that satisfy a certain condition
+Is formed of the three clauses
+▪ < list_of_columns >
+Column names showed in the result of the query
+▪ < list_of_tables >
+Table names required to process the query
+▪ < condition >
+Boolean expression that identifies the rows to be retrieved
+Expression’s connection : AND, OR, and NOT
+Operations: < , > , <=, >=, <>, =, LIKE and BETWEEN
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 25
+SELECT <list_of_columns>
+FROM <list_of_tables>
+WHERE <condition>
+--- PAGE 26 ---
+4.0
+fit@hcmus
+Basic query
+⬜SQL and Relational Algebra
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 26
+
+
+
+SELECT L
+FROM R
+WHERE C
+SELECT <list_of_columns>
+FROM <list_of_tables>
+WHERE <condition>
+L (C (R))
+--- PAGE 27 ---
+4.0
+fit@hcmus
+SELECT-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 27
+SELECT *
+FROM KHOA
+WHERE PHONG='I53'
+AND NAMTL = '1995'
+The entire tuple is produced
+PHG='I53'NamTL='1995' (KHOA)
+MaKhoa TenKhoa Phong NamTL DienThoai TruongKhoa NgayNhanChuc
+CNTT Công nghệ thông tin I53 1995 08313964145 GV130 01/01/2007
+SH Sinh học B32 1975 08313123545 GV250 01/01/1990
+List all columns
+--- PAGE 28 ---
+4.0
+fit@hcmus
+SELECT-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 28
+SELECT MAKHOA, TENKHOA, PHONG
+FROM KHOA
+WHERE PHONG='I53'
+AND NAMTL = '1995'
+MAKHOA, TENKHOA, PHONG(PHG='I53'NamTL='1995' (KHOA))
+MaKhoa TenKhoa Phong
+CNTT Công nghệ thông tin I53
+List some specific columns
+--- PAGE 29 ---
+4.0
+fit@hcmus
+SELECT-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 29
+SELECT MAKHOA AS 'Mã khoa', TENKHOA AS 'Tên khoa', PHONG AS 'Mã phòng'
+FROM KHOA
+WHERE PHONG='I53' AND NAMTL = '1995'
+Mã khoa Tên khoa Mã phòng
+CNTT Công nghệ thông tin I53
+Mã khoa, Tên khoa, Mã phòng(MANV,HONV,TENLOT,TENNV(PHG='I53'NamTL='1995' (KHOA)))
+Alias name
+--- PAGE 30 ---
+4.0
+fit@hcmus
+SELECT-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 30
+SELECT MAGV, HOTEN, SONHA + ',' + DUONG + ',' + ',' + QUAN + ',' +
+THANHPHO AS 'DIA CHI'
+FROM GIAOVIEN
+WHERE PHAI='Nam'
+MAGV,HOTEN,DIA CHI(MAGV,HOTEN,SONHA+DUONG+QUAN+THANHPHO(PHAI=‘Nam’(GIAOVIEN)))
+MAGV HOTEN DIA CHI
+GV001 Nguyễn Văn A 123 Phan Đăng Lưu, Q.Phú Nhuận, TP.Hồ Chí
+Minh
+Extension
+--- PAGE 31 ---
+4.0
+4.0
+fit@hcmus SELECT-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 31
+SELECT MAGV, LUONG*1.1 AS 'LUONG10%'
+FROM GIAOVIEN
+WHERE PHAI='Nam'
+MAGV,LUONG10%(MAGV,LUONG*1.1(PHAI=‘Nam’(GIAOVIEN)))
+MAGV LUONG10%
+GV001 550000
+Extension
+--- PAGE 32 ---
+4.0
+4.0
+fit@hcmus SELECT-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 32
+SELECT LUONG
+FROM GIAOVIEN
+WHERE PHAI=‘Nam’
+- Cost
+- Users want to see all tuples
+LUONG
+30000
+25000
+25000
+38000
+LUONG
+30000
+25000
+38000
+SELECT DISTINCT LUONG
+FROM GIAOVIEN
+WHERE PHAI=‘Nam’
+Duplicate tuples are eliminated
+
+--- PAGE 33 ---
+4.0
+fit@hcmus
+Example
+⬜Find the MAGV and TENGV of teachers who 
+work for the department ‘Hệ thống thông tin’
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 33
+SELECT
+FROM
+WHERE
+R1  GIAOVIEN      GIAOVIEN.MABM=BOMON.MABM BOMON
+KQ  MAGV, HOTEN (TENBM='Hệ thống thông tin' (R1))
+MAGV, HOTEN
+GIAOVIEN, BOMON
+TENBM= N'Hệ thống thông tin'
+GIAOVIEN.MABM=BOMON.MABMAND
+--- PAGE 34 ---
+4.0
+fit@hcmus
+WHERE-clause
+⬜Use logical operators (AND, OR) to combine 
+two or more Boolean expressions 
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 34
+SELECT MAGV, HOTEN
+FROM GIAOVIEN, BOMON
+WHERE TENBM = N'Hệ thống thông tin'
+AND GIAOVIEN.MABM = BOMON.MABM
+Boolean 
+expressions 
+TRUE
+TRUE
+AND
+--- PAGE 35 ---
+4.0
+4.0
+fit@hcmus WHERE-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 35
+SELECT MAGV, HOTEN
+FROM GIAOVIEN, BOMON
+WHERE (TENBM = N'Hệ thống thông tin' OR TENBM = N'Mạng máy tính')
+AND GIAOVIEN.MABM = BOMON.MABM
+Priority
+Use parentheses to explicitly specify the intended precedence of the 
+operator
+The default priority of logical operators: left to right. 
+--- PAGE 36 ---
+4.0
+4.0
+fit@hcmus WHERE-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 36
+SELECT MAGV, HOTEN
+FROM GIAOVIEN
+WHERE LUONG >= 20000 AND LUONG <= 30000
+SELECT MAGV, HOTEN
+FROM GIAOVIEN
+WHERE LUONG BETWEEN 20000 AND 30000
+BETWEEN
+--- PAGE 37 ---
+4.0
+4.0
+fit@hcmus WHERE-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 37
+NOT BETWEEN
+SELECT MAGV, HOTEN 
+FROM GIAOVIEN
+WHERE LUONG NOT BETWEEN 20000 AND
+30000
+SELECT MAGV, HOTEN
+FROM GIAOVIEN
+WHERE LUONG < 20000 OR LUONG > 30000
+
+--- PAGE 38 ---
+4.0
+4.0
+fit@hcmus WHERE-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 38
+SELECT MAGV, HOTEN
+FROM GIAOVIEN
+WHERE HOTEN LIKE ‘Nguyen _ _ _ _’
+SELECT MAGV, HOTEN
+FROM GIAOVIEN
+WHERE HOTEN LIKE ‘Nguyen %’
+Arbitrary strings
+Arbitrary characters
+LIKE
+HOTEN LIKE ‘nguyen _ _ _ _’
+
+--- PAGE 39 ---
+4.0
+4.0
+fit@hcmus WHERE-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 39
+SELECT MAGV, HOTEN
+FROM GIAOVIEN
+WHERE HOTEN LIKE ‘Nguyen’
+SELECT MAGV, HOTEN
+FROM GIAOVIEN
+WHERE HOTEN NOT LIKE ‘Nguyen’
+NOT LIKE
+negative
+--- PAGE 40 ---
+4.0
+4.0
+fit@hcmus WHERE-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 40
+charlist MAGV HOTEN
+GV001 Nguyễn Văn A
+GV002 Hoàng Thị C
+SELECT *
+FROM GIAOVIEN GV
+WHERE GV.HOTEN LIKE N'[nh]%'
+SELECT *
+FROM GIAOVIEN GV
+WHERE GV.HOTEN LIKE N'[n]%'
+MAGV HOTEN
+GV001 Nguyễn Văn A
+MAGV HOTEN
+GV001 Nguyễn Văn A
+GV002 Hoàng Thị C
+--- PAGE 41 ---
+4.0
+4.0
+fit@hcmus WHERE-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 41
+charlist MAGV HOTEN
+GV001 Nguyễn Văn A
+GV002 Hoàng Thị C
+SELECT *
+FROM GIAOVIEN GV
+WHERE GV.HOTEN LIKE N'[^nh]%'
+SELECT *
+FROM GIAOVIEN GV
+WHERE GV.HOTEN LIKE N'[^h]%'
+MAGV HOTEN
+GV001 Nguyễn Văn A
+MAGV HOTEN
+--- PAGE 42 ---
+4.0
+4.0
+fit@hcmus WHERE-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 42
+Datetime
+SELECT MAGV, HOTEN
+FROM GIAOVIEN
+WHERE NGAYSINH BETWEEN ‘1955-12-08’ AND ‘1966-07-19’
+YYYY-MM-DD
+MM/DD/YYYY
+‘1955-12-08’
+’12/08/1955’
+‘December 8, 1955’
+HH:MI:SS’17:30:00’
+’05:30 PM’
+‘1955-12-08 17:30:00’
+--- PAGE 43 ---
+4.0
+fit@hcmus
+WHERE-clause
+▪ SQL allows attributes to have value NULL
+◼ Value unknown
+◼ Value inapplicable
+◼ Value withheld
+▪ Operations involving a NULL and any other value 
+results in NULL
+◼ x has a value NULL
+◼ x + 3 is also NULL
+▪ Comparison between a NULL value and any other 
+value results in an UNKNOWN
+◼ The value of x = 3 is UNKNOWN
+◼ The comparison x = 3 is not correct SQL
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 43
+NULL
+--- PAGE 44 ---
+4.0
+4.0
+fit@hcmus WHERE-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 44
+NULL
+SELECT MAGV, HOTEN
+FROM GIAOVIEN
+WHERE GVQL IS NULL
+SELECT MAGV, HOTEN
+FROM GIAOVIEN
+WHERE GVQL IS NOT NULL
+--- PAGE 45 ---
+4.0
+4.0
+fit@hcmus FROM-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 45
+MABM TENBM
+HTTT Hệ thống thông tin 
+MTT Mạng máy tính 
+001
+001
+MAGV
+CNPM Công nghệ PM 
+002
+002
+001
+002
+… … …
+MAB
+M HTTT
+HTTT
+MMT
+MMT
+HTTT
+MMT
+HTTT Hệ thống thông tin 
+MTT Mạng máy tính 
+CNPM Công nghệ PM 
+…
+SELECT *
+FROM GIAOVIEN, BOMON
+From clause ~ x in Relational algebra  
+SELECT *
+FROM GIAOVIEN, BOMON
+WHERE TRUE
+GIAOVIEN x BOMON 
+Sử dụng thêm điều 
+kiện ở WHERE để biểu 
+diễn phép kết 
+SELECT *
+FROM GIAOVIEN, BOMON
+WHERE C
+GIAOVIEN        BOMON 
+C
+--- PAGE 46 ---
+4.0
+4.0
+fit@hcmus FROM-clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 46
+SELECT MAGV, MABM, TENBM
+FROM GIAOVIEN, BOMON
+SELECT G.MAGV, G.MABM, B.TENBM 
+FROM GIAOVIEN G, BOMON AS B
+WHERE G.MABM = B.MABM
+Alias name
+Ambigous ???
+MABM TENBM
+HTTT Hệ thống thông tin 
+MTT Mạng máy tính 
+001
+001
+MAGV
+CNPM Công nghệ PM 
+002
+002
+001
+002
+… … …
+MAB
+M HTTT
+HTTT
+MMT
+MMT
+HTTT
+MMT
+HTTT Hệ thống thông tin 
+MTT Mạng máy tính 
+CNPM Công nghệ PM 
+…
+MABM TENBM
+HTTT Hệ thống thông tin 001
+MAGV
+002
+… … …
+MTT Mạng máy tính 
+WHERE MABM = MABM
+use spaces or “AS” when you are 
+aliasing
+Điều kiện kết để tìm ra bộ môn của
+giáo viên
+--- PAGE 47 ---
+4.0
+fit@hcmus
+Example
+⬜Retrieve the dept. and head’s name 
+which belong to the faculty IT
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 47
+SELECT BM.TENBM, GV.HOTEN AS TEN_TRUONGBM
+FROM BOMON BM, GIAOVIEN GV
+WHERE BM.TRUONGBM = GV.MAGV AND
+BM.MAKHOA= ‘CNTT’
+Điều kiện kết để tìm ra giáo viên làm trưởng bộ môn
+--- PAGE 48 ---
+4.0
+fit@hcmus
+Example
+ For the projects managed by ‘Thanh Pho”, list out the
+project ID, topic, project owner, his birthday and
+address.
+ Với những đề tài thuộc cấp quản lý ‘Thành phố’, cho
+biết mã đề tài, đề tài thuộc về chủ đề nào, họ tên người
+chủ nghiệm đề tài cùng với ngày sinh và địa chỉ của
+người ấy
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 48
+SELECT D.MADT, C.TENCD, G.MAGV, G.HOTEN, G.DIACHI
+FROM DETAI D, CHUDE C, GIAOVIEN G
+WHERE D.CapQL = ‘Thanh Pho’ AND D.MACD = C.MACD AND
+D.GVCNDT = G.MAGV
+--- PAGE 49 ---
+4.0
+fit@hcmus
+Example
+⬜List out the full name of the lecturers working in the 
+dept. “HTTT” and participating in the project “Mobile 
+Database” with allowance >10 million NVD
+⬜Tìm họ tên của giáo viên viên thuộc bộ môn “HTTT” có
+tham gia vào đề tài “ Mobile Database” với số tiền phụ
+cấp cho mỗi công việc trên 10 triệu.
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 49
+SELECT GV.HOTEN
+FROM GIAOVIEN GV, THAMGIADT TG, DETAI DT
+WHERE GV.MAGV = TG.MAGV AND
+TG.MADT = DT.MADT AND
+GV.MABM=‘HTTT’ AND
+DT.TENDT=‘Mobile Database’ AND TG.PHUCAP>10
+--- PAGE 50 ---
+4.0
+fit@hcmus
+Example
+⬜Retrieve the name of lecturer and his line 
+manager
+⬜Tìm họ tên của từng giáo viên và người
+phụ trách chuyên môn trực tiếp của nhân
+viên đó.
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 50
+--- PAGE 51 ---
+4.0
+fit@hcmus
+Example
+⬜Search the name of lecturers who are 
+managed by “Trần Trà Hương”
+⬜Tìm họ tên của những giáo viên được
+“Trần Trà Hương” phụ trách quản lý
+chuyên môn.
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 51
+--- PAGE 52 ---
+4.0
+fit@hcmus
+ORDER BY-clause
+⬜Is used for presenting a query in sorted 
+order
+⬜Syntax
+▪ ASC: ascending order(default)
+▪ DESC: descending order
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 52
+SELECT <<List_of_columns>
+FROM <List_of_tables>
+WHERE <Conditions>
+ORDER BY <List_of columns>
+--- PAGE 53 ---
+4.0
+fit@hcmus
+ORDER BY-clause
+⬜Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 53
+SELECT *
+FROM THAMGIADT 
+ORDER BY MAGV DESC, MADT ASC, STT DESC
+MAGV MADT STT
+GV01 DT01 1
+GV01 DT01 2
+GV01 DT02 1
+GV02 DT01 2
+GV02 DT01 3
+GV02 DT03 1
+GV02 DT03 4
+MAGV MADT STT
+GV02 DT01 3
+GV02 DT01 2
+GV02 DT03 4
+GV02 DT03 1
+GV01 DT01 2
+GV01 DT01 1
+GV01 DT02 1
+
+--- PAGE 54 ---
+4.0
+fit@hcmus
+Content
+⬜Introduction
+⬜Data definition
+⬜Data manipulation
+▪ Basic queries
+▪ Set, set/multiset comparison and nested queries
+▪ Aggregate functions and grouping
+⬜View
+⬜Index
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 54
+--- PAGE 55 ---
+4.0
+fit@hcmus
+Set Operations in SQL
+⬜SQL has implemented set operators
+▪ UNION
+▪ INTERSECT
+▪ EXCEPT
+⬜The result is a set
+▪ Eliminate identical tuples
+▪ To keep identical tuples
+◼ UNION ALL
+◼ INTERSECT ALL
+◼ EXCEPT ALL
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 55
+--- PAGE 56 ---
+4.0
+fit@hcmus
+Set operations in SQL
+ Syntax
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 56
+SELECT <ColList> FROM <TabList> WHERE <Condition>
+UNION [ALL]
+SELECT <ColList> FROM <TabList> WHERE < Condition >
+SELECT < ColList > FROM < TabList > WHERE < Condition >
+INTERSECT [ALL]
+SELECT < ColList > FROM < TabList > WHERE < Condition >
+SELECT < ColList > FROM < TabList > WHERE < Condition >
+EXCEPT [ALL]
+SELECT < ColList > FROM < TabList > WHERE < Condition >
+--- PAGE 57 ---
+4.0
+fit@hcmus
+Example
+⬜Cho biết mã của các giáo viên có họ tên bắt đầu là
+'Nguyễn' và lương trên 200000 hoặc, giáo viên
+là trưởng bộ môn nhận chức sau năm 1995
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 57
+SELECT MAGV
+FROM GIAOVIEN
+WHERE HOTEN LIKE N'Nguyễn%'
+AND LUONG > 200000
+UNION
+SELECT TRUONGBM
+FROM BOMON
+WHERE YEAR(NGAYNHANCHUC)>=1995
+--- PAGE 58 ---
+4.0
+fit@hcmus
+Example
+⬜Retrieve lecturers name who are the head of 
+dept. and manage at least one project
+⬜Tìm những giáo viên vừa là trưởng bộ môn
+vừa chủ nhiệm đề tài
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 58
+SELECT TRUONGBM
+FROM BOMON
+INTERSECT
+SELECT GVCNDT
+FROM DETAI
+SELECT BM.TRUONGBM
+FROM BOMON BM, DETAI DT
+WHERE BM.TRUONGBM = DT.GVCNDT
+--- PAGE 59 ---
+4.0
+fit@hcmus
+Example
+⬜Retrieve lecturers (IDs) who have not 
+participated any projects
+⬜Tìm những giáo viên không tham gia bất kỳ đề
+tài nào
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 59
+SELECT MAGV
+FROM GIAOVIEN
+EXCEPT
+SELECT MAGV
+FROM THAMGIADT
+--- PAGE 60 ---
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH 
+KHTN
+--- PAGE 61 ---
+4.0
+4.0
+fit@hcmus Nested query
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 61
+SELECT MAGV, HOTEN
+FROM GIAOVIEN, BOMON
+WHERE TENBM = N'Hệ thống thông tin'
+AND GIAOVIEN.MABM = BOMON.MABM
+SELECT <danh sách các cột>
+FROM <danh sách các bảng>
+WHERE <so sánh tập hợp> (
+SELECT <danh sách các cột>
+FROM <danh sách các bảng>
+WHERE <điều kiện>)
+Outer query
+Subquery
+--- PAGE 62 ---
+4.0
+fit@hcmus
+Nested query
+⬜Queries can have several nested levels
+⬜Subqueries in a WHERE clause are connected 
+by logical connective
+▪ OR, AND
+⬜Subqueries will return
+▪ A single attribute and a single tuple (a single value)
+▪ A table (a set or multiset of tuples)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 62
+--- PAGE 63 ---
+4.0
+fit@hcmus
+Nested query
+⬜WHERE clause of the outer query
+▪ <Expression> <set operation> <subquery>
+▪ Set comparison includes many operators
+◼ IN, NOT IN
+◼  ALL
+◼  ANY or SOME
+▪ Check whether the result of subqueries is empty or 
+not
+◼ EXISTS
+◼ NOT EXISTS
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 63
+: is comparison operation (<, >, !=, >=, <=)
+--- PAGE 64 ---
+4.0
+fit@hcmus
+Nested query
+⬜Categories
+▪ Non-correlated subqueries
+◼ WHERE clause of subqueries do not refer to attributes of 
+relations in FROM clause of the outer query
+◼ Subqueries will be performed before the outer query, 
+and be executed just one time
+▪ Correlated subqueries
+◼ WHERE clause of subqueries refer to at least one 
+attribute of relations in FROM clause of the outer query
+◼ Subqueries will be executed many times, each time will 
+correlate to one tuple of the outer query
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 64
+--- PAGE 65 ---
+4.0
+fit@hcmus
+Example
+⬜Tìm những giáo viên là trưởng bộ môn
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 65
+SELECT MAGV, HOTEN
+FROM GIAOVIEN, BOMON
+WHERE GIAOVIEN.MAGV = BOMON.TRUONGBM
+SELECT MAGV, HOTEN
+FROM GIAOVIEN
+WHERE MAGV IN (SELECT TRUONGBM
+FROM BOMON
+SELECT MAGV, HOTEN
+FROM GIAOVIEN
+WHERE MABM IN (‘001',
+‘002', ‘004', ‘005‘, ‘007‘ )
+Subquery does not use attributes from relations in the  outer query
+Cartesian product 
+Nested query with IN
+--- PAGE 66 ---
+4.0
+4.0
+fit@hcmus Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 66
+SELECT HOTEN
+FROM GIAOVIEN
+WHERE MAGV IN (SELECT MAGV
+FROM GIAOVIEN
+WHERE HOTEN LIKE N'Nguyễn%'
+AND LUONG > 200000)
+OR MAGV IN (SELECT TRUONGBM
+FROM BOMON
+WHERE YEAR(NGAYNHANCHUC)>=1995)
+--- PAGE 67 ---
+4.0
+fit@hcmus
+Example
+⬜Tìm những giáo viên không tham gia đề
+tài nào
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 67
+SELECT *
+FROM GIAOVIEN
+WHERE MAGV NOT IN(SELECT MAGV
+FROM THAMGIADT)
+SELECT *
+FROM GIAOVIEN
+WHERE MAGV <> ALL(SELECT MAGV
+FROM THAMGIADT)
+--- PAGE 68 ---
+4.0
+fit@hcmus
+Example
+⬜Tìm những giáo viên có lương lớn hơn lương
+của ít nhất một giáo viên bộ môn ‘Công nghệ
+phần mềm’
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 68
+SELECT *
+FROM GIAOVIEN
+WHERE LUONG > ANY (SELECT GV.LUONG
+FROM GIAOVIEN GV, BOMON BM
+WHERE GV.MABM = BM.MABM
+AND BM.TENBM = N'Công nghệ phần mềm')
+SELECT GV1.*
+FROM GIAOVIEN GV1, GIAOVIEN GV2, BOMON BM
+WHERE GV2.MABM = BM.MABM
+AND BM.TENBM = N'Công nghệ phần mềm' AND GV1.LUONG > GV2.LUONG
+--- PAGE 69 ---
+4.0
+fit@hcmus
+Example
+⬜Tìm những giáo viên có lương lớn hơn lương
+của tất cả giáo viên thuộc bộ môn ‘Hệ thống
+thông tin’
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 69
+SELECT *
+FROM GIAOVIEN
+WHERE LUONG > ALL (SELECT LUONG
+FROM GIAOVIEN GV, BOMON BM
+WHERE GV.MABM = BM.MABM
+AND BM.TENBM = N'Hệ thống thông tin')
+--- PAGE 70 ---
+4.0
+fit@hcmus
+Example
+⬜Tìm những trưởng bộ môn tham gia tối thiểu 1 
+đề tài
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 70
+SELECT *
+FROM GIAOVIEN
+WHERE MAGV IN (SELECT TRUONGBM
+FROM BOMON)
+AND MAGV IN (SELECT MAGV
+FROM THAMGIADT)
+--- PAGE 71 ---
+4.0
+fit@hcmus
+Example
+⬜Tìm những giáo viên là trưởng bộ môn
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 71
+SELECT MAGV, HOTEN
+FROM GIAOVIEN GV
+WHERE EXISTS (SELECT *
+FROM BOMON BM
+WHERE BM.TRUONGBM = GV.MAGV)
+Giáo viên là trưởng bộ môn khi tồn tại một bộ môn có TRUONGBM = 
+MAGV của giáo viên đó  
+Nested query with EXISTS 
+Mệnh đề WHERE của truy vấn con tham chiếu ít nhất một thuộc tính của các 
+quan hệ trong mệnh đề FROM ở truy vấn cha
+SELECT MAGV, HOTEN
+FROM GIAOVIEN
+WHERE MAGV IN (SELECT TRUONGBM FROM BOMON)
+Nested query with IN
+--- PAGE 72 ---
+4.0
+fit@hcmus
+Example
+⬜Tìm những giáo viên có lương lớn nhất
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 72
+SELECT MAGV, HOTEN
+FROM GIAOVIEN GV
+WHERE NOT EXISTS (SELECT *
+FROM GIAOVIEN GV2 
+WHERE GV2.LUONG  > GV.LUONG)
+Giáo viên là có lương lớn 
+nhất khi không tồn tại một 
+giáo viên nào mà có lương 
+lớn hơn giáo viên đó 
+SELECT MAGV, HOTEN
+FROM GIAOVIEN GV
+WHERE LUONG >= ALL (SELECT LUONG 
+FROM GIAOVIEN GV2)
+Giáo viên là có lương lớn 
+nhất khi lương của giáo viên 
+lớn hơn hoặc bằng tất cả
+lương của các giáo viên (lồng 
+phân cấp)
+--- PAGE 73 ---
+4.0
+fit@hcmus
+Example
+⬜Tìm giáo viên trùng tên và cùng giới tính với
+giáo viên khác trong cùng bộ môn
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 73
+SELECT *
+FROM GIAOVIEN GV1
+WHERE EXISTS (SELECT *
+FROM GIAOVIEN GV2
+WHERE GV1.HOTEN LIKE GV2.HOTEN
+AND GV1.PHAI = GV2.PHAI
+AND GV1.MABM = GV2.MABM
+AND GV1.MAGV <> GV2.MAGV)
+--- PAGE 74 ---
+4.0
+fit@hcmus
+Example
+⬜Tìm những giáo viên không tham gia đề tài
+nào
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 74
+SELECT *
+FROM GIAOVIEN GV
+WHERE NOT EXISTS (SELECT *
+FROM THAMGIADT PC
+WHERE PC.MAGV = GV.MAGV)
+Giáo viên GV không tham gia đề 
+tài khi không tồn tại một dòng 
+nào trong THAMGIADT mà có 
+MAGV = GV.MAGV
+--- PAGE 75 ---
+4.0
+fit@hcmus
+Example
+⬜Tìm những giáo viên có lương lớn hơn lương
+của ít nhất một giáo viên bộ môn ‘Công nghệ
+phần mềm’
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 75
+SELECT *
+FROM GIAOVIEN GV1
+WHERE EXISTS (SELECT *
+FROM GIAOVIEN GV2, BOMON BM
+WHERE GV2.MABM = BM.MABM
+AND BM.TENBM = N'Công nghệ phần 
+mềm'
+AND GV1.LUONG > GV2.LUONG)
+--- PAGE 76 ---
+4.0
+fit@hcmus
+Example
+⬜Tìm những trưởng bộ môn tham gia tối thiểu 1 
+đề tài
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 76
+SELECT *
+FROM GIAOVIEN GV
+WHERE EXISTS (SELECT *
+FROM BOMON BM
+WHERE GV.MAGV =BM.TRUONGBM)
+AND EXISTS (SELECT * FROM THAMGIADT PC
+WHERE PC.MAGV = GV.MAGV)
+--- PAGE 77 ---
+4.0
+fit@hcmus
+IN and EXISTS
+⬜IN
+▪ <Column_name> IN <Subquery>
+▪ Attributes in the subquery’s SELECT clause have 
+the same data types as attributes in the outer 
+query’s WHERE clause 
+⬜EXISTS
+▪ Do not need attributes, constants or any expressions 
+before it 
+▪ Do not need to specify column names in the 
+subquery’s SELECT clause
+▪ Queries containing “= ANY” or IN can be converted 
+queries containing EXISTS
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 77
+--- PAGE 78 ---
+4.0
+fit@hcmus
+IN and EXISTS
+⬜EXISTS:
+▪ Is used for checking an existing row
+▪ Syntax
+▪ … EXISTS (Select … From … Where…)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 78
+Sub query
+If the subquery returns at least one row => EXISTS (…) = TRUE  
+If the sub query returns no row => EXISTS (…) = FALSE 
+--- PAGE 79 ---
+4.0
+fit@hcmus
+Example
+⬜Tìm những giáo viên có tham gia đề tài
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 79
+SELECT *
+FROM GIAOVIEN GV
+WHERE EXISTS (SELECT *
+FROM THAMGIADT PC
+WHERE PC.MAGV = GV.MAGV)
+Nếu giáo viên GV có tham gia đề tài →
+câu truy vấn bên trong sẽ có dữ liệu
+(>= 1 dòng) → mệnh EXISTS (S .. F… 
+W) có giá trị TRUE
+--- PAGE 80 ---
+4.0
+fit@hcmus
+Example
+⬜Tìm những giáo viên không tham gia đề tài
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 80
+SELECT *
+FROM GIAOVIEN GV
+WHERE NOT EXISTS (SELECT *
+FROM THAMGIADT PC
+WHERE PC.MAGV = GV.MAGV)
+Nếu giáo viên GV không tham gia đề 
+tài → câu truy vấn bên trong sẽ rỗng 
+(0 dòng) → NOT EXISTS (S…F..W) có 
+giá trị TRUE 
+--- PAGE 81 ---
+4.0
+fit@hcmus
+Divide operation in SQL
+⬜R÷S is a set of values ai in R such that there is no
+values bi in S that makes the tuple (ai , bi) does not exist 
+in R
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 81
+A B
+
+
+a
+a
+ a
+ a
+ a
+ a
+ a
+ a
+C D
+
+
+a
+b
+ a
+ a
+ b
+ a
+ b
+ b
+E
+1
+3
+1
+1
+1
+1
+1
+1
+R D E
+a
+S
+b
+1
+1
+A B C
+ a 
+ a 
+RS
+aibi
+--- PAGE 82 ---
+4.0
+fit@hcmus
+Divide operation in SQL
+⬜Using EXCEPT
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 82
+SELECT R1.A, R1.B, R1.C
+FROM R R1
+WHERE NOT EXISTS (
+( SELECT S.D, S.E  FROM S)
+EXCEPT 
+( SELECT R2.D, R2.E 
+FROM R R2
+WHERE R1.A=R2.A AND R1.B=R2.B 
+AND R1.C=R2.C )
+)
+--- PAGE 83 ---
+4.0
+fit@hcmus
+Divide operation in SQL
+⬜Using NOT EXISTS
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 83
+SELECT R1.A, R1.B, R1.C
+FROM R R1
+WHERE NOT EXISTS (
+SELECT *
+FROM S
+WHERE NOT EXISTS (
+SELECT * 
+FROM R R2
+WHERE R2.D=S.D AND R2.E=S.E 
+AND R1.A=R2.A AND R1.B=R2.B AND R1.C=R2.C ))
+--- PAGE 84 ---
+4.0
+fit@hcmus
+Example
+ Tìm tên các giáo viên được phân công làm tất cả
+các đề tài
+- Tìm tên các nhân viên mà không có đề án nào là
+không được phân công làm
+▪ Tập bị chia: THAMGIADT(MAGV, MADT)
+▪ Tập chia: DETAI(MADT)
+▪ Tập kết quả: KQ(MAGV)
+▪ Kết KQ với GIAOVIEN để lấy ra TENGV
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 84
+--- PAGE 85 ---
+4.0
+4.0
+fit@hcmus Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 85
+SELECT DISTINCT GV.MAGV, GV.HOTEN
+FROM GIAOVIEN GV, THAMGIADT PC1
+WHERE GV.MAGV = PC1.MAGV
+AND NOT EXISTS ( (SELECT DT.MADT FROM DETAI DT)
+EXCEPT
+(SELECT PC2.MADT
+FROM THAMGIADT PC2
+WHERE PC2.MAGV = PC1.MAGV) )
+Những đề tài 
+mà giáo viên 
+PC1.MAGV 
+không tham 
+gia 
+Toàn bộ đề tài 
+Những đề tài mà 
+PC1.MaGV đã tham gia 
+Nếu danh sachs đề tài chưa tham gia = rỗng →
+Giáo viên đã tham gia tất cả các đề tài
+--- PAGE 86 ---
+4.0
+4.0
+fit@hcmus Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 86
+SELECT DISTINCT GV.MAGV, GV.HOTEN
+FROM GIAOVIEN GV, THAMGIADT PC1
+WHERE GV.MAGV = PC1.MAGV
+AND NOT EXISTS ( SELECT *
+FROM DETAI DT
+WHERE NOT EXISTS (SELECT *
+FROM THAMGIADT PC2
+WHERE PC2.MAGV = PC1.MAGV
+AND DT.MADT = PC2.MADT))
+Những đề tài 
+mà giáo viên 
+PC1.MAGV 
+không tham gia 
+Tìm những giáo viên mà danh sách đề tài không tham gia = rỗng  
+--- PAGE 87 ---
+4.0
+4.0
+fit@hcmus Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 87
+SELECT DISTINCT GV.MAGV, GV.HOTEN
+FROM GIAOVIEN GV, THAMGIADT PC1
+WHERE GV.MAGV = PC1.MAGV
+AND 0 = (SELECT COUNT(*) 
+FROM DETAI DT
+WHERE NOT EXISTS (SELECT *
+FROM THAMGIADT PC2
+WHERE PC2.MAGV = PC1.MAGV
+AND DT.MADT = PC2.MADT))
+Tìm những giáo viên mà số lượng đề tài chưa tham gia bằng 0 
+--- PAGE 88 ---
+4.0
+fit@hcmus
+Divide operation in SQL
+⬜Cho R(A,B), S(B), thực hiện RS 
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 88
+SELECT R.A
+FROM R
+[WHERE R.B IN (SELECT S.B FROM S   [WHERE <ĐK>]]
+GROUP BY R.A
+HAVING COUNT(DISTINCT R.B) = ( SELECT COUNT(S.B)
+FROM S
+[WHERE <ĐK>])
+--- PAGE 89 ---
+4.0
+4.0
+fit@hcmus Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 89
+SELECT DISTINCT GV.MAGV, GV.HOTEN
+FROM GIAOVIEN GV, THAMGIADT PC1
+WHERE GV.MAGV = PC1.MAGV
+GROUP BY GV.MAGV, GV.HOTEN
+HAVING COUNT(DISTINCT PC1.MADT) = (SELECT COUNT (MADT)
+FROM DETAI DT)
+--- PAGE 90 ---
+4.0
+fit@hcmus
+Example
+▪ Tìm tên các giáo viên được phân công làm tất cả
+các đề tài có kinh phí trên 100 triệu?
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 90
+SELECT DISTINCT GV.MAGV, GV.HOTEN
+FROM GIAOVIEN GV, THAMGIADT PC1
+WHERE GV.MAGV = PC1.MAGV
+AND PC1.MADT IN (SELECT DT.MADT FROM DETAI WHERE KINHPHI > 100)
+GROUP BY GV.MAGV, GV.HOTEN
+HAVING COUNT(DISTINCT PC1.MADT) = (SELECT COUNT (MADT)
+FROM DETAI DT
+WHERE KINHPHI >100)
+--- PAGE 91 ---
+4.0
+fit@hcmus
+Exercise
+1. Cho biết mã số, họ tên, ngày sinh của giáo viên tham gia 
+tất cả các công việc của đề tài ‘Ứng dụng hóa học xanh’.
+2. Cho biết mã số, họ tên, tên bộ môn và tên người quản lý 
+chuyên môn của giáo viên tham gia tất cả các đề tài thuộc 
+chủ đề ‘Nghiên cứu phát triển’.
+3. Cho biết họ tên, ngày sinh, tên khoa, tên trưởng khoa của 
+giáo viên tham gia tất cả các đề tài có giáo viên ‘Nguyễn 
+Hoài An’ tham gia.
+4. Cho biết họ tên giáo viên khoa ‘Công nghệ thông tin’ tham 
+gia tất cả các công việc của đề tài có trưởng bộ môn của bộ 
+môn đông nhất khoa ‘Công nghệ thông tin’ làm chủ nhiệm.
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 91
+--- PAGE 92 ---
+4.0
+fit@hcmus
+Content
+⬜Introduction
+⬜Data definition
+⬜Data manipulation
+▪ Basic queries
+▪ Set, set/multiset comparison and nested queries
+▪ Aggregate functions and grouping
+▪ Other
+⬜View
+⬜Index
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 92
+--- PAGE 93 ---
+4.0
+fit@hcmus
+Aggregate functions
+▪ COUNT
+- COUNT(*) : the number of rows
+- COUNT(<Column_name>): the number of non-zero 
+values of the column
+- COUNT(DISTINCT <Column_name>): the number of 
+different and non-zero values of the column
+▪ MIN
+▪ MAX
+▪ SUM
+▪ AVG
+▪ These functions are in SELECT and HAVING clause© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 93
+--- PAGE 94 ---
+4.0
+fit@hcmus
+Example
+▪ Tìm tổng lương, lương cao nhất, lương thấp nhất
+và lương trung bình của các giáo viên
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 94
+SELECT SUM(LUONG), MAX(LUONG), MIN(LUONG), AVG(LUONG)
+FROM GIAOVIEN
+--- PAGE 95 ---
+4.0
+fit@hcmus
+Example
+▪ Cho biết số lượng giáo viên của bộ môn
+‘Mạng máy tính’
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 95
+SELECT COUNT(*) AS SL_GV
+FROM GIAOVIEN GV, BOMON BM
+WHERE GV.MABM = BM.MABM
+AND TENBM=N'Mạng máy tính'
+--- PAGE 96 ---
+4.0
+fit@hcmus
+Example
+▪ Tìm những giáo viên có lương thuộc 3 mức
+lương cao nhất
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 96
+SELECT *
+FROM GIAOVIEN GV1
+WHERE 2 >= (SELECT COUNT(*)
+FROM GIAOVIEN GV2
+WHERE GV2.LUONG > GV1.LUONG)
+--- PAGE 97 ---
+4.0
+fit@hcmus
+Example
+▪ Cho biết số lượng giáo viên của từng bộ
+môn
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 97
+Bộ môn Số lượng
+HTTT 2
+CNPM 1
+MMT 1
+MANV HOTEN … MABM
+GV001 Nguyễn Văn A … HTTT
+GV002 Trần Văn B … HTTT
+GV003 Trần Thị C … CNPM
+GV004 Đặng Thị D … MMT
+--- PAGE 98 ---
+4.0
+fit@hcmus
+Grouping
+ Syntax
+ After grouping
+- Each group will have identical values at grouping
+attributes
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 98
+SELECT <ColumnList>
+FROM <TableList>
+WHERE <Conditions>
+GROUP BY <List_of_grouping_columns>
+--- PAGE 99 ---
+4.0
+fit@hcmus
+Example
+▪ Cho biết số lượng giáo viên của từng bộ
+môn
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 99
+SELECT MABM, COUNT(*) 'Số lượng giáo viên'
+FROM GIAOVIEN
+GROUP BY MABM
+SELECT GV.MABM, COUNT(*) 'Số lượng giáo viên'
+FROM GIAOVIEN GV, BOMON BM
+WHERE GV.MABM = BM.MABM
+GROUP BY GV.MABM
+--- PAGE 100 ---
+4.0
+fit@hcmus
+Example
+▪ Với mỗi giáo viên cho biết mã số, mã đề tài và số
+công việc mà họ tham gia ứng với mỗi đề tài
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 100
+SELECT PC.MAGV, PC.MADT, COUNT(*) AS 'Số lượng công việc'
+FROM THAMGIADT PC
+GROUP BY PC.MAGV, PC.MADT
+MAGV MADT STT
+GV001 DT001 1
+GV001 DT001 2
+GV001 DT002 1
+GV002 DT002 2
+GV003 DT001 3
+GV003 DT002 3
+--- PAGE 101 ---
+4.0
+fit@hcmus
+Example
+▪ Cho biết những giáo viên tham gia từ 2 công việc
+trở lên cho mỗi đề tài?
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 101
+MAGV MADT STT
+GV001 DT001 1
+GV001 DT001 2
+GV001 DT002 1
+GV002 DT002 2
+GV003 DT001 3
+GV003 DT002 3
+--- PAGE 102 ---
+4.0
+fit@hcmus
+Conditions on groups
+▪ Syntax
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 102
+SELECT <ColumnList>
+FROM <TableList>
+WHERE <Conditions>
+GROUP BY <List_of_grouping_columns>
+HAVING < Conditions >
+--- PAGE 103 ---
+4.0
+fit@hcmus
+Example
+▪ Cho biết những giáo viên tham gia từ 2 công việc
+trở lên cho mỗi đề tài?
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 103
+SELECT PC.MAGV, PC.MADT, COUNT(*) AS 'Số lượng công việc'
+FROM THAMGIADT PC
+GROUP BY PC.MAGV, PC.MADT
+HAVING COUNT(*) >= 2
+--- PAGE 104 ---
+4.0
+fit@hcmus
+Example
+▪ Cho biết những giáo viên tham gia từ 2 đề tài trở lên
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 104
+MAGV MADT STT
+GV001 DT001 1
+GV001 DT001 2
+GV001 DT002 1
+GV002 DT002 2
+GV003 DT001 3
+GV003 DT002 3
+SELECT PC.MAGV, COUNT(DISTINCT MADT) AS 'Số lượng đề tài'
+FROM THAMGIADT PC
+GROUP BY PC.MAGV
+HAVING COUNT(DISTINCT MADT) >= 2
+--- PAGE 105 ---
+4.0
+fit@hcmus
+Example
+▪ Cho biết những bộ môn (TENBM) có lương trung
+bình của các giáo viên lớn hơn 20000
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 105
+SELECT GV.MABM, AVG(GV.LUONG) AS 'Lương trung 
+bình'
+FROM GIAOVIEN GV
+GROUP BY GV.MABM
+HAVING AVG(GV.LUONG)>20000
+SELECT BM.TENBM, AVG(GV.LUONG) AS 'Lương trung bình'
+FROM GIAOVIEN GV, BOMON BM
+WHERE GV.MABM = BM.MABM
+GROUP BY BM.MABM, BM.TENBM
+HAVING AVG(GV.LUONG)>=20000
+--- PAGE 106 ---
+4.0
+fit@hcmus
+Discussion
+▪ GROUP BY -clause
+- Attributes in SELECT clause (excepting attributes of 
+aggregate functions) must appear in GROUP BY-clause
+▪ HAVING-clause
+- Use aggregate functions in SELECT-clause to check a 
+certain condition
+- Just validate the conditions for groups, not a condition 
+for
+filtering rows
+- After grouping, conditions on groups will be 
+performed 
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 106
+--- PAGE 107 ---
+4.0
+fit@hcmus
+Discussion
+▪ The order of the query execution
+▪ (1) Pick out rows that satisfy conditions in the 
+WHERE clause
+▪ (2) Group these rows into many groups in 
+GROUP BY-clause
+▪ (3) Apply aggregate functions for each group
+▪ (4) Eliminate groups that do not satisfy 
+conditions in the HAVING-clause
+▪ (5) Retrieve values from columns and 
+aggregate functions in SELECT clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 107
+--- PAGE 108 ---
+4.0
+fit@hcmus
+Example
+▪ Tìm những phòng ban có lương trung bình cao
+nhất
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 108
+SELECT GV.MABM, AVG(GV.LUONG) AS 'Lương trung bình'
+FROM GIAOVIEN GV
+GROUP BY GV.MABM
+HAVING AVG(GV.LUONG)) = (SELECT MAX(AVG(GV.LUONG))
+FROM GIAOVIEN GV
+GROUP BY GV.MABM)
+--- PAGE 109 ---
+4.0
+fit@hcmus
+Example
+▪ Tìm những phòng ban có lương trung bình cao
+nhất
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 109
+SELECT GV.MABM, AVG(GV.LUONG) AS 'Lương trung bình'
+FROM GIAOVIEN GV
+GROUP BY GV.MABM
+HAVING AVG(GV.LUONG)>= ALL(SELECT AVG(GV.LUONG)
+FROM GIAOVIEN GV
+GROUP BY GV.MABM)
+--- PAGE 110 ---
+4.0
+fit@hcmus
+Example
+▪ Tìm tên các giáo viên được phân công làm tất cả
+các đề tài
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 110
+SELECT PC.MAGV, COUNT(DISTINCT PC.MADT) AS 'Số lượng đề tài'
+FROM THAMGIADT PC
+GROUP BY PC.MAGV
+HAVING COUNT(DISTINCT PC.MADT) = (SELECT COUNT(MADT)
+FROM DETAI)
+--- PAGE 111 ---
+4.0
+fit@hcmus
+Content
+⬜Introduction
+⬜Data definition
+⬜Data manipulation
+▪ Basic queries
+▪ Set, set/multiset comparison and nested queries
+▪ Aggregate functions and grouping
+▪ Others
+⬜View
+⬜Index
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 111
+--- PAGE 112 ---
+4.0
+fit@hcmus
+Other queries
+▪ Subquery in FROM clause
+▪ Joining conditions in FROM clause
+▪ Natural join
+▪ Outer join
+▪ CASE structure
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 112
+--- PAGE 113 ---
+4.0
+fit@hcmus
+Subquery in FROM clause
+▪ The result of a subquery is a table
+▪ Intermediate table in the process of query execution
+▪ Do not store this result into the database
+▪ Syntax
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 113
+SELECT <ColumnList>
+FROM R1, R2, (<Subquery>) AS Table_name
+WHERE <Conditions>
+--- PAGE 114 ---
+4.0
+fit@hcmus
+Example
+▪ Cho biết những bộ môn (TENBM) có lương trung
+bình của các giáo viên lớn hơn 20000
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 114
+SELECT BM.TENBM, AVG(GV.LUONG) AS LUONG_TB
+FROM GIAOVIEN GV, BOMON BM
+WHERE GV.MABM = BM.MABM
+GROUP BY BM.MABM, BM.TENBM
+HAVING AVG(GV.LUONG)>=20000
+--- PAGE 115 ---
+4.0
+fit@hcmus
+Example
+▪ Cho biết những bộ môn (TENBM) có lương trung
+bình của các giáo viên lớn hơn 20000
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 115
+SELECT BM.TENBM, LUONG_GV.LUONG_TB
+FROM BOMON BM, (SELECT MABM, AVG(LUONG) LUONG_TB
+FROM GIAOVIEN
+GROUP BY MABM) AS LUONG_GV
+WHERE BM.MABM = LUONG_GV.MABM
+--- PAGE 116 ---
+4.0
+fit@hcmus
+Join conditions in FROM clause
+▪ Equijoin
+▪ Outer join
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 116
+SELECT <ColumnList>
+FROM R1 [INNER] JOIN R2 ON <Expression>
+WHERE <Conditions>
+SELECT < ColumnList >
+FROM R1 LEFT|RIGHT [OUTER] JOIN R2 ON < Expression >
+WHERE < Conditions >
+--- PAGE 117 ---
+4.0
+fit@hcmus
+Example
+▪ Tìm mã và tên các giáo viên làm việc tại bộ môn
+‘Hệ thống thông tin’
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 117
+SELECT MAGV, HOTEN
+FROM GIAOVIEN, BOMON
+WHERE TENBM = N'Hệ thống thông tin'
+AND GIAOVIEN.MABM = BOMON.MABM
+SELECT MAGV, HOTEN
+FROM GIAOVIEN GV INNER JOIN BOMON BM ON GV.MABM = BM.MABM
+WHERE TENBM = N'Hệ thống thông tin'
+--- PAGE 118 ---
+4.0
+fit@hcmus
+Example
+▪ Tìm họ tên các giáo viên và tên các đề tài giáo viên
+tham gia nếu có
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 118
+SELECT DISTINCT GV.*
+FROM GIAOVIEN GV LEFT JOIN (THAMGIADT PC JOIN DETAI DT ON
+PC.MADT = DT.MADT) ON GV.MAGV = PC.MAGV
+GIAOVIEN GIAOVIEN JOIN THAMGIADT 
+GV.MAGV= PC.MAGV
+extend
+--- PAGE 119 ---
+4.0
+fit@hcmus
+CASE structure
+▪ Allow us to check conditions or output the  
+information in each case
+▪ Syntax
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 119
+CASE <Column_name>
+WHEN <value> THEN <Expression>
+WHEN < value > THEN <Expression>
+…
+[ELSE < Expression >]
+END
+--- PAGE 120 ---
+4.0
+fit@hcmus
+Example
+▪ Cho biết họ tên các giáo viên đã đến tuổi về hưu
+(nam 60 tuổi, nữ 55 tuổi)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 120
+SELECT HOTEN
+FROM GIAOVIEN
+WHERE YEAR(GETDATE()) - YEAR(NGAYSINH) >= ( CASE PHAI
+WHEN 'Nam' THEN 60
+WHEN 'Nu' THEN 55
+END)
+--- PAGE 121 ---
+4.0
+fit@hcmus
+Example
+▪ Cho biết họ tên các giáo viên và năm về hưu
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 121
+SELECT GV.HOTEN, YEAR(GV.NGAYSINH) + ( CASE PHAI
+WHEN 'Nam' THEN 60
+WHEN 'Nu' THEN 55
+END) AS NAMVEHUU
+FROM GIAOVIEN GV
+SELECT GV.HOTEN, ( CASE PHAI
+WHEN 'Nam' THEN YEAR(NGAYSINH) + 60
+WHEN 'Nu' THEN YEAR(NGAYSINH) + 55
+END) AS NAMVEHUU
+FROM GIAOVIEN GV
+--- PAGE 122 ---
+4.0
+4.0
+fit@hcmus Summary
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 122
+SELECT <List_of_columns>
+FROM <List_of_tables>
+[WHERE <Conditions>]
+[GROUP BY <List_grouping_columns>]
+[HAVING <Conditions>]
+[ORDER BY <List_of_ordering_columns>]
+--- PAGE 123 ---
+4.0
+fit@hcmus
+Content
+▪ Introduction
+▪ Data definition
+▪ Data manipulation
+▪ Data update
+▪ View
+▪ Index
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 123
+--- PAGE 124 ---
+4.0
+fit@hcmus
+INSERT command
+▪ Is used to add 1 or more tuple(s) to a 
+relation
+▪ In order to add a tuple
+– Relation name
+– List of column names
+– List of values for the tuple
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 124
+--- PAGE 125 ---
+4.0
+fit@hcmus
+INSERT command
+▪ Syntax (one tuple)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 125
+INSERT INTO <Table_name>(<List_of_columns>)
+VALUES (<List_of_values>)
+--- PAGE 126 ---
+4.0
+fit@hcmus
+Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 126
+INSERT INTO THAMGIADT(MAGV, MADT, STT, PHUCAP, KETQUA)
+VALUES(’002', ‘001', 1, 1.0, N’ĐẠT')
+INSERT INTO THAMGIADT(MAGV, MADT, STT, PHUCAP, KETQUA)
+VALUES(’002', ‘001', 2, 1.2, NULL)
+--- PAGE 127 ---
+4.0
+fit@hcmus
+INSERT command
+▪ Discussion
+– The order of values is the same to the order of 
+columns
+– The NULL value can be used for non-primary-
+key attributes
+– INSERT command will raise errors if the 
+integrity constraint is violated
+▪ Primary key
+▪ Reference
+▪ NOT NULL constraint
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 127
+--- PAGE 128 ---
+4.0
+fit@hcmus
+INSERT command
+▪ Syntax (many tuples)
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 128
+INSERT INTO <Table_name>(<List_of_columns>)
+<Query>
+--- PAGE 129 ---
+4.0
+4.0
+fit@hcmus Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 129
+CREATE TABLE THONGKE_BM (
+TENBM NVARCHAR(50),
+SL_GV INT,
+LUONG_TC INT
+PRIMARY KEY(TENBM)
+)
+INSERT INTO THONGKE_BM
+SELECT BM.TENBM, COUNT(GV.MAGV), SUM(GV.LUONG)
+FROM GIAOVIEN GV, BOMON BM
+WHERE GV.MABM = BM.MABM
+GROUP BY BM.MABM, BM.TENBM
+--- PAGE 130 ---
+4.0
+fit@hcmus
+DELETE command
+▪ Is used to remove tuples from a relation
+▪ Syntax
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 130
+DELETE FROM <Table_name> 
+[WHERE <Conditions>]
+--- PAGE 131 ---
+4.0
+4.0
+fit@hcmus Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 131
+DELETE FROM GIAOVIEN
+WHERE HOTEN LIKE N'Trần%'
+DELETE FROM GIAOVIEN
+WHERE MAGV = 'GV001'
+DELETE FROM GIAOVIEN
+--- PAGE 132 ---
+4.0
+fit@hcmus
+Example
+▪ Xóa đi những giáo viên ở bộ môn ‘Hệ thống thông
+tin’
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 132
+DELETE FROM GIAOVIEN
+WHERE MABM IN (SELECT MABM
+FROM BOMON
+WHERE TENBM = N'Hệ thống thông tin')
+DELETE FROM GIAOVIEN
+FROM BOMON BM
+WHERE GIAOVIEN.MABM = BM.MABM
+AND BM.TENBM = N'Hệ thống thông tin'
+--- PAGE 133 ---
+4.0
+fit@hcmus
+DELETE command
+▪ Discussion
+– The number of removed tuples depends on the 
+condition in WHERE clause
+– A missing WHERE clause specifies that all tuples can 
+be deleted
+– DELETE command can cause the violation of reference 
+constraints
+▪ Do not permit to remove
+▪ Remove tuples whose value is being referred
+▪ CASCADE
+▪ Set the NULL value to reference values
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 133
+--- PAGE 134 ---
+4.0
+4.0
+fit@hcmus DELETE command
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 134
+MAGV HOTEN … MABM
+GV001 Nguyễn Văn A … HTTT
+GV002 Trần Văn B … HTTT
+GV003 Trần Thị C … CNPM
+GV004 Đặng Thị D … MMT
+MAGV MADT STT PHUCAP KETQUA
+GV001 001 1 ... ...
+GV001 001 3 ... ...
+GV003 002 1 ...
+GV004 003 1 ... ...
+... ... ... ... ...
+
+--- PAGE 135 ---
+4.0
+4.0
+fit@hcmus DELETE command
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 135
+MANV HOTEN …
+GV001 Nguyễn Văn A …
+GV002 Trần Văn B …
+GV003 Trần Thị C …
+GV004 Đặng Thị D …
+MABM TENBM
+HTTT Hệ thống thông tin
+CNPM Công nghệ phần mềm
+MMT Mạng máy tính
+KHMT Khoa học máy tính
+MABM
+HTTT
+HTTT
+CNPM
+MMT
+MABM
+NULL
+NULL
+CNPM
+MMT
+--- PAGE 136 ---
+4.0
+fit@hcmus
+UPDATE command
+▪ Is used to change the value of attributes
+▪ Syntax
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 136
+UPDATE <Table_name>
+SET <Attribute_name>=<The_new_value>,
+<Attribute_name>=<The_new_value>,
+…
+[WHERE <Conditions>]
+--- PAGE 137 ---
+4.0
+4.0
+fit@hcmus Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 137
+UPDATE GIAOVIEN
+SET NGAYSINH='08/12/1965'
+WHERE MAGV='GV001'
+UPDATE GIAOVIEN
+SET LUONG=LUONG*1.1
+--- PAGE 138 ---
+4.0
+fit@hcmus
+Example
+▪ Với mỗi giáo viên của bộ môn ‘Hệ thống thông tin’, 
+nâng lương của các giáo viên gấp 1.5 lần và gán
+giáo viên quản lý (GVQL) thành null
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 138
+UPDATE GIAOVIEN
+SET LUONG = LUONG*1.5, GVQL = NULL
+WHERE MABM = (SELECT MABM
+FROM BOMON
+WHERE TENBM = N'Hệ thống thông tin')
+--- PAGE 139 ---
+4.0
+fit@hcmus
+Example
+▪ Tăng 10% lương cho giáo viên có tham gia đề tài
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 139
+UPDATE GIAOVIEN
+SET LUONG = LUONG * 1.1
+FROM THAMGIADT TG
+WHERE TG.MAGV = GIAOVIEN.MAGV
+UPDATE GIAOVIEN
+SET LUONG = LUONG * 1.1
+WHERE EXISTS (
+SELECT *
+FROM THAMGIADT TG
+WHERE TG.MAGV = GIAOVIEN.MAGV )
+UPDATE GIAOVIEN
+SET LUONG = LUONG * 1.1
+WHERE MAGV IN (
+SELECT TG.MAGV
+FROM THAMGIADT TG
+WHERE TG.MAGV = GIAOVIEN.MAGV )
+--- PAGE 140 ---
+4.0
+fit@hcmus
+Example
+▪ Tăng lương 10% cho tất cả các giáo viên làm cho
+đề tài ‘DT001’ nhiều hơn 3 công việc.
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 140
+UPDATE GIAOVIEN
+SET LUONG = LUONG * 1.1
+WHERE MAGV IN (SELECT PC.MAGV
+FROM THAMGIADT TG
+WHERE TG.MADT = 'DT001'
+GROUP BY TG.MAGV, TG.MADT
+HAVING COUNT(*) >= 3)
+--- PAGE 141 ---
+4.0
+fit@hcmus
+UPDATE command
+▪ Discussion
+– Tuples that satisfy conditions in WHERE 
+clause will be modified to the new value
+– A missing WHERE clause specifies that all 
+tuples can be modified
+– UPDATE command can cause violations of the 
+reference constraint
+▪ Do not allow to modify
+▪ Modify the values of tuples that are being referred
+▪ CASCADE
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 141
+--- PAGE 142 ---
+4.0
+fit@hcmus
+Content
+▪ Introduction
+▪ Data definition
+▪ Data manipulation
+▪ Data update
+▪ View
+▪ Index
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 142
+--- PAGE 143 ---
+4.0
+fit@hcmus
+View
+▪ Table is a relation that exist actually the database
+▪ Stored in some physical organization
+▪ Persistent
+▪ View is also a relation
+– Do not exist physically (virtual table)
+– Do not contain the data
+– Is derived from other tables
+– Can query or even modify the data through 
+views
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 143
+--- PAGE 144 ---
+4.0
+fit@hcmus
+View
+▪ Why do we use views?
+– Hide the complexity of data
+– Simplify queries
+– Present data with the purpose “easy to use”
+– Mechanism of data safety
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 144
+--- PAGE 145 ---
+4.0
+fit@hcmus
+View definition
+▪ Syntax
+▪ View contains
+- A list of attributes that are the same as attributes in 
+SELECT clause
+- The number of tuples depending on the conditions in 
+WHERE clause
+- Data derived from tables in FROM clause
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 145
+CREATE VIEW <View_name> AS
+<Query>
+DROP VIEW <View_name>
+--- PAGE 146 ---
+4.0
+4.0
+fit@hcmus Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 146
+CREATE VIEW GV_HTTT AS
+SELECT GV.*
+FROM GIAOVIEN GV
+WHERE BM.MABM = 'HTTT'
+CREATE VIEW THONGKE_BM AS
+SELECT BM.TENBM, COUNT(GV.MAGV) SL_GV,
+SUM(GV.LUONG) TONG_LUONG
+FROM GIAOVIEN GV, BOMON BM
+WHERE GV.MABM = BM.MABM
+GROUP BY BM.MABM, BM.TENBM
+--- PAGE 147 ---
+4.0
+fit@hcmus
+Querying views
+▪ Although views do not contain data, we can do 
+the query on views
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 147
+SELECT GV.HOTEN
+FROM GV_HTTT GV
+WHERE GV.MAGV = 'GV003'
+GV_HTTT  MABM='HTTT' (GIAOVIEN)
+ HOTEN (MAGV='GV003' (GV_HTTT))
+--- PAGE 148 ---
+4.0
+fit@hcmus
+Querying views
+▪ Can query data from both tables and views
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 148
+SELECT DISTINCT GV.*
+FROM GV_HTTT GV, THAMGIADT PC
+WHERE GV.MAGV = PC.MAGV
+KQ  GV_HTTT GV_HTTT.MAGV=THAMGIADT.MAGV THAMGIADT
+GV_HTTT  MABM='HTTT' (GIAOVIEN)
+--- PAGE 149 ---
+4.0
+fit@hcmus
+Modifying views
+▪ Can apply INSERT, DELETE, and UPDATE commands to 
+simple views
+- Views built on one table and having the key attribute 
+of that table
+▪ Cannot modify views
+- Views have a key word DISTINCT
+- Views use aggregate functions
+- Views have extended SELECT clause
+- Views are derived from table containing constrains on 
+columns
+- Views are derived from many tables
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 149
+--- PAGE 150 ---
+4.0
+fit@hcmus
+Modifying views
+▪ Sửa lại lương cho giáo viên mã ‘GV003’ ở bộ
+môn 'Hệ thống thông tin' tăng lên 10%
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 150
+UPDATE GV_HTTT
+SET LUONG = LUONG * 1.1
+WHERE MAGV = 'GV003'
+--- PAGE 151 ---
+4.0
+fit@hcmus
+Content
+▪ Introduction
+▪ Data definition
+▪ Data manipulation
+▪ Data update
+▪ View
+▪ Index
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 151
+--- PAGE 152 ---
+4.0
+fit@hcmus
+Index
+▪ The index on an attribute A is the data structure 
+that makes it efficient to find tuples having a fixed 
+value for attribute A
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 152
+SELECT *
+FROM GIAOVIEN
+WHERE MABM='HTTT' AND PHAI=‘Nu’
+Bảng GIAOVIEN có 10.000 bộ
+Có 200 giáo viên làm việc cho bộ môn ‘HTTT’
+Đọc 10.000 bộ
+Đọc 200 bộ
+Đọc 70 bộ
+--- PAGE 153 ---
+4.0
+fit@hcmus
+Index
+▪ Syntax
+▪ Example
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 153
+CREATE INDEX <Index_name> ON <Table_name>(<Column_name>)
+CREATE INDEX MABM_IND ON GIAOVIEN(MABM)
+CREATE INDEX MABM_PHAI_IND ON GIAOVIEN(MABM, PHAI)
+DROP INDEX <Index_name>
+--- PAGE 154 ---
+▪ Discussion
+- Speed up queries in which a value for an attribute is 
+specified, join operations
+- Make insertion, deletion, and update more complex and 
+time-consuming
+- Cost
+◼ Index storage
+◼ Disk access (HDD)
+▪ Selection of indexes
+- One of the principal factors that influence a database
+- One of the hardest parts of database design
+Index
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN
+154
+--- PAGE 155 ---
+4.0
+4.0
+fit@hcmus
+© Bộ môn HTTT - Khoa CNTT - Trường ĐH KHTN 155

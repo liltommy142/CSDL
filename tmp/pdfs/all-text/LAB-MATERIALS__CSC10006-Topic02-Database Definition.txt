@@ -1,0 +1,634 @@
+
+--- PAGE 1 ---
+ 
+Information System department – FIT- VNUHCM-US 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+Database Definition 
+(Defining the database schema using SQL) 
+CSC10006 – Introduction to Database 
+
+--- PAGE 2 ---
+ 
+ 
+--- PAGE 3 ---
+Subject CSC10006 – Introduction to Database 
+ 
+ 
+TABLE OF CONTENTS 
+ 
+1 OBJECTIVES ........................................................................................................................................................ 1 
+2 DETAILED INSTRUCTIONS ............................................................................................................................ 2 
+2.1 CONSTRUCTING THE DATABASE SCHEMA ................................ ................................ ................................ .......................  2 
+2.1.1 Execute a Script in Query Analyzer .................................................................................................................... 2 
+2.1.2 Creating a database.................................................................................................................................................. 3 
+2.1.3 Create table .................................................................................................................................................................. 4 
+2.1.4 Drop table: .................................................................................................................................................................... 6 
+2.1.5 Defining (Creating) Primary Keys, Foreign Keys, and other Integrity Constraints....................... 6 
+2.1.6 Add, modify, or drop table attributes ............................................................................................................. 10 
+2.1.7 Drop table .................................................................................................................................................................. 11 
+2.1.8 Useful Statements for Inspecting Metadata ................................................................................................ 11 
+2.1.9 Notes ............................................................................................................................................................................. 11 
+2.2 INSERTING AND UPDATING DATA ................................ ................................ ................................ ................................ . 12 
+2.2.1 Syntax for Inserting a Single Row into a Table .......................................................................................... 12 
+2.2.2 Inserting String and Date/Time Data ........................................................................................................... 13 
+2.2.3 Inserting Data with Foreign Key Constraints ............................................................................................. 14 
+2.2.4 Viewing and Deleting Data ................................................................................................................................. 15 
+2.2.5 Updating data .......................................................................................................................................................... 15 
+2.2.6 Best Practices ........................................................................................................................................................... 16 
+2.2.7 Creating a Database Diagram Using Enterprise Manager ................................................................... 16 
+3 IN-CLASS EXERCISES ..................................................................................................................................... 21 
+4 HOMEWORK EXERCISES .............................................................................................................................. 21 
+--- PAGE 4 ---
+
+--- PAGE 5 ---
+ 
+Information department – FIT- VNUHCM-US Page 1 
+ 
+1 Objectives  
+Use SQL to implement a relational data model on a specific DBMS: create 
+databases and tables, declare integrity constraints (primary keys, foreign keys, 
+domain/value constraints, etc.), and populate the database with data.  
+After completing this exercise, students will be able to: 
+− Execute a SQL script and inspect the execution results in the Query 
+Analyzer tool. 
+− Use the syntax to create and drop databases.  
+− Use table-creation statements, including: 
+o Creating a table without a primary key 
+o Creating a table with a primary key 
+o Creating a table with foreign keys 
+o Creating a table whose primary key consists of multiple attributes 
+(composite primary key) 
+− Modify table schemas, including: 
+o Adding/removing constraints: primary key, foreign key, 
+domain/value constraints, UNIQUE, and NULL/NOT NULL 
+constraints 
+o Adding/removing columns and changing a column’s data type 
+o Applying additional options when defining foreign keys 
+− Use supporting statements/tools, such as viewing a table’s schema, listing 
+the attributes that form a table’s primary key, and listing a table’s foreign 
+keys. 
+− Insert data into a table successfully using multiple methods. 
+− Insert data for different data types (strings, Unicode strings, dates, etc.). 
+− Update data. 
+− Query and delete data. 
+  
+--- PAGE 6 ---
+ 
+2 Detailed Instructions 
+2.1 Constructing the Database schema 
+2.1.1 Execute a Script in Query Analyzer 
+Assume that we have the following script to create the HOCSINH table in the 
+master database (you do not need to understand the details of this script yet):  
+ 
+To execute this SCRIPT in Query Analyzer, proceed as follows: 
+Step 1: Select (highlight) the SCRIPT block you want to execute. 
+
+--- PAGE 7 ---
+ 
+Information department – FIT- VNUHCM-US Page 3 
+ 
+ 
+Step 2: Click the RUN button or press F5 to excute the selected. 
+Bước 3: View the returned output. 
+2.1.2 Creating a database 
+Syntax Example 
+Creating a database: 
+CREATE  DATABASE  [Database name] 
+Select the database to work with: 
+USE [Database name] 
+Delete database: 
+DROP DATABASE  [Database name] 
+Create the HocSinhDB database: 
+CREATE  DATABASE HocSinhDB 
+Select the  HocSinhDB database to 
+work with 
+USE HocSinhDB 
+Delete the HocSinhDB database: 
+DROP DATABASE HocSinhDB 
+ 
+
+--- PAGE 8 ---
+ 
+ 
+Notes:  
+1. After executing any statements that modify the database (e.g., create or 
+drop), you must REFRESH the Object Browser  window to see the 
+latest changes. 
+2. To execute a CREATE DATABASE statement, the user must have the 
+required permissions. For the accounts that students use in the 
+computer lab, this permission is not granted if you log in using 
+Windows Authentication, so you cannot run this command. Instead, 
+log in to SQL Server Management Studio using the username and 
+password provided by the instructors. 
+2.1.3 Create table 
+Common syntax for table creation: 
+Syntax Example 
+CREATE TABLE [Table name] 
+( 
+ [Attribute 1] [Data type 1], 
+ [Attribute 2] [Data type 2], 
+CREATE TABLE  GIAOVIEN  
+( 
+ MAGV char (5),  
+ HOTEN nvarchar(40),  
+
+--- PAGE 9 ---
+ 
+Information department – FIT- VNUHCM-US Page 5 
+ 
+ 
+ [Attribute 3] [Data type 3] 
+) 
+ LUONG float,  
+ PHAI nchar(3),  
+ NGSINH datetime,  
+ MANQL char(5),  
+ MABM char(5) 
+) 
+Basic data types supported by SQL Server 1: 
+# Data Data type 
+1 Integers int, bigint, smallint, tinyint 
+2 Real (floating-
+point) 
+numbers 
+float, real 
+3 Concurrency money, smallmoney 
+4 Date time datetime, smalldatetime 
+5 Strings 1 byte strings: char, varchar; 
+2 bytes strings (UNICODE): nchar, nvarchar 
+6 Binary strings binary 
+7 Bit (1, 0) bit 
+8 ...  
+ 
+ 
+1 Students should consult Microsoft’s documentation to learn about the valid domains of 
+data types, as well as additional data types. 
+--- PAGE 10 ---
+ 
+The table-creation syntax above does not declare any integrity constraints for the 
+table; therefore, it is typically used together with other statements (e.g., defining 
+a primary key during table creation or defining foreign keys during table 
+creation). 
+2.1.4 Drop table: 
+Notes: 
+1. If the table already exists, or if the database contains an object with the 
+same name as the table you want to create, the CREATE TABLE statement 
+will fail. 
+2. If the table does not exist, the DROP TABLE statement will fail. 
+3. Nếu bảng đã tồn tại hoặc trong c ơ sở dữ liệu có một đối tượng nào trùng 
+tên với tên bảng muốn tạo thì câu lệnh tạo bảng sẽ bị lỗi. 
+4. Nếu bảng không tồn tại thì câu lệnh xóa bảng sẽ bị lỗi. 
+The two rules above also apply to all other database objects (e.g., primary keys, 
+foreign keys, databases, etc.). 
+2.1.5 Defining (Creating) Primary Keys, Foreign Keys, and other Integrity 
+Constraints 
+Defining Primary Keys: 
+Syntax  Example  
+Define the primary key inline within 
+CREATE TABLE statement (single-
+column PK): 
+CREATE TABLE [Table name] 
+Create the GIAOVIEN table with inline 
+primary key: 
+CREATE TABLE  GIAOVIEN  
+( 
+Syntax Example 
+DROP TABLE [Table name] 
+ 
+Drop the GIAOVIEN table: 
+DROP TABLE GIAOVIEN 
+--- PAGE 11 ---
+ 
+Information department – FIT- VNUHCM-US Page 7 
+ 
+( 
+ [Attribute 1] [Data type 1] 
+PRIMARY KEY, 
+ [Attribute 2] [Data type 2], 
+ 
+ [Attribute 3] [Data type 3], 
+) 
+ 
+ 
+ MAGV char (5) PRIMARY KEY,  
+ HOTEN nvarchar(40),  
+ LUONG float,  
+ PHAI nchar(3),  
+ NGSINH datetime,  
+ MANQL char(5),  
+ MABM char(5) 
+) 
+ 
+ 
+Syntax  Example  
+Define the primary key within the 
+CREATE TABLE statement: 
+CREATE TABLE [Table name] 
+( 
+ [Attribute 1] [Data type 1], 
+ [Attribute 2] [Data type 2], 
+ 
+ [Attribute 3] [Data type 3], 
+ PRIMARY KEY ([The table’s 
+primary key attributes]) 
+) 
+Create the GIAOVIEN table with 
+primary: 
+CREATE TABLE  GIAOVIEN  
+( 
+ MAGV char (5),  
+ HOTEN nvarchar(40),  
+ LUONG float,  
+ PHAI nchar(3),  
+ NGSINH datetime,  
+ MANQL char(5),  
+ MABM char(5) 
+--- PAGE 12 ---
+ 
+  PRIMARY KEY (MAGV) 
+) 
+ 
+ 
+Defining Foreign Key: 
+Syntax  Example 
+Define foreign key after table creation: 
+ALTER TABLE [Table name]  
+ADD CONSTRAINT [Constraint name]  
+FOREIGN KEY ([The table’s primary 
+key attributes])  
+REFERENCES [Referenced table 
+name.] ( [List of primary key columns 
+Thêm khóa ngoại cho bảng BOMON 
+tham chiếu đến bảng KHOA: 
+ALTER TABLE BOMON 
+ADD CONSTRAINT FK_BOMON_KHOA 
+FOREIGN KEY (MAKHOA)  
+REFERENCES KHOA(MAKHOA) 
+Syntax Example 
+Define primary key after table creation: 
+ALTER TABLE  [Table name]  
+ADD CONSTRAINT  [Contraint name]  
+PRIMARY KEY ([The table’s primary key 
+attributes]) 
+Notes: When defining a primary key after the 
+table creation, the primary key attributes 
+(columns) must be declared as NOT NULL in 
+the CREATE TABLE statement. 
+ 
+Define the primary key for the GIAOVIEN 
+table: 
+ALTER TABLE GIAOVIEN 
+ADD CONSTRAINT  PK_GIAOVIEN 
+PRIMARY KEY (MAGV) 
+--- PAGE 13 ---
+ 
+Information department – FIT- VNUHCM-US Page 9 
+ 
+of the referenced table.]) 
+Define domain constraint: 
+Syntax  Example  
+ALTER TABLE [Table name]  
+ADD CONSTRAINT [Constraint name]  
+CHECK ([Conditional Expression]) 
+Add a constraint requiring Phái to be 
+either Nam or Nữ 
+ALTER TABLE GIAOVIEN  
+ADD CONSTRAINT C_PHAI  
+CHECK (PHAI IN ('Nam', N'Nữ')) 
+ 
+Create a UNIQUE constraint (candidate key)2: 
+Syntax  Example  
+ALTER TABLE [Table name]  
+ADD CONSTRAINT [Constraint name]  
+UNIQUE ([List of attributes]) 
+Add a constraint requiring the full 
+name (Họ tên) to be unique. 
+ALTER TABLE GIAOVIEN  
+ADD CONSTRAINT U_HOTEN 
+UNIQUE (HOTEN) 
+ 
+Drop a primary key, foreign key, or domain constraint: 
+Syntax  Example 
+ALTER TABLE [Table name] DROP 
+CONSTRAINT [Constraint name] 
+Drop a primary key: 
+ALTER TABLE GIAOVIEN DROP 
+ 
+2 A unique constraint is also considered a key, and foreign keys can reference columns 
+that have been defined with a UNIQUE constraint. 
+--- PAGE 14 ---
+ 
+CONSTRAINT PK_GIAOVIEN 
+Drop a foreign key: 
+ALTER TABLE BOMON DROP 
+CONSTRAINT FK_BOMON_KHOA 
+2.1.6 Add, modify, or drop table attributes 
+Add attributes: 
+Syntax  Example  
+ALTER TABLE [Table name]  
+ADD [Attribute] [Data type] 
+Add the DIACHI attribute: 
+ALTER TABLE GIAOVIEN  
+ADD DIACHI nvarchar(20) 
+ 
+Drop attribute 
+Syntax  Example  
+ALTER TABLE [Table name]  
+DROP COLUMN [Attribute] 
+Drop the DIACHI attribute 
+ALTER TABLE GIAOVIEN  
+DROP COLUMN DIACHI 
+ 
+Modify attribute: 
+Cú pháp  Ví dụ  
+ALTER TABLE [Table name]  
+ALTER COLUMN [Attribute] [New data 
+type] 
+Modify the DIACHI attribute 
+ALTER TABLE GIAOVIEN 
+ALTER COLUMN DiaChi nvarchar(100) 
+ 
+--- PAGE 15 ---
+ 
+Information department – FIT- VNUHCM-US Page 11 
+ 
+2.1.7 Drop table 
+Cú pháp  Ví dụ  
+DROP TABLE [Table name] Drop the GIAOVIEN table 
+DROP TABLE GIAOVIEN 
+Dropping tables with foreign key relationships: 
+General rule: A table cannot be dropped if it is referenced by a foreign key 
+constraint. 
+Therefore: 
+1. If there is no circular dependency , drop the foreign-key (child) tables  
+first, then drop the referenced (parent) tables. Alternatively, drop the 
+foreign key constraints first and then drop the tables.  
+2. If there is a circular dependency , drop one foreign key constraint to 
+break the cycle, then follow the procedure in (1). 
+2.1.8 Useful Statements for Inspecting Metadata  
+Syntax  Example  
+Retrieve metadata information about a 
+database object: 
+sp_help [Table name] 
+sp_help GIAOVIEN 
+View primary key information: 
+sp_pkeys [Table name] 
+sp_pkeys GIAOVIEN 
+View foreign key information: 
+sp_fkeys [Table name] 
+sp_fkeys GIAOVIEN 
+2.1.9 Notes  
+− A primary key may consist of multiple attributes, which is called a 
+composite primary key.  
+--- PAGE 16 ---
+ 
+− A table can define at most one primary key, but it may define multiple 
+candidate keys. 
+− A candidate key is implemented as a UNIQUE constraint. 
+− A foreign key must reference a key. In the examples above, foreign keys 
+reference primary keys; however, a foreign key may also reference a 
+candidate key (UNIQUE). 
+− Primary key and foreign key names are mainly for readability, but students 
+should follow a consistent naming convention for clarity (e.g., primary key 
+names start with PK_, foreign key names start with FK_). 
+− For composite primary keys or foreign keys, list the columns separated by 
+commas. 
+2.2  Inserting and Updating Data 
+2.2.1 Syntax for Inserting a Single Row into a Table 
+Syntax  Example  
+Implicit insert syntax:  
+INSERT INTO  [Table name]  
+VALUES  ([val1], [val2], ..., [valn]) 
+Notes : The [val1], [val2], ..., [valn]) correspond 
+to the table’s columns. Therefore, the user 
+must know the column order in order to 
+supply values that match the table structure 
+defined in the CREATE TABLE statement. 
+Assume the table: GIAOVIEN (MAGV, HOTEN, 
+NGSINH, LUONG) 
+Insert one row into GIAOVIEN with all values 
+provided: 
+INSERT INTO  GIAOVIEN  VALUES  ('GV01', 
+'Nguyen Van An', '12/1/2008', 10000) 
+Insert one row into GIAOVIEN where LUONG is 
+NULL: 
+INSERT INTO  GIAOVIEN  VALUES  ('GV02', 
+'Tran Thi Be, '12/1/2008', NULL) 
+Explicit insert syntax:  
+INSERT INTO  [Table name] ([att1], [att2], ..., 
+[attn]) 
+VALUES  ([val1], [val2], ..., [valn]) 
+Lưu ý: The inserted values must correspond 
+Insert one row into GIAOVIEN with all values 
+provided: 
+INSERT INTO  NHANVIEN  (MAGV, HOTEN, 
+NGSINH, LUONG) VALUES  ('NV03', 'Nguyen 
+Manh Hung', '12/1/2008', 40000) 
+--- PAGE 17 ---
+ 
+Information department – FIT- VNUHCM-US Page 13 
+ 
+to the declared attributes. Insert one row into GIAOVIEN where LUONG is 
+NULL: 
+INSERT INTO  GIAOVIEN  (MAGV, HOTEN, 
+NGSINH) VALUES  ('NV04', 'Nguyen Manh 
+Hung', '12/1/2008') 
+Insert data from an existing source:  
+INSERT INTO  ...  SELECT ... 
+Key point: This approach can insert multiple 
+rows in a single statement. 
+ 
+2.2.2 Inserting String and Date/Time Data 
+Syntax Example 
+Insert Unicode string:  
+Prefix Unicode string literals with N. 
+INSERT INTO  GIAOVIEN VALUES  ('NV01', 
+N'Nguyễn Văn Trường', '12/30/1955', 5000) 
+Insert date and time: 
+Default Datetime input format : 
+'mm/dd/yyyy' 
+INSERT INTO  GIAOVIEN VALUES  ('NV01', 
+N'Nguyễn Văn Trường', '12/30/1955', 5000) 
+Insert a row in which one value is NULL3 
+Use NULL keyword 
+INSERT INTO  GIAOVIEN VALUES  ('NV01', 
+'Tran Thi Be', '12/1/2008', NULL) 
+ 
+  
+ 
+3 If a column is declared as NOT NULL in the table definition, it must have a value when 
+inserting a row into the table. 
+--- PAGE 18 ---
+ 
+2.2.3 Inserting Data with Foreign Key Constraints 
+Case 1:  
+ 
+Approach 1: 
+1. Step 1 : Input KHOA  
+2. Step 2 : Input BOMON 
+Approach 2: 
+1. Step 1 : Input BOMON with MAKHOA 
+= NULL 
+2. Step 2 : Input KHOA 
+3. Step 3 : Update the MAKHOA 
+attribute in the BOMON table 
+ 
+Case 2: 
+ 
+Approach 1:  
+Step 1 : Input GIAOVIEN, with MABM = 
+NULL 
+Step 2 : Input BOMON 
+Step 3 : Update the MABM attribute 
+inside GIAOVIEN 
+Approach 2 : 
+Step 1 : Input BOMON, with TRBOMON = 
+NULL 
+Step 2 : Input GIAOVIEN 
+Step 3 : Update the TRBOMON attribute 
+inside BOMON 
+ 
+
+--- PAGE 19 ---
+ 
+Information department – FIT- VNUHCM-US Page 15 
+ 
+Case 3: 
+ 
+Approach 1 : 
+Step 1: First, insert the GIAOVIEN 
+records whose MANQL is NULL. 
+Step 2: Then, insert the GIAOVIEN 
+records for which the manager (NQL) 
+information has already been inserted. 
+Approach 2 : 
+Step 1. Insert all GIAOVIEN records, 
+setting MANQL to NULL 
+Step 2. Update MANQL for GIAOVIEN. 
+2.2.4 Viewing and Deleting Data 
+Syntax  Example 
+Retrieve all data from a table: 
+SELECT * FROM [Tên bảng] 
+View all data of the  GIAOVIEN table: 
+SELECT * FROM GIAOVIEN 
+Delete data froma table: 
+DELETE FROM [Table name]  
+WHERE [Condition] 
+Delete the teacher with id NV01 from the 
+GIAOVIEN table: 
+DELETE FROM GIAOVIEN WHERE MAGV = 
+'GV01'  
+Delete all data from the GIAOVIEN table: 
+DELETE FROM NHANVIEN 
+2.2.5 Updating data 
+Syntax  Example  
+UPDATE TABLE  [Table name]  
+SET  [att1] = [val1], [att2] = [val2], ..., [attn] = 
+[valn] 
+WHERE ([Condition])  
+Notes: If the WHERE clause is omitted, all 
+Increase the salary of all teachers with a salary 
+below 50,000 by 10%: 
+UPDATE TABLE  GIAOVIEN  
+SET  LUONG=LUONG * 1.1 
+
+--- PAGE 20 ---
+ 
+rows in the table will be updated. WHERE LUONG < 50000 
+ 
+Update the name and date of birth of the 
+teacher with MAGV = '001' to 'Hùng' and 
+'1/1/1984':  
+UPDATE TABLE  GIAOVIEN 
+SET  HOTEN = N'Hùng', NGSINH='1/1/1984' 
+WHERE MAGV='001' 
+2.2.6 Best Practices 
+In practice, the workflow for building a database schema and loading data is 
+usually as follows: 
+Step 1: Create tables and define primary key constraints. 
+Step 2: Define foreign key constraints and other constraints. 
+Step 3: Insert data. 
+2.2.7 Creating a Database Diagram Using Enterprise Manager 
+Purpose: To view tables and their relationships in a visual (diagram) form. 
+Step 1: Right-click and select New Database Diagram, as shown in the figure. 
+--- PAGE 21 ---
+ 
+Information department – FIT- VNUHCM-US Page 17 
+ 
+ 
+Step 2: Select Next. 
+
+--- PAGE 22 ---
+ 
+ 
+Step 3: Select (Add) the tables to display in the diagram. 
+ 
+Step 4: Select Finish. 
+
+--- PAGE 23 ---
+ 
+Information department – FIT- VNUHCM-US Page 19 
+ 
+ 
+Step 5: View the diagram. 
+
+--- PAGE 24 ---
+ 
+ 
+ 
+  
+
+--- PAGE 25 ---
+ 
+Information department – FIT- VNUHCM-US Page 21 
+ 
+3 In-Class Exercises 
+Requirement: Write a script to create the schema and insert data for the 
+GIAOVIEN, BOMON, and KHOA tables in the Quan ly DE TAI exercise. 
+Duration: 1 hour. 
+4 Homework Exercises 
+Requirement: 
+Complete the script to create the schema and insert data for the Quan ly DE 
+TAI database. 
+Duration: 3 hours. 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 

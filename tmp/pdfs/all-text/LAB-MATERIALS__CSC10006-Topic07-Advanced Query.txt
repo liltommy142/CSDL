@@ -1,0 +1,260 @@
+
+--- PAGE 1 ---
+Information department – FIT- VNUHCM-US page 1
+Advanced Query
+CSC10006 – Introduction to Database
+--- PAGE 2 ---
+TABLE OF CONTENTS
+1 Objectives........................................................................................................................................ 1
+2 Detailed Instructions........................................................................................................................ 1
+2.1 Extended INSERT, UPDATE statements................................................................................. 1
+2.1.1 UPDATE data from existing data:...................................................................................... 1
+2.1.2 INSERT data into a table from an existing table................................................................ 1
+2.2 Joining....................................................................................................................................... 2
+2.2.1 Inner joins.......................................................................................................................... 2
+2.2.2 Right (Outer) joins............................................................................................................. 3
+2.2.3 Left (Outer) joins................................................................................................................ 4
+2.2.4 Full (Outer) joins................................................................................................................ 4
+2.3 Query with CASE structure....................................................................................................... 6
+2.3.1 Structure 1.......................................................................................................................... 6
+2.3.2 Structure 2.......................................................................................................................... 6
+2.4 Use GROUP BY … WITH CUBE | ROLLUP.......................................................................... 7
+2.4.1 GROUP BY … WITH CUBE............................................................................................ 7
+2.4.2 GROUP BY … WITH ROLLUP....................................................................................... 8
+2.5 Use GROUP BY … WITH CUBE | ROLLUP với GROUPING function................................ 8
+2.5.1 Case 1:................................................................................................................................ 8
+2.5.2 Case 2 (Modified data) → Problem ???............................................................................. 9
+2.5.3 Using GROUPING:.......................................................................................................... 10
+2.6 Using Case ... End with Grouping........................................................................................... 11
+3 In-Class Exercises.......................................................................................................................... 11
+4 Homework Exercises..................................................................................................................... 12
+Information department – FIT- VNUHCM-US page 2
+--- PAGE 3 ---
+1 Objectives 
+After completing this lab, students will be able to:
+ Extended INSERT, UPDATE statements
+ Use outer joins
+ Query with CASE structure
+ Use GROUP BY … WITH CUBE | ROLLUP 
+ Use GROUPING SET and GROUPING function
+ Use CASE structure with GROUPING
+2 Detailed Instructions 
+2.1 Extended INSERT, UPDATE statements
+Consider the following 2 data tables:
+SINHVIEN (MASV, HOTEN, DIEMTB, HANG)
+SINHVIENGIOI (MASV, HOTEN, DIEMTB)
+2.1.1 UPDATE data from existing data:  
+Example 1: Update student ranking
+2.1.2 INSERT data into a table from an existing table  
+Example 2: Add data to SINHVIENGIOI table for students with average score of 8.0 or 
+higher
+Information department – FIT- VNUHCM-US page 1
+--- PAGE 4 ---
+2.2 Joining
+Consider the following 2 data tables:
+SINHVIEN LOP
+Requirement: Show the number of students in each class
+2.2.1 Inner joins  
+Inner join between 2 tables A and B is a table C = {tuples where each tuple is a combination of 
+tuples in A with tuples in B such that the join condition is satisfied}
+To Inner join between SINHVIEN and LOP :
+-- Using JOIN:
+SELECT * 
+FROM SINHVIEN AS SV JOIN LOP AS L ON SV.MALOP = L.MALOP
+-- Or using join condition in WHERE clause:
+SELECT *
+FROM SINHVIEN SV, LOP L
+WHERE SV.MALOP = L.MALOP
+Information department – FIT- VNUHCM-US page 2
+
+--- PAGE 5 ---
+Result :
+Observation: Information about class 10C is lost
+To Calculate number of student in each class :
+SELECT L.MALOP, L.TENLOP, COUNT(*) AS SISO
+FROM SINHVIEN AS SV JOIN LOP AS L ON SV.MALOP = L.MALOP
+GROUP BY L.MALOP, L.TENLOP
+Result :
+Observation: The size of class 10C (equal to 0) is not displayed, because information about class
+10C was lost after the inner join. Therefore, with inner join, tuples that do not satisfy the join
+condition will be removed. If you want it to appear → Use outer join.
+2.2.2 Right (Outer) joins  
+Right Outer  join between 2 tables A and B is a table C = {tuples where each tuple is a
+combination  of  tuples  in  A  with  tuples  in  B  such  that  the  join  condition  is  satisfied}  +
+{remaining tuples in B that do not satisfy the join condition with any tuple in A}
+To Right (Outer) Joins between SINHVIEN and LOP :
+SELECT * 
+FROM SINHVIEN as SV RIGHT JOIN LOP as L ON SV.MALOP = L.MALOP
+Result: 
+Information department – FIT- VNUHCM-US page 3
+
+--- PAGE 6 ---
+Observation: Although class (10C) hasn’t any student, but it still appear in result (because the
+Right Outer Join preserve the class 10C).
+2.2.3 Left (Outer) joins  
+Left (Outer) join between 2 tables A and B is a table C = {tuples where each tuple is a 
+combination of tuples in A with tuples in B such that the join condition is satisfied} + 
+{remaining tuples in A that do not satisfy the join condition with any tuple in B}
+2.2.4 Full (Outer) joins  
+Full Outer join between 2 tables A and B is a table C = 
+{tuples where each tuple is a combination of tuples in A with tuples in B such that the join
+condition is satisfied} + 
+{remaining tuples in A that do not satisfy the join condition with any tuple in B} + 
+{remaining tuples in B that do not satisfy the join condition with any tuple in A}
+Consider the following 2 data tables:
+PUBLISHER
+Information department – FIT- VNUHCM-US page 4
+
+--- PAGE 7 ---
+AUTHORS
+SELECT *
+FROM AUTHORS FULL JOIN PUBLISHERS ON city = pcity
+Result :
+Information department – FIT- VNUHCM-US page 5
+
+--- PAGE 8 ---
+2.3 Query with CASE structure
+2.3.1 Structure 1  
+Example 7: Show employee names and retirement year
+Example 8: Show names of employees who have reached retirement age (male 60 years old,
+female 55 years old)
+2.3.2 Structure 2  
+Information department – FIT- VNUHCM-US page 6
+
+--- PAGE 9 ---
+Example 9: Show students and their academic performance classification
+2.4 Use GROUP BY … WITH CUBE | ROLLUP 
+2.4.1 GROUP BY … WITH CUBE  
+Given the ITEM data table as follows:
+Example 10: Aggregate the quantity of items by name and color, by each name, by each color, 
+total items.
+Kết quả là :
+Information department – FIT- VNUHCM-US page 7
+Số lượng Item tên Chair và màu Blue là 101
+Số lượng Item (tên bất kỳ, màu bất kỳ) = tổng số item là  
+658
+Số lượng Item tên Table (màu bất kỳ) là : 347
+Số lượng Item màu Red (tên bất kỳ) : 433
+--- PAGE 10 ---
+Notes:
+- Group by n attributes → will aggregate by 2^n criteria
+- Aggregations with no data will not be displayed
+2.4.2 GROUP BY … WITH ROLLUP  
+Example 11: Aggregate the quantity of items by each name and color, by each name, total items
+Kết quả là :
+Lược bỏ 2 thống kê theo : (tên bất kỳ, màu đỏ)  và (tên bất kỳ, màu xanh)
+2.5 Use GROUP BY … WITH CUBE | ROLLUP với GROUPING function
+2.5.1 Case 1:   
+Example 12. Show the quantity of items for (each name, each color), (each name), (each color)
+Information department – FIT- VNUHCM-US page 8
+Thống kê theo  từng tên  và màu, theo  từng
+tên tương tự WITH CUBE nhưng loại bỏ
+bớt tiêu chí thống kê : Các thống kê theo tên
+bất kỳ và một màu nào đó bị lược bỏ
+Số lượng Item tên Table (màu bất kỳ) là : 347
+Số lượng Item (tên bất kỳ, màu bất kỳ) = tổng số item là  
+658
+Số lượng Item tên Chair và màu Blue là 101
+--- PAGE 11 ---
+Kết quả :
+2.5.2 Case 2 (Modified data) → Problem ???  
+Modify data in the above table:
+Result of re-executing the query:
+→ Cannot distinguish what NULL means here: is name equal to NULL or does it mean any 
+name → Solution: Use Grouping to determine
+Information department – FIT- VNUHCM-US page 9
+Số lượng item Chair (màu bất kỳ : NULL) là 101
+ Ở đây hiểu NULL là màu bất kỳ
+Số lượng item (tên bất kỳ : NULL, màu bất kỳ : 
+NULL) là 673 
+NULL được hiểu là : Màu bất kỳ
+NULL được hiểu là : Màu bất kỳ
+NULL được hiểu là : Tên bất kỳ
+Có một item có 
+itemname giá trị NULL
+NULL được hiểu là tên bất kỳ 
+hay là itemname = NULL 
+ ????
+--- PAGE 12 ---
+2.5.3 Using GROUPING:  
+Syntax: GROUPING (<attribute name>)
+Grouping is used to check whether the value of an attribute in the query result is from actual data
+or generated by the query
+Explanation with the above example:
+- If Grouping value of attribute name (itemname) is 1 → NULL value appears due to CUBE 
+clause → meaning any name (generated by the query)
+- If Grouping value of attribute name (itemname) is 0 → NULL value means the item's name is 
+NULL (from actual data: itemname is NULL).
+Example:
+Result:
+Information department – FIT- VNUHCM-US page 10
+NULL được hiểu là itemname = NULL
+do Grouping(itemname)=0
+ Item NULL màu đỏ có số 
+lượng là 225
+NULL được hiểu là tên bất kỳ do 
+Grouping(itemname) = 1
+ Item bất kỳ, màu đỏ có số 
+lượng là 448
+--- PAGE 13 ---
+2.6 Using Case ... End with Grouping
+Kết quả là:
+3 In-Class Exercises
+Requirements: Write the following queries in SQL language, using the Project Management 
+database.
+ Q75. Show teacher names and department names they head if any
+ Q76. Show list of department names and department head names if any
+ Q77. Show list of teacher names and projects they lead if any
+ Q78. Delete projects under topic "NCPT".
+Information department – FIT- VNUHCM-US page 11
+--- PAGE 14 ---
+ Q79. Output teacher information (MAGV, HOTEN) and teacher's salary level. Salary 
+level is classified by rule: Teacher salary < $1800: "LOW"; From $1800 to $2200: 
+AVERAGE; Salary > $2200: "HIGH"
+ Q80. Output teacher information (MAGV, HOTEN) and rank based on salary. If teacher 
+has highest salary then rank is 1.
+ Q81. Output teacher income information. Teacher income is calculated as SALARY + 
+ALLOWANCE. If teacher is department head then ALLOWANCE is 300, and if teacher 
+is faculty dean then ALLOWANCE is 600.
+ Q82. Output the year the teacher is expected to retire with regulations: Retirement age for
+Male is 60, for Female is 55.
+4 Homework Exercises
+Requirements: Write the following queries in SQL language, using the Project Management 
+database.
+ Q83. Show the list of all teachers (magv, hoten) and the name of the teacher who is their 
+academic supervisor.
+ Q84. Show the list of all departments (mabm, tenbm), department head name and the 
+number of teachers in each department.
+ Q85. Show the list of all male teachers and information about the tasks they participated 
+in.
+ Q86. Show the list of all teachers and information about tasks in project 001 that they 
+participated in.
+ Q87. Show information about department heads (magv, hoten) who will retire in 2014. 
+Note that the retirement age for male teachers is 60 and female teachers is 55.
+ Q88. Show information about faculty deans (magv) and the year they will retire.
+ Q89. Create table DANHSACHTHIDUA (magv, sodtdat, danhhieu) containing teacher 
+ID, number of successful projects they participated in, and emulation title:
+Information department – FIT- VNUHCM-US page 12
+--- PAGE 15 ---
++ Insert data for this table (leave title column empty)
++ Based on sldtdat column (number of projects with "pass" result) to update data for title 
+column according to regulations:
+  - Sodtdat = 0 then title "not completed tasks"
+  - 1 <= Sodtdat <= 2 then title "completed tasks"
+  - 3 <= Sodtdat <= 5 then title "advanced"
+  - Sodtdat >= 6 then title "excellent worker"
+ Q90. Show magv, name and salary level of female teachers in "Information Technology" 
+faculty, average salary, maximum and minimum salary of these teachers.
+ Q91. Show makhoa, tenkhoa, number of teachers in each faculty, average, maximum and 
+minimum number of teachers in these faculties.
+ Q92. Show list of topic names, budget for topics (budget allocated to projects under the 
+topic), total budget, maximum and minimum budget for topics.
+ Q93. Show madt, tendt, project budget, total and average budget of these projects by each
+project leader.
+ Q94. Show madt, tendt, project budget, total and average budget of these projects by each
+project level.
+ Q95. Aggregate the number of projects by (level, topic), by (level), by (topic).
+ Q96. Aggregate total salary of teachers by (department, gender), by (department).
+ Q97. Aggregate the number of teachers in IT faculty by (department, salary), by 
+(department), by (salary).
+Information department – FIT- VNUHCM-US page 13

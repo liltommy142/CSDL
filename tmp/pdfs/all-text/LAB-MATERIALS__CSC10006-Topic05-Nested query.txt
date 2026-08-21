@@ -1,0 +1,342 @@
+
+--- PAGE 1 ---
+Information department – FIT- VNUHCM-US page 1
+CSC10006 – Introduction to Database
+Nested query
+--- PAGE 2 ---
+TABLE OF CONTENTS
+1 Objectives................................................................................................................................... 1
+2 Detailed Instructions................................................................................................................... 1
+2.1.1 General SQL Query Syntax........................................................................................... 1
+2.1.2 Simple Queries.............................................................................................................. 2
+2.1.3 Queries with Sorting..................................................................................................... 4
+2.1.4 Queries with Simple Conditions................................................................................. 5
+3.1.1 Queries with String Conditions..................................................................................... 8
+3.1.2 Queries with Date and Time Conditions....................................................................... 9
+3.1.3 Using Functions in Queries......................................................................................... 10
+3.1.4 Supported Set Operators in SQL Server...................................................................... 11
+3.1.5 Join Operations........................................................................................................... 12
+3.1.6 Using ALIAS.............................................................................................................. 13
+3.1.7 Using JOIN................................................................................................................. 15
+4 In-Class Exercises..................................................................................................................... 15
+Information department – FIT- VNUHCM-US page 2
+--- PAGE 3 ---
+1 Objectives 
+After completing this lab, students will be able to:
+- Understand the concepts of nested queries, hierarchical nested queries, and
+correlated subqueries
+- Write hierarchical nested queries
+- Use the operators IN, NOT IN, ALL, ANY, and SOME
+- Use the operators EXISTS and NOT EXISTS
+- Apply hierarchical nested queries
+- Apply correlated subqueries
+- Use nested queries in combination with grouping 
+2 Detailed Instructions 
+2.1 Introduction to Nested Queries
+Definition: A nested query (subquery) is a query that contains another query
+within its statement.
+Syntax:
+SELECT A
+FROM X
+WHERE … ( SELECT B  FROM  Y WHERE …)  …
+Based on the characteristics of subqueries, nested queries can be classified into
+two main types:
+Hierarchical Nested Queries: A hierarchical nested query is a query in which 
+the subquery is independent of the outer (parent) query
+SELECT A
+FROM X
+WHERE ... (SELECT B, C FROM Y) ...
+Information department – FIT- VNUHCM-US page 1
+--- PAGE 4 ---
+In  this  example,  the  subquery  SELECT  B,  C  FROM  Y  does  not reference  any
+component of the outer query. Therefore, it is classified as a  hierarchical nested
+query.
+Correlated Subqueries: A correlated subquery is a query in which the subquery 
+depends on the outer query
+SELECT A
+FROM X
+WHERE ... (SELECT B, C FROM Y WHERE B = X.A) ...
+In this example, the subquery SELECT B, C FROM Y WHERE B = X.A references a
+column from the outer query through the comparison B = X.A. Therefore, this is a
+correlated subquery.
+2.2 Placement of Subqueries in the Outer Query: 
+A subquery can appear in different parts of the outer query. Common positions 
+include the SELECT, FROM, and most commonly, the WHERE clause.
+2.2.1 Subquery in the SELECT Clause
+The result of the subquery is treated as a single attribute value.
+Example 1: For each department, retrieve the department name and the number of 
+teachers in that department.
+SELECT BM.TENBM, ( SELECT COUNT(*) 
+FROM GIAOVIEN GV 
+WHERE GV.MABM = BM.MABM)
+FROM BOMON BM
+2.2.2 Subquery in the FROM Clause
+The result of the subquery is treated as a derived table, which can be queried like a 
+regular table.
+Example 2: Retrieve the full name and salary of teachers in the HTTT department
+Information department – FIT- VNUHCM-US page 2
+--- PAGE 5 ---
+SELECT T.HOTEN, T.LNG
+FROM  ( SELECT MAGV, HOTEN, LUONG as LNG 
+FROM GIAOVIEN 
+WHERE MABM= ‘HTTT’) as T
+2.2.3 Subquery in the WHERE Clause
+The result of the subquery is used as part of a conditional expression
+Example 3: Retrieve teachers whose salary is greater than the salary of the teacher 
+with MAGV = '001'
+SELECT *
+FROM  GIAOVIEN
+WHERE LUONG > (SELECT LUONG
+FROM GIAOVIEN
+WHERE MAGV= ‘001’)
+2.3 Hierarchical Nested Queries with the IN Operator
+The IN operator is used to check whether a value belongs to a given set of values.
+This set can be the result of a subquery or an explicitly specified list of values (see 
+Topic 03 – Basic Queries).
+Syntax: <attribute> IN <set>
+<attribute> IN (     SELECT ...
+FROM ...
+WHERE ...)
+Or: 
+<attribute> IN (value1, value2, ..., valueN)
+The condition evaluates to TRUE if the attribute value appears in the set; otherwise, 
+it evaluates to FALSE.
+Information department – FIT- VNUHCM-US page 3
+--- PAGE 6 ---
+Example 4: Retrieve the names of teachers who do not have any relatives.
+SELECT HOTEN
+FROM GIAOVIEN
+WHERE MAGV NOT IN (SELECT MAGV FROM NGUOITHAN)
+Example 5: Retrieve teachers who participate in at least one project
+SELECT *
+FROM GIAOVIEN
+WHERE MAGV IN (SELECT MAGV FROM THAMGIADT)
+2.4 Hierarchical Nested Queries with the ALL Operator
+The ALL operator is used together with comparison operators such as
+>, <, >=, <=, !=, etc.
+Syntax: <attribute> [> | < | >= | <= | !=] ALL <set>
+This condition evaluates to TRUE if the attribute value satisfies the comparison with
+all elements in the set
+Example 6: Retrieve teachers who have the lowest salary.
+SELECT *
+FROM GIAOVIEN
+WHERE LUONG <= ALL (SELECT LUONG FROM GIAOVIEN)
+Example 7 : Retrieve teachers whose salary is higher than all teachers in the HTTT
+department.
+SELECT *
+FROM GIAOVIEN
+WHERE LUONG >=ALL(SELECT LUONG 
+                                               FROM GIAOVIEN 
+                                   WHERE MABM= ‘HTTT’)
+Information department – FIT- VNUHCM-US page 4
+--- PAGE 7 ---
+Example 8 : Retrieve the department code(s) (MABM) with the largest number of
+teachers.
+SELECT MABM
+FROM GIAOVIEN
+GROUP BY MAMB
+HAVING COUNT(*) >=ALL( SELECT COUNT(*)
+FROM GIAOVIEN 
+GROUP BY MABM)
+Example 9: Retrieve the names of teachers who do not have any relatives (using ALL
+instead of NOT IN).
+SELECT HOTEN
+FROM GIAOVIEN
+GROUP BY MAGV != ALL ( SELECT MAGV
+FROM NGUOITHAN)
+2.5 Hierarchical Nested Queries with ANY and SOME
+The syntax for using ANY and SOME is similar to that of ALL.
+ ALL: the condition must be satisfied for all values in the set.
+ ANY / SOME: the condition must be satisfied for at least one value in the set.
+Example 10: Retrieve the names of teachers who participate in at least one project 
+(using = ANY instead of IN).
+SELECT HOTEN
+FROM GIAOVIEN
+WHERE  MAGV = ANY (SELECT MAGV
+FROM THAMGIADT)
+Explanation:
+Information department – FIT- VNUHCM-US page 5
+--- PAGE 8 ---
+ = ANY (subquery) means the value matches at least one  value returned by the
+subquery.
+ This query is logically equivalent to using IN.
+2.6 Correlated Subqueries with EXISTS
+EXISTS is commonly used in conditional expressions
+… EXISTS ( SELECT …
+FROM …
+WHERE … )
+ The EXISTS condition evaluates to TRUE if the subquery returns one or more
+rows.
+ If the subquery returns no rows, the condition evaluates to FALSE
+ EXISTS is most commonly used in correlated subqueries.
+ Unlike IN, EXISTS only checks for the existence of rows, not actual values, and
+is often more efficient for large datasets
+Example 11: Retrieve teachers who participate in at least one project.
+SELECT HOTEN
+FROM GIAOVIEN GV
+WHERE EXISTS ( SELECT * 
+FROM THAMGIADT TG
+WHERE TG.MAGV = GV.MAGV)
+Information department – FIT- VNUHCM-US page 6
+--- PAGE 9 ---
+Example 12: Retrieve teachers who do not have any relatives
+SELECT HOTEN
+FROM GIAOVIEN GV
+WHERE NOT EXISTS ( SELECT * 
+FROM NGUOITHAN NT
+WHERE NT.MAGV = GV.MAGV)
+Example 13: Retrieve teachers who do not have any relatives
+SELECT HOTEN
+FROM GIAOVIEN GV
+WHERE NOT EXISTS ( SELECT * 
+FROM NGUOITHAN NT
+WHERE NT.MAGV = GV.MAGV)
+2.7 Additional Examples of Correlated Subqueries
+Example 14: Retrieve teachers whose salary is higher than the average salary of the 
+department in which they work.
+SELECT HOTEN
+FROM GIAOVIEN GV1
+WHERE GV1.LUONG > ( SELECT AVG (GV2.LUONG) 
+FROM GIAOVIEN GV2
+WHERE GV2.MABM = GV1.MABM)
+Information department – FIT- VNUHCM-US page 7
+--- PAGE 10 ---
+Example 15: Retrieve teachers who have the highest salary.
+SELECT HOTEN
+FROM GIAOVIEN GV1
+WHERE  ( SELECT COUNT(*)
+FROM GIAOVIEN GV2
+WHERE GV2.LUONG > GV1.LUONG) = 0
+Example 16: Retrieve projects in which teacher ‘001’ does not participate
+Solution 1: Using NOT EXISTS
+SELECT MADT
+FROM DETAI DT
+WHERE  NOT EXISTS ( SELECT *
+FROM THAMGIADT TG
+WHERE TG.MADT = DT.MADT AND MAGV= ‘001’)
+Solution 2: Using NOT IN
+SELECT MADT
+FROM DETAI
+WHERE MADT NOT IN ( SELECT MADT
+FROM THAMGIADT
+WHERE MAGV = ‘001’)
+2.8 A Query Can Be Solved in Multiple Ways
+Example 17: Retrieve the names of teachers who have an academic supervisory role 
+over other teachers
+Information department – FIT- VNUHCM-US page 8
+--- PAGE 11 ---
+Using EXISTS  :  
+SELECT GV1.HOTEN
+FROM GIAOVIEN GV1
+WHERE EXISTS ( SELECT * 
+FROM GIAOVIEN GV2
+WHERE GV2.GVQLCM = GV1.MAGV)
+Using IN:
+SELECT HOTEN
+FROM GIAOVIEN
+WHERE MAGV IN ( SELECT GVQLCM 
+FROM GIAOVIEN)
+Using join:
+SELECT DISTINCT GV2.HOTEN
+FROM GIAOVIEN GV1, GIAOVIEN GV2
+WHERE GV1.GVQLCM = GV2.MAGV
+2.9 Nested Queries with Aggregation and Grouping
+Example 18: Retrieve teachers who have the highest salary.
+SELECT MABM
+FROM GIAOVIEN
+WHERE LUONG =(SELECT MAX(LUONG)
+FROM GIAOVIEN)
+OR
+SELECT MABM
+FROM GIAOVIEN
+WHERE LUONG >= ALL (SELECT LUONG
+FROM GIAOVIEN)
+Information department – FIT- VNUHCM-US page 9
+--- PAGE 12 ---
+Example 19: Retrieve the department code(s) (MABM) with the highest number of 
+teachers
+SELECT MABM
+FROM GIAOVIEN
+GROUP BY MABM
+HAVING COUNT(*) >= ALL ( SELECT COUNT(*)
+FROM GIAOVIEN GV
+GROUP BY GV.MABM)
+OR
+SELECT MABM
+FROM GIAOVIEN
+GROUP BY MABM
+HAVING COUNT(*) = ( SELECT MAX (SLGV)
+FROM ( SELECT COUNT(*) AS SLGV
+FROM GIAOVIEN
+GROUP BY MABM) AS T )
+Example 20 : Retrieve the department name, the department head’s name, and the
+number of teachers for the department(s) with the highest number of teachers
+SELECT BM.TENBM, TBM.HOTEN, COUNT(*) AS SLGV
+FROM GIAOVIEN GV, BOMON BM, GIAOVIEN TBM
+WHERE GV.MABM = BM.MABM AND BM.TRUONGBM=TBM.MAGV 
+GROUP BY GV.MABM, TBM.HOTEN
+HAVING COUNT(*) >= ALL ( SELECT COUNT(*)
+FROM GIAOVIEN
+GROUP BY MABM)
+Information department – FIT- VNUHCM-US page 10
+--- PAGE 13 ---
+Example 21 : Retrieve teachers whose salary is higher than the average salary of
+teachers  in  the  Information  Systems  department,  but  who  do  not  belong  to  the
+Information Systems department.
+SELECT GV.HOTEN
+FROM GIAOVIEN GV
+WHERE LUONG >  ( SELECT AVG(GV.LUONG)
+FROM GIAOVIEN GV, BOMON BM
+WHERE GV.MABM=BM.MABM AND 
+    BM.TENBM = ‘Hệ thống thông tin’)
+Example  22:  Retrieve  the  name(s)  of  the  project(s)  with  the  highest  number  of
+participating teachers
+SELECT MAX (MADT)
+FROM DETAI
+WHERE LUONG >  ( SELECT MADT, COUNT (DISTINCT MAGV) AS SL
+FROM THAMGIADT
+GROUP BY MADT )
+3. In-class exercises
+Requirement: Write SQL queries Q35, Q37, …, Q57 for the “Quản lý đề tài” 
+exercise
+Duration: 2 hour.
+Q35. Retrieve the highest salary among lecturers.
+Q36. Retrieve teachers who have the highest salary.
+Q37. Retrieve the highest salary in the “HTTT” department.
+Q38. Retrieve the name of the oldest teacher in the Information Systems department.
+Q39. Retrieve  the  name  of  the  youngest  teacher  in  the  Faculty  of  Information
+Technology.
+Q40. Retrieve the teacher’s name and the faculty name of the teacher with the highest
+salary.
+Q41. Retrieve teachers who have the highest salary within their own department.
+Information department – FIT- VNUHCM-US page 11
+--- PAGE 14 ---
+Q42. Retrieve the names of projects that the teacher “Nguyễn Hoài An” has not
+participated in.
+Q43. Retrieve the projects that the teacher “Nguyễn Hoài An” has not participated in.
+Output the project name and the name of the project leader.
+Q44. Retrieve the names of teachers in the Faculty of Information Technology who
+have not participated in any project.
+Q45. Find teachers who do not participate in any project.
+Q46. Retrieve teachers whose salary is higher than the salary of the teacher “Nguyễn
+Hoài An”.
+Q47. Find department heads who participate in at least one project.
+Q48. Find teachers who have the same name and gender as another teacher in the
+same department.
+Q49. Find teachers whose salary is higher than the salary of at least one teacher in the
+“Công nghệ phần mềm” department.
+Q50. Find teachers whose salary is higher than the salary of all teachers in the “Hệ
+thống thông tin” department.
+Q51. Retrieve the name of the faculty that has the largest number of teachers.
+Q52. Retrieve the full name of the teacher who is the leader of the largest number of
+projects.
+Q53. Retrieve the department code that has the largest number of teachers.
+Q54. Retrieve  the  teacher’s  name  and  department  name  of  the  teacher  who
+participates in the largest number of projects.
+Q55. Retrieve the name of the teacher in the HTTT department who participates in
+the largest number of projects.
+Q56. Retrieve the teacher’s name and department name of the teacher who has the
+largest number of relatives.
+Q57. Retrieve the name of the department head who is the leader of the largest
+number of projects.
+Information department – FIT- VNUHCM-US page 12

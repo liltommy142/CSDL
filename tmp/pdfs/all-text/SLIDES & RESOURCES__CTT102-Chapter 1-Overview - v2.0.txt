@@ -1,0 +1,989 @@
+
+--- PAGE 1 ---
+fit@hcmus
+4.0
+Chapter 1
+An 
+Overview of Databases
+--- PAGE 2 ---
+4.0
+fit@hcmus
+Agenda
+ Introduction  
+ The evolution of database systems 
+ Characteristics of the database approach 
+ Database users
+ Architecture of a DBMS 
+ Properties of DBMS
+ Data models 
+ Database languages 
+--- PAGE 3 ---
+4.0
+fit@hcmus
+Introduction
+Introducti
+on2DB -
+FIT -
+HCMUS
+3
+Real business & 
+application
+Computers
+develop
+Marketing, production, banking, 
+education, entertainment, medical, …  →
+complex, richness
+Automate & support tasks
+How can computers 
+understand the real 
+world domain to 
+digitize & support 
+automation?
+--- PAGE 4 ---
+4.0
+fit@hcmus
+Introduction
+⬜Development process
+Introducti
+on2DB -
+FIT -
+HCMUS
+4
+Analyze & design
+Database
+Implementation
+Application
+(Operations)
+Data
+Processes, business 
+rules, interface
+Business environment
+--- PAGE 5 ---
+4.0
+fit@hcmus Introduction 
+ What is data ?
+ Raw facts that can be recorded and have inherent meaning
+ Pieces of data are individual pieces of information
+ Collection of facts such as numbers, words, measurements, 
+observations or even just descriptions of things represented in 
+a form suitable for processing by computer
+ Example
+ “Nguyễn Văn A” is a student’s name
+ “11.12.008 ” is a student’s ID
+ “19-02-2015” is a Tet day of 2015
+5
+--- PAGE 6 ---
+4.0
+fit@hcmus Introduction
+ What is a Database (DB)
+ A collection of related data that has a 
+specific purpose and meaning
+ A logically coherent collection of data, not a 
+random assortment 
+ Contains information relevant to a business 
+or organsisation
+6
+--- PAGE 7 ---
+4.0
+fit@hcmus Introduction
+ Database (DB)
+ DB is designed, built, and populated with data for a 
+specific purpose, for intended group of users or 
+applications  
+ DB is stored using a structure → structured database
+ Other types of database: unstructured databases, 
+document databases, graph databases
+ Example:
+ A list of students → data structure of group of students
+ A list of classes → data structure of classes
+7
+--- PAGE 8 ---
+4.0
+fit@hcmus
+Example 1 – Course Management 
+
+--- PAGE 9 ---
+4.0
+fit@hcmus
+Example 2 – Project management
+Introducti
+on2DB -
+FIT -
+HCMUS
+9
+PHANCONG MA_NVIEN SODA THOIGIAN
+123456789 1 32.5
+123456789 2 7.5
+666884444 3 40.0
+453453453 1 20.0
+DEAN TENDA MADA DDIEM_DA PHONG
+San pham X 1 VUNG TAU 5
+San pham Y 2 NHA TRANG 5
+San pham Z 3 TP HCM 5
+Tin hoc hoa 10 HA NOI 4
+NHANVIEN HONV TENLOT TENNV MANV NGSINH MA_NQL PHG
+Tran Hong Quang 987987987 03/09/1969 987654321 4
+Nguyen Thanh Tung 333445555 12/08/1955 888665555 5
+Nguyen Manh Hung 666884444 09/15/1962 333445555 5
+Tran Thanh Tam 453453453 07/31/1972 333445555 5
+--- PAGE 10 ---
+4.0
+4.0
+fit@hcmus Example 2 – PROJECT MANAGEMENT
+WORKS_ON SSN PNo Hours 
+123456789 1 32.5
+123456789 2 7.5
+666884444 3 40.0
+453453453 1 20.0
+PROJECT PName PNumber PLocation DNum
+San pham X 1 VUNG TAU 5
+San pham Y 2 NHA TRANG 5
+San pham Z 3 TP HCM 5
+Tin hoc hoa 10 HA NOI 4
+EMPLOYEE LName MName FName SSN BirthDate SuperSSN DNo
+Tran Hong Quang 987987987 03/09/1969 987654321 4
+Nguyen Thanh Tung 333445555 12/08/1955 888665555 5
+Nguyen Manh Hung 666884444 09/15/1962 333445555 5
+Tran Thanh Tam 453453453 07/31/1972 333445555 5
+--- PAGE 11 ---
+4.0
+fit@hcmus Introduction 
+ Database Management System (DBMS)
+ A collection of programs that enables users to 
+build, operate and maintain a database = software
+ A general-purpose software system that facilitates
+ Definition – specifying the data types, structures, and 
+constraints for the data
+ Construction – storing the data itself on some storage 
+medium 
+ Manipulation – querying the database to retrieve data, 
+updating the database to reflect changes, generating 
+reports from the data
+ Sharing – allowing multiple users/programs to access the 
+database concurrently  
+11
+--- PAGE 12 ---
+4.0
+fit@hcmus Introduction
+ Database Management System (DBMS)
+12
+Query/Program 
+Processing
+DBMS
+Data Accessing 
+DatabaseDatabase
+Definition
+Users/Programmers 
+Applications/Queries
+DB system 
+Catalog
+Set of programs 
+that enable users to 
+create, operate, 
+and maintain 
+databases
+--- PAGE 13 ---
+4.0
+fit@hcmus
+Quiz #1
+⬜What below statements are TRUE?
+A. DB is a collection of related data
+B. DB is collection of facts
+C. DB is stored in a structure called structured database
+D. “22-01-2023” is a data
+⬜DBMS is?
+A. A data set with the same structure
+B. Discrete data
+C. Tools supporting data or application programming
+D. A set of programs to build, operate, and maintain databases
+Introducti
+on2DB -
+FIT -
+HCMUS
+13
+--- PAGE 14 ---
+4.0
+fit@hcmus Content
+ Introduction 
+ The evolution of database systems
+ Characteristics of the database approach 
+ Database users
+ Architecture of a DBMS 
+ Properties of DBMS
+ Data models 
+ Database languages
+--- PAGE 15 ---
+4.0
+fit@hcmus Evolution 
+ File
+Data is stored in independent files
+Each program controls its own files
+No centralized data management
+Application 1
+Application 2
+Application 3
+File
+File
+File
+File 
+System
+Data
+--- PAGE 16 ---
+4.0
+fit@hcmus
+Evolution - Example
+Introducti
+on2DB -
+FIT -
+HCMUS
+16
+…
+struct STUDENT
+{
+char[10] StudentID;
+char[100] Name;
+};
+…
+<12345, Nguyen Van X>
+<54321, Tran Van Y>
+<21345, Vo Van Z>
+…
+Application/Program
+Data file
+Application declare data structure inside
+--- PAGE 17 ---
+4.0
+fit@hcmus Evolution 
+ Limitations 
+ Data redundancy (same data stored in many files)
+ Wasted storage space
+ Opportunities of the inconsistency (updates are not synced)
+ Data sharing is limited 
+ Difficult recovery
+ Low security
+ But, still be used in some applications 
+ Small size
+ Storing and accessing data only, not including other processing 
+operations 
+ Fee costs less
+ Operation or maintenance 
+--- PAGE 18 ---
+4.0
+fit@hcmus Evolution 
+ Database
+DBMS
+Application 1
+Application 2
+Application 3
+Database
+Centralized data storage
+Data is shared among multiple applications
+Managed by DBMS
+--- PAGE 19 ---
+4.0
+fit@hcmus Content
+ Introduction 
+ The evolution of database systems 
+ Characteristics of the database approach 
+- Self-describing 
+- Isolation between programs and data
+- Data abstraction 
+- Views of data
+- Sharing of data 
+ Database users
+ Architecture of a DBMS 
+ Properties of DBMS
+ Data models 
+ Database languages
+--- PAGE 20 ---
+4.0
+fit@hcmus Self-Describing 
+ DB systems contain not only the DB itself, but also 
+a complete definition/description of the DB structure 
+ This definition/description is stored in catalog 
+called “metadata”
+ Contains information such as the structure of data, type 
+and storage format of data items, and constraints on the 
+data  
+ Many applications can access to the DB 
+ Refer to catalog, knowing the structure of files in specific 
+DB (type and format of data)
+--- PAGE 21 ---
+4.0
+fit@hcmus
+Self-Describing 
+ An example of a database catalog/metadata
+Relation_name No_of_columns
+EMPLOYEE 7
+PROJECT 4
+WORKS_ON 3
+RELATION
+Column_name Data_type Belongs_to_relation
+LName Character(10) EMPLOYEE
+FName Character(10) EMPLOYEE
+… … …
+COLUMN
+--- PAGE 22 ---
+4.0
+fit@hcmus Isolation
+ The structure of data is stored in catalog
+separately from the access programs
+ Program-Data independence 
+ A little change in the data structure
+ Application programs are rarely revised 
+Isolation
+Program
+Data
+Isolation
+Program
+Data
+Catalog/metadata
+Catalog/metadata
+Program contains catalog → data 
+structure depends on the program
+DBMS contains catalog → data is 
+independent of program
+--- PAGE 23 ---
+4.0
+fit@hcmus Data abstraction 
+ DB systems provide a conceptual 
+representation of the data to hide certain details 
+of how the data are stored and maintained 
+ Example 
+ Data model is a type of data abstraction
+ Objects 
+ Properties 
+ Relationships 
+ These logical concepts are easier for user to 
+understand than computer storage concepts 
+--- PAGE 24 ---
+4.0
+fit@hcmus Views of data 
+ A DB has many users
+ Each user may require a different perspective or view of 
+the database 
+ A view may be 
+ A subset of the database
+ Aggregate data that are derived from the database
+STUDENT
+Regular STUDENT CLC STUDENT
+Database
+Views APCS STUDENT
+--- PAGE 25 ---
+4.0
+fit@hcmus Sharing of data 
+ A multiuser DBMS 
+ Allows multiple users accessing to DB at the same 
+time
+ Data for many applications can be integrated and 
+maintained in a single DB
+ Using concurrency control mechanisms to 
+access the data reasonably 
+ Avoid data contention (tranh chấp)
+ Ensure the data will always be valid when they are 
+accessed 
+--- PAGE 26 ---
+4.0
+fit@hcmus
+Quiz #2
+1. Self-Describing is
+A. To aggregate data that are derived from the database
+B. To enable a DB to define in catalog called “metadata”
+C. To enable only one application can access to DB
+D. To define different views of DB
+2. What below statements are TRUE?
+A. Sharing data: allows multiple users to access to DB at the 
+same time
+B. A view can mainly store data of DB
+C. Isolation: combining program and catalog/metadata together
+D. Data abstraction provides a conceptual representation of the 
+data to hide certain details of how the data are stored and 
+maintained
+Introducti
+on2DB -
+FIT -
+HCMUS
+26
+--- PAGE 27 ---
+4.0
+fit@hcmus Content
+ Introduction 
+ The evolution of database systems 
+ Characteristics of the database approach 
+ Database users: Actors on the scene
+- Database administrator (DBA)
+- Database designer 
+- End user
+ Architecture of a DBMS 
+ Properties of DBMS
+ Data models 
+ Database languages
+--- PAGE 28 ---
+4.0
+fit@hcmus Database administrator 
+ Many people use the same resources 
+ Need a chief administrator to oversee and 
+manage
+ Responsibility  
+ Administering the DB
+ Authorizing access to the DB
+ Coordinating and monitoring the use of DB
+ Acquiring software and hardware resources 
+as needed 
+--- PAGE 29 ---
+4.0
+fit@hcmus Database designer 
+ Responsibility
+ Identifying the data to be stored in the DB
+ Choosing appropriate structures to represent and 
+store the DB 
+ Communicating with all DB users to understand their 
+requirements, to come up with a design that meet 
+the requirements 
+ Can be
+ Staff of the DBA
+ Other staffs taking responsibilities after the DB 
+designed is completed 
+--- PAGE 30 ---
+4.0
+fit@hcmus End user 
+ People whose jobs require to access to the DB
+ Querying, updating, generating reports 
+ Categories 
+ Casual end user 
+ Occasionally access the DB
+ Need different information each time 
+ Use sophisticated DB query language to specify requests 
+ Middle or high level manager 
+ Naïve end user
+ Sophisticated end user 
+--- PAGE 31 ---
+4.0
+fit@hcmus End user 
+ People whose jobs require to access to the DB
+ Querying, updating, generating reports 
+ Categories 
+ Casual end user 
+ Naïve end user
+ Sophisticated end user 
+ Be familiar with the facilities of the DBMS
+ Implement the applications to meet the complex 
+requirements 
+ Engineers, scientists, business analysts 
+--- PAGE 32 ---
+4.0
+fit@hcmus Content
+ Introduction 
+ The evolution of database systems 
+ Characteristics of the database approach 
+ Database users
+ Architecture of a DBMS 
+ Properties of DBMS
+ Data models 
+ Database languages
+--- PAGE 33 ---
+4.0
+fit@hcmus BDMS Architecture (logical view)
+ Three-schema architecture (ANSI/SPARC Architecture):
+Introduction
+2DB - FIT -
+HCMUS
+33
+External level 
+Conceptual level
+Internal level 
+End user 1
+External view 1 External view n…
+Conceptual schema
+Internal schema
+End user n
+(External/Conceptual 
+Mapping)
+(Conceptual/ 
+Internal Mapping)
+Physical storage 
+structure of the 
+DB
+The structure of the 
+whole DB for a 
+community of users
+The part of the DB that 
+a particular user group 
+is interested in 
+--- PAGE 34 ---
+4.0
+fit@hcmus
+Three-schema architecture
+ The external (View level): The highest level. It defines 
+different "views" for different users. 
+ For example, a student sees their grades, but a professor sees the entire 
+class list. 
+ The conceptual level (logical view) : The middle level, 
+describing what data is stored and the relationships 
+between them without worrying about how they are 
+physically saved.
+ The internal level (physical view): The lowest level. It 
+describes how the data is physically stored on the disk, 
+including file structures, indexing, encryption, compression, 
+etc. 
+Introducti
+on2DB -
+FIT -
+HCMUS
+34
+--- PAGE 35 ---
+4.0
+fit@hcmus Architecture 
+ Data independence 
+ Logic data independence 
+ The capacity to change the conceptual schema without 
+change to external schemas or application programs 
+ Example
+▪ Adding/removing a record type or data item (expand/reduce DB)
+▪ Changing constrains 
+ Physical data independence 
+ The capacity to change the internal schema without change to 
+the conceptual schema 
+ Example
+▪ Physical files had to be reorganized to improve the performance 
+of retrieval or update 
+35
+--- PAGE 36 ---
+4.0
+fit@hcmus Content
+ Introduction 
+ The evolution of database systems 
+ Characteristics of the database approach 
+ Database users
+ Architecture of a DBMS 
+ Properties of DBMS
+ Data models 
+ Database languages
+--- PAGE 37 ---
+4.0
+fit@hcmus Properties of DBMS 
+ Controlling redundancy 
+ By placing all the data together, we do not have to search 
+multiple files to collect this data
+ Data sharing 
+ In multiple user environment, concurrency data access is 
+allowed 
+ Restricting unauthorized access 
+ Users or user groups are given account numbers protected by 
+passwords to gain access to the DB
+ Providing multiple user interfaces 
+ Provide query languages for casual users, programming 
+language interfaces for programmers, forms and command 
+codes for parametric users 
+Introduction
+2DB - FIT -
+HCMUS
+38
+--- PAGE 38 ---
+4.0
+fit@hcmus Properties of DBMS 
+ Enforcing integrity constraints (rules)
+ Integrity constraints: rules/conditions are derived 
+from the meaning/semantics of the data or the 
+domain it represents 
+ Providing backup and recovery 
+ Provide facilities for recovering from hardware 
+and software failures 
+ Make sure the DB is restored to the state it was 
+before
+--- PAGE 39 ---
+4.0
+fit@hcmus Properties of DBMS 
+ Others 
+ Potential for enforcing standards 
+ Permit DBA to define and enforce standards among 
+database users in a large organization 
+ Flexibility
+ It may be necessary to change the structure of a DB as 
+requirements change without affecting the stored data and 
+the existing application programs  
+ Reduced application development time 
+ Availability of up-to-date information 
+ As soon as one user’s update is applied to the DB, all other 
+users can immediately see this update 
+--- PAGE 40 ---
+4.0
+fit@hcmus Content
+ Introduction 
+ The evolution of database systems 
+ Characteristics of the database approach 
+ Database users
+ Architecture of a DBMS 
+ Properties of DBMS
+ Data models 
+ Database languages
+--- PAGE 41 ---
+4.0
+fit@hcmus Data models 
+ Definition
+ A collection of 
+concepts that can be 
+used to describe the
+structure of a DB
+ Data types, 
+relationships, and
+rules (constraints)
+ Including a set of basic 
+operations for 
+specifying retrievals 
+and updates on the 
+DB Database instance
+Database schema
+Data model
+Is described by 
+Is described by 
+Specific 
+domain 
+--- PAGE 42 ---
+4.0
+fit@hcmus Data models 
+ High level data model (The “What”)
+ A high-level, business-oriented view.2 It defines what data is 
+important to the organization (e.g., "Customers," "Orders," 
+"Products") and how they relate, without any technical details.
+ E.g.: entity relationship model, object-oriented model…
+ Logical data model (The “How”)
+ Provide concepts that may be understood by end users, but that are 
+not too far from the way data is organized within the computer 
+ E.g.: relational model, network and hierarchical models…  
+ Low level data model (The “Implementation”)
+ Provide concepts the describe the details of how data is stored in the 
+computer 
+--- PAGE 43 ---
+4.0
+fit@hcmus
+Example of data model
+⬜Entity Relationship Diagram
+▪ Concepts
+⬜Network data model
+▪ Concepts
+Introducti
+on2DB -
+FIT -
+HCMUS
+44
+Entity type Atribute Relationship
+Record type
+Relationship 1:N
+--- PAGE 44 ---
+4.0
+fit@hcmus
+Database schema - Example of 
+ER Model
+Student
+Study Course Open
+Subject
+constraint
+Major
+ID
+Grade
+Mark
+(1,n)
+(0,n)
+Name
+(1,1)
+pre
+post
+(0,n)
+(0,n)
+NoOfCredits
+ID
+Faculty
+Name
+(0,n)
+Term
+InstructorYear
+ID
+--- PAGE 45 ---
+4.0
+fit@hcmus
+Database schema
+⬜Definition
+▪ Description of the structure and constraints on the database 
+about a particular domain (banking, education, marketing, etc.)
+▪ Example:
+Introducti
+on2DB -
+FIT -
+HCMUS
+46
+
+--- PAGE 46 ---
+4.0
+fit@hcmus
+Database schema - Example of Object-
+Oriented Model
+Student
+Name
+Grade
+Major
+planSchedule()
+printReoord()
+Mark
+LabMark
+LectureMarrk
+ProjectMark
+UpdateMark()
+Course
+Name
+Number0..*1..*
+study
+0..*1..*
+Subject
+Name
+Faculty
+NoOfCredits
+UpdateCredit()
+0..*
+1
+0..*
+1
+open
+0..* Constraint
++pre
++post
+0..*
+0..*
+--- PAGE 47 ---
+4.0
+fit@hcmus
+Database schema - Example of 
+relational model
+Student
+StuID
+Name
+Grade
+Major
+Study
+StuID
+CouID
+LabMark
+LectureMar
+k
+Course
+CouID
+Number
+SubID
+Subject
+SubID
+Name
+Faculty
+NoOFCredits
+Constraint
+SubID
+PreviousID
+--- PAGE 48 ---
+4.0
+fit@hcmus
+Database schema - Example of 
+network data model
+Student Subject     
+Course 
+Result
+Constraint
+Student_Mark
+Subject_Open
+PreSubject
+PostSubject
+Result_Course
+--- PAGE 49 ---
+Database schema - Example of hierarchical 
+data model 
+Result 
+LabMark LectureMark
+Student
+Name Grade Major
+Course
+Name Number
+Subject
+Name Faculty NoOfCredits
+Level 2:
+Level 1:
+Level 3:
+--- PAGE 50 ---
+4.0
+fit@hcmus
+Database instance or status
+⬜Definition
+▪ The data stored in database at a particular moment 
+of time is called instance of database.
+Introducti
+on2DB -
+FIT -
+HCMUS
+51
+
+--- PAGE 51 ---
+4.0
+fit@hcmus Content
+ Introduction 
+ The evolution of database systems 
+ Characteristics of the database approach 
+ Database users
+ Architecture of a DBMS 
+ Properties of DBMS
+ Data models 
+ Database languages 
+--- PAGE 52 ---
+4.0
+fit@hcmus Database language
+ DDL – Data Definition Language
+ Identify descriptions of the schema constructs   
+ Store the schema description in the DBMS catalog 
+ SDL – Storage Definition Language
+ Specify the internal schema and the mappings 
+between two schemas  
+ VDL – View Definition Language
+ Specify user views and their mapping to the 
+conceptual schema
+--- PAGE 53 ---
+4.0
+fit@hcmus Database language
+ DML – Data Manipulation Language
+ Provide a set of operations including retrieval, 
+insertion, deletion and modification of the data
+ Two types
+ High level (nonprocedural)
+▪ Entered interactively from a display monitor/terminal, or 
+▪ Embedded in a general-purpose programming language  
+ Low level (procedural)
+▪ Must be embedded in a general-purpose programming 
+language 
+A query in a high-level DML often specifies which data to retrieve rather than how to retrieve it; therefore, such languages 
+are also called declarative. 
+--- PAGE 54 ---
+4.0
+fit@hcmus
+Quiz
+Which characteristic of the database (DB) 
+approach allows a complete definition of the 
+database structure to be contained within itself?
+A. Self-describing
+B. Data abstraction
+C. Sharing of data
+D. Data isolation
+Introducti
+on2DB -
+FIT -
+HCMUS
+55
+--- PAGE 55 ---
+4.0
+fit@hcmus
+Quiz
+What is the primary function of a DBMS?
+A. It is a collection of related data with some 
+inherent meaning.
+B. It is an application program, like a banking app, 
+that accesses data.
+C. It is a software system that enables users to 
+create, operate, and maintain a database.
+D. It is the physical hardware where data files are 
+stored.
+Introducti
+on2DB -
+FIT -
+HCMUS
+56
+--- PAGE 56 ---
+4.0
+fit@hcmus
+Quiz
+What is a key limitation of the traditional file 
+system approach that the database approach 
+addresses?
+A. Data is defined centrally and is independent of 
+application programs.
+B. It provides robust security mechanisms to restrict 
+unauthorized access.
+C. It facilitates easy data sharing among multiple 
+concurrent users.
+D. Data redundancy can lead to wasted storage and 
+potential inconsistencies.
+Introducti
+on2DB -
+FIT -
+HCMUS
+57
+--- PAGE 57 ---
+4.0
+fit@hcmus
+Quiz
+⬜The ability to change the conceptual schema 
+(e.g., adding a new record type) without having 
+to rewrite external application programs is 
+called:
+A. Concurrency control
+B. Logical data independence
+C. Physical data independence
+D. Data abstraction
+Introducti
+on2DB -
+FIT -
+HCMUS
+58
+--- PAGE 58 ---
+4.0
+fit@hcmus
+Quiz
+Which database language is used for tasks 
+like retrieving, inserting, deleting, and 
+modifying data in the database?
+A. VDL (View Definition Language)
+B. DDL (Data Definition Language)
+C. SDL (Storage Definition Language)
+D. DML (Data Manipulation Language)
+Introducti
+on2DB -
+FIT -
+HCMUS
+59
+--- PAGE 59 ---
+4.0
+fit@hcmus
+Quiz
+Which database user is primarily 
+responsible for authorizing access, 
+monitoring use, and acquiring necessary 
+software and hardware resources?
+A. Database Designer
+B. Database Administrator (DBA)
+C. Application Programmer
+D. End User
+Introducti
+on2DB -
+FIT -
+HCMUS
+60
+--- PAGE 60 ---
+4.0
+fit@hcmus
+Quiz
+What is the difference between a schema and an 
+instance?
+A. The schema is the data model used, while the instance 
+is the physical file.
+B. There is no difference; the terms are used 
+interchangeably.
+C. The schema is the high-level conceptual model, while 
+the instance is the low-level physical model.
+D. The schema is the description of the database 
+structure, while the instance is the actual data at a 
+moment in time.
+Introducti
+on2DB -
+FIT -
+HCMUS
+61
+--- PAGE 61 ---
+4.0
+fit@hcmus
+Introduction
+2DB - FIT -
+HCMUS
+62

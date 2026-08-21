@@ -1,0 +1,271 @@
+
+--- PAGE 1 ---
+Information department – FIT- VNUHCM-US page 1
+Advanced Nested Query
+CSC10006 – Introduction to Database
+--- PAGE 2 ---
+TABLE OF CONTENTS
+1 Objectives........................................................................................................................................ 1
+2 Detailed Instructions........................................................................................................................ 1
+2.1 Set Operations........................................................................................................................... 1
+2.1.1 Subtraction......................................................................................................................... 1
+2.1.2 Intersection......................................................................................................................... 2
+2.1.3 Union.................................................................................................................................. 3
+2.2 Division Operation.................................................................................................................... 4
+2.2.1 Using NOT EXISTS ... EXCEPT....................................................................................... 5
+2.2.2 Using NOT EXISTS ... NOT EXISTS............................................................................... 5
+2.2.3 Using GROUP BY with COUNT....................................................................................... 6
+2.3 Additional Examples................................................................................................................. 7
+3 In-Class Exercises............................................................................................................................ 8
+Information department – FIT- VNUHCM-US page 2
+--- PAGE 3 ---
+1 Objectives 
+After completing this practical lesson, students will know:
+ How to represent division operation in relational algebra using SQL
+ How to represent set operations (subtraction, intersection, union) using SQL
+2 Detailed Instructions 
+2.1 Set Operations
+2.1.1 Subtraction  
+Methods:
+ Use EXCEPT operator
+ Nested query with NOT EXISTS or NOT IN
+Example 2: Find teachers who do not participate in any project.
+Observation: 
+Teachers not participating in projects = All teachers – Teachers participating in projects.
+Using EXCEPT:
+-- Simple: Only shows MAGV information
+SELECT MAGV 
+FROM GIAOVIEN GV
+EXCEPT 
+SELECT MAGV 
+FROM THAMGIADT TG
+-- Complex: Shows MAGV and HOTEN information
+SELECT MAGV, HOTEN 
+FROM GIAOVIEN GV
+EXCEPT 
+SELECT GV.MAGV, GV.HOTEN 
+FROM THAMGIADT TG, GIAOVIEN GV 
+WHERE TG.MAGV = GV.MAGV
+Information department – FIT- VNUHCM-US page 1
+--- PAGE 4 ---
+Using NOT EXISTS:
+SELECT GV.MAGV, GV.HOTEN 
+FROM GIAOVIEN GV
+WHERE NOT EXISTS ( SELECT *
+FROM THAMGIADT TG
+WHERE TG.MAGV = GV.MAGV)
+Using NOT IN:
+SELECT MAGV, HOTEN
+FROM GIAOVIEN 
+WHERE MAGV NOT IN (SELECT MAGV
+FROM THAMGIADT)
+2.1.2 Intersection  
+Methods:
+ Use INTERSECT operator
+ Nested query with EXISTS or IN
+ Use regular join operation
+Example 3: Find teachers who both participate in projects and are department heads.
+Observation: Result = Teachers participating in projects ∩ Teachers who are department heads.
+Using INTERSECT:
+SELECT TRUONGBM FROM BOMON
+INTERSECT 
+SELECT MAGV FROM THAMGIADT
+Using … IN (…) AND … IN (…):
+SELECT GV.MAGV, GV.HOTEN 
+FROM GIAOVIEN GV
+WHERE MAGV IN (SELECT TRUONGBM FROM BOMON) AND
+ MAGV IN (SELECT MAGV FROM THAMGIADT)
+Using EXISTS (…) AND EXISTS (…):
+Information department – FIT- VNUHCM-US page 2
+--- PAGE 5 ---
+SELECT GV.MAGV, GV.HOTEN
+FROM GIAOVIEN GV
+WHERE EXISTS (SELECT * FROM BOMON WHERE TRUONGBM=GV.MAGV) AND
+ EXISTS (SELECT * FROM THAMGIADT TG WHERE TG.MAGV = GV.MAGV)
+Using regular join:
+SELECT TG.MAGV 
+FROM BOMON BM, THAMGIADT TG 
+WHERE BM.TRUONGBM = TG.MAGV
+2.1.3 Union  
+Methods:
+ Use UNION operator (duplicate rows will be removed) / UNION ALL (takes all rows 
+from tables)
+ Nested query with EXISTS or IN
+Conditions for performing UNION / INTERSECT,
+EXCEPT: Tables must have the same number of attributes
+and corresponding data types between columns.
+The output table columns are the columns from the first
+table.
+UNION UNION ALL
+SELECT * FROM TABLE1
+UNION
+SELECT * FROM TABLE2
+SELECT * FROM TABLE1
+UNION ALL
+SELECT * FROM TABLE2
+Kết quả : Kết quả :
+Information department – FIT- VNUHCM-US page 3
+
+--- PAGE 6 ---
+Example 4: List teachers who participate in projects or teachers who are department 
+heads.
+Using UNION:
+SELECT MAGV FROM THAMGIADT 
+UNION 
+SELECT TRUONGBM FROM BOMON
+Using EXISTS (…) OR EXISTS (…):
+SELECT GV.MAGV, GV.HOTEN
+FROM GIAOVIEN GV
+WHERE EXISTS ( SELECT * FROM BOMON WHERE TRUONGBM=GV.MAGV) OR
+ EXISTS ( SELECT * FROM THAMGIADT TG WHERE TG.MAGV = GV.MAGV)
+Using IN (…) OR IN (…):
+SELECT GV.MAGV, GV.HOTEN
+FROM GIAOVIEN GV
+WHERE GV.MAGV IN (SELECT TRUONGBM FROM BOMON ) OR
+GV.MAGV IN ( SELECT MAGV FROM THAMGIADT TG )
+2.2 Division Operation
+Given tables R (A, B, C, D, E) and S (D, E) as follows:
+Dividend: R
+Divisor: S
+Information department – FIT- VNUHCM-US page 4
+
+--- PAGE 7 ---
+2.2.1 Using NOT EXISTS ... EXCEPT  
+Formula:
+SELECT R1.A, R1.B, R1.C
+FROM R R1
+WHERE NOT EXISTS (
+( SELECT S.D, S.E FROM S)
+ EXCEPT 
+ ( SELECT R2.D, R2.E 
+ FROM R R2
+ WHERE R1.A=R2.A AND R1.B=R2.B  AND R1.C=R2.C )
+)
+Example 5: Find teachers (MAGV) who participate in all projects
+Dividend: THAMGIADT (MAGV, MADT, …)
+Divisor: DETAI (MADT, …)
+SELECT DISTINCT TG1.MAGV 
+FROM THAMGIADT TG1
+WHERE NOT EXISTS (
+( SELECT MADT FROM DETAI)
+EXCEPT 
+( SELECT MADT
+ FROM THAMGIADT TG2 
+ WHERE TG2.MAGV = TG1.MAGV )
+)
+2.2.2 Using NOT EXISTS ... NOT EXISTS  
+Formula:
+SELECT R1.A, R1.B, R1.C
+FROM R R1
+WHERE NOT EXISTS (
+SELECT *
+FROM S
+WHERE NOT EXISTS (
+SELECT * 
+Information department – FIT- VNUHCM-US page 5
+--- PAGE 8 ---
+FROM R R2
+WHERE R2.D=S.D AND R2.E=S.E  AND
+R1.A=R2.A AND R1.B=R2.B AND R1.C=R2.C
+)
+)
+Example 6: Find teachers (MAGV) who participate in all projects (Using NOT EXISTS)
+Dividend: THAMGIADT (MAGV, MADT, …)
+Divisor: DETAI (MADT, …)
+SELECT TG.MAGV 
+FROM THAMGIADT TG1
+WHERE NOT EXISTS (
+SELECT *
+FROM DETAI DT
+WHERE NOT EXISTS (
+SELECT * 
+FROM THAMGIADT TG2
+WHERE TG2.MADT=DT.MADT AND TG2.MAGV=TG1.MAGV
+)
+)
+2.2.3 Using GROUP BY with COUNT  
+For R(A,B), S(B), performing R÷S
+SELECT R.A
+FROM R
+[WHERE R.B IN (SELECT S.B FROM S [WHERE <CONDITION>]]
+GROUP BY R.A
+HAVING COUNT(DISTINCT R.B) = ( SELECT COUNT(S.B)
+ FROM S
+ [WHERE <CONDITION>])
+Example 7: Find teachers (MAGV) who participate in all projects (Using GROUP BY)
+Dividend: THAMGIADT (MAGV, MADT, STT, …)
+Divisor: DETAI (MADT, …)
+Information department – FIT- VNUHCM-US page 6
+--- PAGE 9 ---
+SELECT TG.MAGV 
+FROM THAMGIADT TG1
+GROUP BY TG.MAGV
+HAVING COUNT(DISTINCT TG1.MADT) =  ( SELECT COUNT(DT.MADT)
+FROM DETAI DT  )
+2.3 Additional Examples
+Example 9: Find names of 'HTTT' teachers who participate in all projects with topic 
+'QLGD'
+-- EXCEPT 
+SELECT DISTINCT TG1.MAGV, GV.HOTEN 
+FROM THAMGIADT TG1, GIAOVIEN GV
+WHERE TG1.MAGV=GV.MAGV AND GV.MABM='HTTT'
+AND NOT EXISTS (
+( SELECT MADT FROM DETAI WHERE MACD='QLGD')
+ EXCEPT 
+ ( SELECT MADT
+ FROM THAMGIADT TG2 
+ WHERE TG2.MAGV = TG1.MAGV )
+)
+-- NOT EXISTS 
+SELECT TG1.MAGV, GV.HOTEN 
+FROM THAMGIADT TG1, GIAOVIEN GV
+WHERE TG1.MAGV=GV.MAGV AND GV.MABM='HTTT'
+AND NOT EXISTS ( SELECT *
+FROM DETAI DT
+WHERE MACD='QLGD' 
+AND NOT EXISTS ( SELECT * 
+FROM THAMGIADT TG2
+WHERE TG2.MADT=DT.MADT AND 
+TG2.MAGV=TG1.MAGV 
+)
+)
+Information department – FIT- VNUHCM-US page 7
+--- PAGE 10 ---
+-- COUNT 
+SELECT TG1.MAGV , GV.HOTEN 
+FROM THAMGIADT TG1 , GIAOVIEN GV
+WHERE TG1.MAGV=GV.MAGV AND GV.MABM='HTTT' 
+AND TG1.MADT IN (SELECT MADT FROM DETAI WHERE MACD='QLGD') 
+GROUP BY TG1.MAGV , GV.HOTEN
+HAVING COUNT(DISTINCT TG1.MADT) = ( SELECT COUNT(MADT)
+FROM DETAI 
+WHERE MACD='QLGD' )
+3 In-Class Exercises
+Requirements: Write queries Q58, Q60, …, Q72 in the ‘Project Management’ exercise. Each 
+query should be written in 3 ways: Using EXCEPT, NOT EXISTS, and COUNT.
+Duration: 02 hours.
+Q58. Find the names of teachers who participate in projects covering all topics.
+Q59. Find the names of projects in which all teachers from the HTTT department participate.
+Q60. Find the names of projects in which all teachers from the "Hệ thống thông tin" department 
+participate.
+Q61. Find teachers who have participated in all projects with topic code QLGD.
+Q62. Find the names of teachers who participate in all projects that teacher “Trần Trà Hương” 
+has participated in.
+Q63. Find the names of projects in which all teachers from the “Hoá hữu cơ” department 
+participate.
+Q64. Find the names of teachers who participate in all tasks of project 006.
+Q65. Find teachers who have participated in all projects of the “Ứng dụng công nghệ” topic.
+Q66. Find the names of teachers who have participated in all projects lead by teacher “Trần Trà 
+Hương”.
+Q67. Find the names of projects in which all teachers from the “CNTT” faculty participate.
+Q68. Find the names of teachers who participate in all tasks of the “Nghiên cứu tế bào gốc” 
+project.
+Q69. Find the names of teachers assigned to all projects with budgets over 100 million?
+Q70. Find the names of projects in which all teachers from the “Sinh học” faculty participate.
+Information department – FIT- VNUHCM-US page 8
+--- PAGE 11 ---
+Q71. Find the ID, name, and date of birth of teachers who participate in all tasks of the "Ứng 
+dụng hoá học xanh" project.
+Q72. Find the ID, name, department name, and academic supervisor name of teachers who 
+participate in all projects under the "Nghiên cứu phát triển" topic.
+Information department – FIT- VNUHCM-US page 9

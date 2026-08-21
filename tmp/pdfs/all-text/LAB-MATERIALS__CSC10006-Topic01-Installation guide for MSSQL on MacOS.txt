@@ -1,0 +1,430 @@
+
+--- PAGE 1 ---
+I
+nformation
+ 
+s
+ystem department, 
+ 
+Faculty of Information Technology
+,
+VNUHCM
+-
+US
+ 
+1
+ 
+Guide to Install SQL Server on macOS 
+Using Docker
+ 
+ 
+Docker is a platform that runs applications in isolated containers, ensuring consistency across 
+environments. Docker Desktop, its user
+-
+friendly application, simplifies container management 
+on macOS, Windows, and Linux.
+ 
+ 
+Since SQL Server is not natively supported on macOS, Docker Desktop enables you to run it in 
+a Linux
+-
+based container. This setup ensures compatibility, ease of management, and a 
+reproducible environment for development and learning. This guide will show yo
+u how to install 
+SQL Server on macOS using Docker.
+ 
+Step 1: Install Docker Desktop
+ 
+Follow the link to download and install Docker Desktop: 
+https://docs.docker.com/desktop/setup/install/mac
+-
+install/
+. Make sure that you choose the 
+correct version that is suitable for your chip. 
+ 
+If you are using a Mac with an Apple silicon chip (M1/M2/M3, etc.), it is recommended that you 
+install Rosetta 2. On your Terminal, run the following command:
+ 
+ 
+$ softwareupdate 
+--
+install
+-
+rosetta
+ 
+ 
+If you are facing the bug that says: “ “Docker” is damaged and can’t be opened. You should 
+move it to the Bin.”. 
+ 
+ 
+First, move it to trash, then stop all the Docker processes using Activity Monitor. Then restart 
+your computer before downloading the version 4.37.2 or later using this 
+link
+.
+ 
+ 
+BO MON HTTT - DH KHTN
+--- PAGE 2 ---
+I
+nformation
+ 
+s
+ystem department, 
+ 
+Faculty of Information Technology
+,
+VNUHCM
+-
+US
+ 
+2
+ 
+Step 2: Download and launch the available SQL Server image.
+ 
+A Docker image is a prepackaged blueprint for running applications in containers. The MSSQL 
+Docker image provides a lightweight, containerized version of Microsoft SQL Server, allowing it 
+to run seamlessly on macOS without native installation.
+ 
+https://learn.microsoft.com/en
+-
+us/sql/linux/quickstart
+-
+install
+-
+connect
+-
+docker?view=sql
+-
+server
+-
+ver15&pivots=cs1
+-
+bash&tabs=cli
+ 
+ 
+Download image
+ 
+On your Terminal (or Terminal inside the Docker Desktop GUI), run the following commands to 
+pull (download)  the Docker image:
+ 
+$ docker pull 
+mcr.microsoft.com/mssql/server:2022
+-
+latest
+ 
+If you want to find the image for other versions of MSSQL Server, please check 
+here
+.
+ 
+After downloading, you can see the image in the Docker Desktop GUI.
+ 
+ 
+ 
+Launch the image
+ 
+Launch the image to create a docker container. A Docker container is a running instance of a 
+Docker image. Think of the image as a recipe and the container as the prepared dish.
+ 
+ 
+On the Terminal (or Docker Terminal window), run the following command:
+ 
+$ docker run 
+-
+e "ACCEPT_EULA=Y" 
+-
+e "MSSQL_SA_PASSWORD=<password>" 
+\
+ 
+   
+-
+p 1433:1433 
+--
+name sql_server_test 
+--
+hostname sql_server_test 
+\
+ 
+   
+-
+d 
+\
+ 
+   
+mcr.microsoft.com/mssql/server:2022
+-
+latest
+ 
+ 
+●
+ 
+-
+e 'ACCEPT_EULA=Y'
+: 
+Confirms by agreeing with end user license agreement 
+(EULA) for Docker.
+ 
+●
+ 
+-
+e 'SA_PASSWORD=<password>'
+ 
+: Sets the database password.
+ 
+BO MON HTTT - DH KHTN
+--- PAGE 3 ---
+I
+nformation
+ 
+s
+ystem department, 
+ 
+Faculty of Information Technology
+,
+VNUHCM
+-
+US
+ 
+3
+ 
+●
+ 
+-
+p 1433:1433
+ 
+: Map a TCP port on the host environment (first value) with a TCP port 
+in the container (second value). In this example, SQL Server is listening on TCP 1433 in 
+the container and this container port is then exposed to TCP port 1433 on the host.
+ 
+●
+ 
+--
+name sql_server_test
+ 
+: Sets a name for the Docker container. In this example, 
+we are using “
+sql_server_test
+”
+ 
+●
+ 
+--
+hostname sql_server_test
+ 
+: Used to explicitly set the container hostname.
+ 
+●
+ 
+-
+d
+ 
+: Launches the docker container in daemon mode, allowing it to run in the 
+background without a terminal window open.
+ 
+●
+ 
+mcr.microsoft.com/mssql/server:2022
+-
+latest
+ 
+: The SQL server container 
+image
+ 
+If you’re using a Mac with an ARM chip (M1, M2, etc.), you might receive the following warning: 
+“WARNING: The requested image's platform (linux/amd64) does not match 
+the detected host platform (linux/arm64/v8) and no specific platform 
+was requested
+ 
+84182d3f00fb548a5cbf780221417a058b5fe61d3f599d8426eca1d65b5b0dd3”
+ 
+However, don’t worry your container will still be created after a few seconds. You can check on 
+the Docker GUI (or using docker command: 
+$ docker ps 
+-
+l
+) for the results 
+ 
+ 
+Step 3: Download and install the GUI application
+ 
+Install SQL Server (mssql) extension on Visual Studio Code
+ 
+Prerequisites: Visual Studio Code
+ 
+On your Visual Studio Code UI, navigate to the Extension tabs 
+, search for sql server then 
+install the package.
+ 
+BO MON HTTT - DH KHTN
+--- PAGE 4 ---
+I
+nformation
+ 
+s
+ystem department, 
+ 
+Faculty of Information Technology
+,
+VNUHCM
+-
+US
+ 
+4
+ 
+ 
+After installing the extension, you can see the SQL Server Tab at the bottom of VS Code Tab 
+bar 
+, select this tab will navigate to the SQL server GUI
+ 
+Create new connection to SQL Server
+ 
+Next, select “+ Add Connection” to create a new connection to your SQL Server. Fill in the form 
+with following information then select “Connect”
+ 
+Profile Name: Naming your profile for this connection. For example: SQL Server 2022
+ 
+Input Type: Paramaters
+ 
+Server Name: localhost
+ 
+Trust server certificate: True
+ 
+Authentication Type: SQL login
+ 
+BO MON HTTT - DH KHTN
+--- PAGE 5 ---
+I
+nformation
+ 
+s
+ystem department, 
+ 
+Faculty of Information Technology
+,
+VNUHCM
+-
+US
+ 
+5
+ 
+User name: sa
+ 
+Password: <password> the password you specified when launching the image.
+ 
+Create your first database 
+ 
+Right click on the Connection, in this example the “SQL Server 20222”, choose New query to 
+create a new window to execute SQL queries.
+ 
+ 
+ 
+Create new Database:
+ 
+ 
+ 
+BO MON HTTT - DH KHTN
+--- PAGE 6 ---
+I
+nformation
+ 
+s
+ystem department, 
+ 
+Faculty of Information Technology
+,
+VNUHCM
+-
+US
+ 
+6
+ 
+ 
+Stop and restart the SQL server
+ 
+Stop working with SQL Server
+ 
+When you have finished and saved your work, you can right click on the SQL Connection profile 
+and choose Disconnect to stop the connection with the SQL Server
+ 
+ 
+Then, you should stop your SQL server container as following:
+ 
+●
+ 
+Using Docker Desktop GUI: Select the stop button of the specific container to stop that. 
+In this example, we stop the SQL server name 
+sql_server_test
+.
+ 
+ 
+BO MON HTTT - DH KHTN
+--- PAGE 7 ---
+I
+nformation
+ 
+s
+ystem department, 
+ 
+Faculty of Information Technology
+,
+VNUHCM
+-
+US
+ 
+7
+ 
+ 
+●
+ 
+Using Docker commands:
+ 
+$ docker stop sql_server_test
+ 
+Restart working with SQL Server container
+ 
+Restart the SQL server container using Docker GUI and reconnect the connection if you want to 
+work again with SQL server.
+ 
+Note that you only need to start the container, no need to re
+-
+launch the image.
+ 
+ 
+References
+ 
+ 
+1
+ 
+https://learn.microsoft.com/en
+-
+us/sql/linux/quickstart
+-
+install
+-
+connect
+-
+docker?view=sql
+-
+server
+-
+ver15&pivots=cs1
+-
+bash&tabs=cli
+ 
+2
+ 
+https://builtin.com/software
+-
+engineering
+-
+perspectives/sql
+-
+server
+-
+management
+-
+studio
+-
+mac
+ 
+ 
+BO MON HTTT - DH KHTN
