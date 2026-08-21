@@ -1,0 +1,126 @@
+
+
+-- THI THỰC HÀNH CUỐI KÌ MÔN CƠ SỞ DỮ LIỆU 
+-- MÃ ĐỀ: C1
+-- VỊ TRÍ NGỒI: B5
+-- MSSV: 19127616
+-- HỌ TÊN: PHÙNG QUỐC TUẤN
+
+
+USE QLDETAI
+GO
+GO
+GO
+
+SELECT * FROM GIAOVIEN
+GO
+GO
+
+
+-- 1 --
+SELECT DT.MADT, DT.TENDT, DT.GVCNDT, COUNT(GVDT.DIENTHOAI) AS N'SỐ LƯỢNG SĐT'
+FROM DETAI DT
+    LEFT JOIN GIAOVIEN GV ON GV.MAGV = DT.GVCNDT
+    LEFT JOIN GV_DT GVDT ON GVDT.MAGV = GV.MAGV
+GROUP BY DT.MADT, DT.TENDT, DT.GVCNDT
+HAVING COUNT(GVDT.DIENTHOAI) >= 2
+GO
+GO
+
+-- 2 -- 
+SELECT K.MAKHOA, K.TENKHOA, COUNT(D.MADT) AS N'TỔNG SL ĐỀ TÀI', MIN(D.KINHPHI) AS N'KINH PHÍ TỐI ĐA', MAX(D.KINHPHI) AS N'KINH PHÍ TỐI THIỂU'
+FROM DETAI D
+    LEFT JOIN GIAOVIEN GV ON GV.MAGV = D.GVCNDT 
+    LEFT JOIN BOMON BM ON GV.MABM = BM.MABM 
+    LEFT JOIN KHOA K ON BM.MAKHOA = K.MAKHOA 
+GROUP BY K.MAKHOA, K.TENKHOA 
+GO 
+GO 
+
+-- 3 -- 
+SELECT GV.*
+FROM GIAOVIEN GV
+WHERE EXISTS (
+    SELECT *
+    FROM THAMGIADT TG
+    WHERE TG.MAGV = GV.MAGV
+)
+AND NOT EXISTS (
+    SELECT *
+    FROM THAMGIADT TG, DETAI DT, CHUDE CD
+    WHERE TG.MAGV = GV.MAGV
+        AND TG.MADT = DT.MADT
+        AND DT.MACD = CD.MACD
+        AND (CD.TENCD <> N'Nghiên cứu phát triển' OR DT.KINHPHI < 200)
+)
+GO
+GO
+
+-- 4 -- 
+CREATE TRIGGER TRG_KIEMTRA_TYLE_GV_DUOI30
+ON GIAOVIEN
+FOR INSERT, DELETE, UPDATE
+AS
+BEGIN
+    IF EXISTS (
+        SELECT BM.MAKHOA
+        FROM GIAOVIEN GV, BOMON BM
+        WHERE GV.MABM = BM.MABM
+          AND BM.MAKHOA IN (
+              SELECT BM1.MAKHOA
+              FROM BOMON BM1, inserted I
+              WHERE BM1.MABM = I.MABM
+
+              UNION
+
+              SELECT BM2.MAKHOA
+              FROM BOMON BM2, deleted D
+              WHERE BM2.MABM = D.MABM
+          )
+        GROUP BY BM.MAKHOA
+        HAVING SUM(
+                   CASE
+                       WHEN YEAR(GETDATE()) - YEAR(GV.NGSINH) < 30 THEN 1
+                       ELSE 0
+                   END
+               ) * 4 > COUNT(*)
+    )
+    BEGIN
+        RAISERROR(N'Lỗi: Số lượng giáo viên dưới 30 tuổi vượt quá 25\% tổng số giáo viên của khoa', 16, 1)
+        ROLLBACK TRANSACTION
+    END
+END
+GO
+GO
+
+-- INSERT vi phạm: khoa Sinh học có 2 giáo viên, thêm 1 giáo viên dưới 30 tuổi
+INSERT INTO GIAOVIEN(MAGV, HOTEN, LUONG, PHAI, NGSINH, DIACHI, GVQLCM, MABM)
+VALUES ('900', N'Giáo viên kiểm thử', 2000, N'Nam', '2000-01-01', N'TP HCM', NULL, 'VS')
+GO
+GO
+
+-- DELETE vi phạm: xóa 6 giáo viên trên 30 tuổi
+BEGIN TRANSACTION
+
+INSERT INTO GIAOVIEN(MAGV, HOTEN, LUONG, PHAI, NGSINH, DIACHI, GVQLCM, MABM)
+VALUES
+    ('901', N'Giáo viên trẻ 1', 2000, N'Nam', '2000-01-01', N'TP HCM', NULL, 'HTTT'),
+    ('902', N'Giáo viên trẻ 2', 2000, N'Nữ',  '2001-01-01', N'TP HCM', NULL, 'HTTT'),
+    ('903', N'Giáo viên lớn 1', 2000, N'Nam', '1980-01-01', N'TP HCM', NULL, 'HTTT'),
+    ('904', N'Giáo viên lớn 2', 2000, N'Nữ',  '1980-01-01', N'TP HCM', NULL, 'HTTT'),
+    ('905', N'Giáo viên lớn 3', 2000, N'Nam', '1980-01-01', N'TP HCM', NULL, 'HTTT'),
+    ('906', N'Giáo viên lớn 4', 2000, N'Nữ',  '1980-01-01', N'TP HCM', NULL, 'HTTT'),
+    ('907', N'Giáo viên lớn 5', 2000, N'Nam', '1980-01-01', N'TP HCM', NULL, 'HTTT'),
+    ('908', N'Giáo viên lớn 6', 2000, N'Nữ',  '1980-01-01', N'TP HCM', NULL, 'HTTT')
+
+DELETE FROM GIAOVIEN
+WHERE MAGV IN ('903', '904', '905', '906', '907', '908')
+GO
+GO
+
+-- UPDATE vi phạm: đổi ngày sinh của giáo viên 006 thành dưới 30 tuổi.
+UPDATE GIAOVIEN
+SET NGSINH = '2000-01-01'
+WHERE MAGV = '006'
+GO
+GO
