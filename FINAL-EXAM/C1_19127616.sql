@@ -12,11 +12,6 @@ GO
 GO
 GO
 
-SELECT * FROM GIAOVIEN
-GO
-GO
-
-
 -- 1 --
 SELECT DT.MADT, DT.TENDT, DT.GVCNDT, COUNT(GVDT.DIENTHOAI) AS N'SỐ LƯỢNG SĐT'
 FROM DETAI DT
@@ -57,7 +52,7 @@ GO
 GO
 
 -- 4 -- 
-CREATE TRIGGER TRG_KIEMTRA_TYLE_GV_DUOI30
+ALTER TRIGGER trgKTRA_TI_LE_GV_DUOI_30_TUOI
 ON GIAOVIEN
 FOR INSERT, DELETE, UPDATE
 AS
@@ -86,7 +81,7 @@ BEGIN
                ) * 4 > COUNT(*)
     )
     BEGIN
-        RAISERROR(N'Lỗi: Số lượng giáo viên dưới 30 tuổi vượt quá 25\% tổng số giáo viên của khoa', 16, 1)
+        RAISERROR(N'Lỗi: Số lượng giáo viên dưới 30 tuổi vượt quá 25 phần tramw tổng số giáo viên của khoa', 16, 1)
         ROLLBACK TRANSACTION
     END
 END
@@ -100,18 +95,16 @@ GO
 GO
 
 -- DELETE vi phạm: xóa 6 giáo viên trên 30 tuổi
-BEGIN TRANSACTION
-
 INSERT INTO GIAOVIEN(MAGV, HOTEN, LUONG, PHAI, NGSINH, DIACHI, GVQLCM, MABM)
 VALUES
-    ('901', N'Giáo viên trẻ 1', 2000, N'Nam', '2000-01-01', N'TP HCM', NULL, 'HTTT'),
-    ('902', N'Giáo viên trẻ 2', 2000, N'Nữ',  '2001-01-01', N'TP HCM', NULL, 'HTTT'),
-    ('903', N'Giáo viên lớn 1', 2000, N'Nam', '1980-01-01', N'TP HCM', NULL, 'HTTT'),
-    ('904', N'Giáo viên lớn 2', 2000, N'Nữ',  '1980-01-01', N'TP HCM', NULL, 'HTTT'),
-    ('905', N'Giáo viên lớn 3', 2000, N'Nam', '1980-01-01', N'TP HCM', NULL, 'HTTT'),
-    ('906', N'Giáo viên lớn 4', 2000, N'Nữ',  '1980-01-01', N'TP HCM', NULL, 'HTTT'),
-    ('907', N'Giáo viên lớn 5', 2000, N'Nam', '1980-01-01', N'TP HCM', NULL, 'HTTT'),
-    ('908', N'Giáo viên lớn 6', 2000, N'Nữ',  '1980-01-01', N'TP HCM', NULL, 'HTTT')
+('901', N'Giáo viên trẻ 1', 2000, N'Nam', '2000-01-01', N'TP HCM', NULL, 'HTTT'),
+('902', N'Giáo viên trẻ 2', 2000, N'Nữ',  '2001-01-01', N'TP HCM', NULL, 'HTTT'),
+('903', N'Giáo viên lớn 1', 2000, N'Nam', '1980-01-01', N'TP HCM', NULL, 'HTTT'),
+('904', N'Giáo viên lớn 2', 2000, N'Nữ',  '1980-01-01', N'TP HCM', NULL, 'HTTT'),
+('905', N'Giáo viên lớn 3', 2000, N'Nam', '1980-01-01', N'TP HCM', NULL, 'HTTT'),
+('906', N'Giáo viên lớn 4', 2000, N'Nữ',  '1980-01-01', N'TP HCM', NULL, 'HTTT'),
+('907', N'Giáo viên lớn 5', 2000, N'Nam', '1980-01-01', N'TP HCM', NULL, 'HTTT'),
+('908', N'Giáo viên lớn 6', 2000, N'Nữ',  '1980-01-01', N'TP HCM', NULL, 'HTTT')
 
 DELETE FROM GIAOVIEN
 WHERE MAGV IN ('903', '904', '905', '906', '907', '908')
